@@ -1,3 +1,8 @@
+---
+name: Human Developer
+description: Detailed stories with explicit UI components, data requirements, business rules, and implementation guidance. Best for human developers who need comprehensive specifications.
+---
+
 # User Story: [Story Title]
 
 **Story ID**: [Number]

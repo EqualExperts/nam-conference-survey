@@ -20,7 +20,7 @@ This command orchestrates the synthesis workflow by reading the canonical prompt
 - Ask the user to clarify if there are multiple recent iterations
 
 ## 3. Read the Synthesis Prompt
-**Read and follow the instructions in**: `prompts/pm-synthesize-discovery.md`
+**Read and follow the instructions in**: `prompts/product/synthesize-discovery.md`
 
 This prompt contains the canonical instructions for:
 - What context files to review
@@ -34,9 +34,9 @@ This prompt contains the canonical instructions for:
 Follow the instructions from the prompt to create the synthesis document.
 
 **Key requirements:**
-- Use the synthesis template from `templates/pm-synthesis-template.md`
+- Use the synthesis template from `templates/product/synthesis-template.md`
 - Review all discovery materials in the iteration's discovery directory
-- Include product context from `context/pm-*` files
+- Include product context from `context/product/*` files
 - Cross-reference with previous synthesis from this or other iterations
 - Provide evidence-based recommendations
 
@@ -61,6 +61,6 @@ Follow the instructions from the prompt to create the synthesis document.
 # Important Notes
 
 - **The prompt file is the source of truth** for synthesis instructions
-- Users can customize synthesis behavior by editing `prompts/pm-synthesize-discovery.md`
+- Users can customize synthesis behavior by editing `prompts/product/synthesize-discovery.md`
 - This command handles workflow orchestration (finding files, timing, saving output)
 - The prompt handles the actual synthesis logic and requirements

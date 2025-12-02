@@ -26,19 +26,43 @@ This command orchestrates the requirements extraction workflow by reading the ca
 - If no synthesis found, inform the user they need to run `/synth` first
 - Read the most recent synthesis document to understand the capabilities and requirements
 
-## 4. Determine Story Numbering
+## 4. Select Story Template and Granularity
+
+### Discover Available Templates
+- Scan `templates/product/` for files matching pattern `story-template-*.md`
+- Read the YAML front matter from each template to extract `name` and `description`
+- Build a list of available templates with their descriptions
+
+### Ask User for Template Selection
+Use the AskUserQuestion tool to present the available templates. For each template, show:
+- The template name (from front matter)
+- The description (from front matter)
+
+Example options based on current templates:
+- **Human Developer**: Detailed stories with explicit UI components, data requirements, business rules, and implementation guidance. Best for human developers who need comprehensive specifications.
+- **LLM Developer**: Streamlined stories with high-level acceptance criteria. Best for LLM-assisted development where the AI infers implementation details from context.
+
+### Ask User for Story Granularity
+Use the AskUserQuestion tool to ask about granularity:
+- **Fine**: More, smaller stories. Each screen element, interaction, or discrete capability becomes a separate story. Results in highly specific, atomic stories.
+- **Standard**: Balanced approach. Logical user-facing capabilities become stories. A screen with multiple related elements may be one story.
+- **Coarse**: Fewer, larger stories. Related functionality grouped together. Epics may become single stories.
+
+Store the selected template path and granularity for use in story extraction.
+
+## 5. Determine Story Numbering
 - Scan all `product/iterations/*/stories/` directories to find the highest existing story number
 - New stories should start at the next sequential number (e.g., if last is STORY-044, start at STORY-045)
 
-## 5. Review Design Artifacts
+## 6. Review Design Artifacts
 - Check if `product/iterations/{iteration-name}/design/` directory exists
 - If it exists, review all screenshots and design files
 - Design screens often represent individual stories
 - Screenshots should be referenced in story files
 
-## 6. Read the Story Extraction Prompts
+## 7. Read the Story Extraction Prompts
 **Read and follow the instructions in**:
-- `prompts/pm-extract-user-stories.md` - For extracting stories from synthesis and design
+- `prompts/product/extract-user-stories.md` - For extracting stories from synthesis and design
 
 This prompt contains the canonical instructions for:
 - How to convert synthesis capabilities into user stories
@@ -49,16 +73,17 @@ This prompt contains the canonical instructions for:
 - How to assign priorities and estimates
 - How to identify dependencies
 - What quality checks to include
-- Story format and size based on development approach (LLM vs human)
 
-## 7. Execute Story Extraction
+## 8. Execute Story Extraction
 Follow the instructions from the prompts to create the stories.
 
 **Key requirements:**
-- Use appropriate story template based on development approach:
-  - `templates/pm-story-template-llm-dev.md` for LLM-centric development
-  - `templates/pm-story-template-human-dev.md` for human-centric development
-- Include product context from `context/pm-*` files
+- **Use the template selected by the user in Step 4** (read the full template file)
+- **Apply the granularity setting selected by the user**:
+  - Fine: Create more, smaller stories (each discrete capability or screen element)
+  - Standard: Create balanced stories (logical user-facing capabilities)
+  - Coarse: Create fewer, larger stories (group related functionality)
+- Include product context from `context/product/*` files
 - Review BOTH synthesis capabilities AND design screens for story creation
 - Reference screenshots in stories where design artifacts exist
 - Use general personas (Conference Attendee, Conference Organizer, Event Planner)
@@ -66,7 +91,7 @@ Follow the instructions from the prompts to create the stories.
 - Ensure sequential story numbering across all iterations
 - Follow Given-When-Then format for acceptance criteria
 
-## 8. Save Stories
+## 9. Save Stories
 - Stories are saved to `product/iterations/{iteration-name}/stories/`
 - Save each story as `story-{number}-{slug}.md`
 - Create or update `product/iterations/{iteration-name}/stories/stories-index.md` with:
@@ -74,18 +99,18 @@ Follow the instructions from the prompts to create the stories.
   - Summary of priorities
   - Total effort estimate
 
-## 9. Add Stories to Backlog
-- Read `context/shared-backlog.md` (create from template if doesn't exist)
+## 10. Add Stories to Backlog
+- Read `context/product/backlog.md` (create from template if doesn't exist)
 - Add each new story to the backlog table with: ID, Title, Priority, Iteration
 - The backlog is the master index of all un-built stories
 - Update the "Last Updated" date
 
-## 10. Record Timing and Report Results
+## 11. Record Timing and Report Results
 - Capture the end timestamp
 - Calculate duration in seconds
 - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
   ```json
-  {"timestamp": "{end_timestamp}", "command": "/req", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"stories_created": {count}, "story_ids": ["STORY-XXX", "STORY-YYY"]}}
+  {"timestamp": "{end_timestamp}", "command": "/req", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"stories_created": {count}, "story_ids": ["STORY-XXX", "STORY-YYY"], "template": "{selected-template-name}", "granularity": "{selected-granularity}"}}
   ```
 - Tell the user:
   - Story extraction is complete
@@ -98,11 +123,14 @@ Follow the instructions from the prompts to create the stories.
 # Important Notes
 
 - **The prompt file is the source of truth** for extraction logic
-- Users can customize story extraction by editing `prompts/pm-extract-user-stories.md`
+- Users can customize story extraction by editing `prompts/product/extract-user-stories.md`
+- **Story templates are discovered dynamically** from `templates/product/story-template-*.md`
+- **User selects template and granularity** at runtime for maximum flexibility
 - This command handles workflow orchestration (finding files, numbering, timing, saving output)
-- The prompt handles the actual extraction logic and story format
+- The prompt handles the actual extraction logic
 - Epics have been removed - stories are the atomic units
 - Stories are saved to iteration directory AND added to product backlog
 - Backlog is the master index of all un-built stories (removed when released via `/rel`)
 - DO NOT automatically load stories to Jira - that's a separate workflow (`/jira`)
 - Story numbering is sequential across all iterations, not per-iteration
+- Different teams can use different templates/granularity within the same project

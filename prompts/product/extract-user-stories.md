@@ -4,7 +4,9 @@ Please review the synthesis document(s) and extract well-formed user stories wit
 
 ## Required Input
 **Discovery Cycle**: [Specify the cycle, e.g., `2025-03-mobile-experience`]
-**Starting Story ID**: [Next available ID based on stories-by-cycle.md]
+**Starting Story ID**: [Next available ID based on existing stories]
+**Selected Template**: [Path to the user-selected story template from `templates/product/`]
+**Granularity Setting**: [fine | standard | coarse]
 
 ## Context Files to Review
 - `product/context/product-overview.md` (for product scope and constraints)
@@ -19,18 +21,23 @@ Please review the synthesis document(s) and extract well-formed user stories wit
 ### Story Creation
 1. Review the "Required System Capabilities" section from the cycle's synthesis
 2. Review the `product/design/[CYCLE-NAME]/` directory for screenshots and design artifacts
-3. **Check for existing stories**: Review stories-by-cycle.md to see if similar stories already exist
-4. Create user stories based on:
+3. **Check for existing stories**: Review existing story files to see if similar stories already exist
+4. **Read the selected story template** and use its structure for all stories created
+5. **Apply the granularity setting** when deciding how to split capabilities into stories:
+   - **Fine**: Create more, smaller stories. Each screen element, interaction, or discrete capability becomes a separate story. Results in highly specific, atomic stories.
+   - **Standard**: Balanced approach. Logical user-facing capabilities become stories. A screen with multiple related elements may be one story.
+   - **Coarse**: Fewer, larger stories. Related functionality grouped together. What might be an epic in fine granularity becomes a single story.
+6. Create user stories based on:
    - **Synthesis capabilities**: Business requirements and user needs from synthesis
    - **Design screens**: Often each screen or major UI component represents a story
    - **Hybrid approach**: Some stories may be pure functionality, others may be screen-focused
-5. Follow the standard user story format: "As a [persona], I want to [action], so that [benefit]"
-6. Use **general personas** (not specific stakeholder names): "Conference Attendee", "Conference Organizer", "Event Planner"
-7. Add story points or t-shirt sizing if enough context exists
-8. Include traceability back to the synthesis (which user needs this addresses)
-9. **Include screenshot references** where screens exist
-10. **Document the discovery cycle** in each story's Source section
-11. Flag any stories that need additional discovery or clarification
+7. Follow the standard user story format: "As a [persona], I want to [action], so that [benefit]"
+8. Use **general personas** (not specific stakeholder names): "Conference Attendee", "Conference Organizer", "Event Planner"
+9. Add story points or t-shirt sizing if enough context exists
+10. Include traceability back to the synthesis (which user needs this addresses)
+11. **Include screenshot references** where screens exist
+12. **Document the discovery cycle** in each story's Source section
+13. Flag any stories that need additional discovery or clarification
 
 ### Business vs Technical Requirements
 - **Focus on business requirements**: What the system must do from a user perspective
@@ -74,91 +81,20 @@ Example: `product/requirements/2025-10-onboarding-flow/story-001-user-login.md`
 If the cycle directory doesn't exist yet, create it.
 
 ## Story Template
-Use this format for each story file (compatible with common issue trackers):
 
-```markdown
-# User Story: [Story Title]
+**Use the selected story template** provided as input to this prompt. The template file will be located at the path specified in the "Selected Template" input field (e.g., `templates/product/story-template-human-dev.md` or `templates/product/story-template-llm-dev.md`).
 
-**Story ID**: [Number]
-**Epic**: [Epic name if known]
-**Priority**: [Must have/Should have/Could have/Won't have]
-**Status**: [Draft/Ready/In Progress/Done]
-**Labels**: [discovery-cycle-name], [persona-name], [feature-area]
+Read the full template file and use its exact structure for all stories created. The template will contain:
+- Required sections and their format
+- Level of detail expected for each section
+- Acceptance criteria structure
+- Quality checklists appropriate to the development approach
 
-## User Story
-As a [general persona - e.g., "Conference Attendee", "Conference Organizer"],
-I want to [action],
-So that [benefit/outcome].
-
-## Source
-**Discovery Cycle**: [e.g., 2025-03-mobile-experience]
-**Synthesis Reference**: [Which synthesis document(s)]
-**User Need**: [The JTBD this addresses]
-**Supporting Evidence**: [Role descriptions from synthesis, not specific names]
-
-## Design Reference
-*(Include this section if design artifacts exist)*
-**Screenshots**:
-- [Path to relevant screenshot, e.g., `product/design/2025-11-12-mvp/screenshots/01-welcome-screen.png`]
-- [Additional screenshots as needed]
-
-**Design Notes**: [Any specific design requirements visible in screenshots]
-
-## Change History
-*(Add entries when story is updated from later cycles)*
-- **[YYYY-MM-DD]**: Updated from cycle [cycle-name] - [Brief description of change]
-
-## Acceptance Criteria
-
-### Functional Scenarios
-
-**Scenario 1: [Scenario Name - Happy Path]**
-- **Given** [initial context/precondition]
-- **When** [action occurs]
-- **Then** [expected outcome]
-- **And** [additional outcome if needed]
-
-**Scenario 2: [Scenario Name - Error Case]**
-- **Given** [initial context]
-- **When** [error condition occurs]
-- **Then** [expected error handling]
-- **And** [user feedback provided]
-
-**Scenario 3: [Scenario Name - Edge Case]**
-- **Given** [edge condition]
-- **When** [action occurs]
-- **Then** [expected behavior]
-
-### Non-Functional Requirements
-- [ ] Performance: [Specific requirement, e.g., "Response time < 2s"]
-- [ ] Security: [Specific requirement, e.g., "User authentication required"]
-- [ ] Accessibility: [Specific requirement, e.g., "WCAG 2.1 AA compliant"]
-- [ ] Usability: [Specific requirement, e.g., "Clear error messages displayed"]
-
-### Quality Checklist
-- [ ] Unit tests written and passing
-- [ ] Integration tests cover main scenarios
-- [ ] Documentation updated
-- [ ] Code reviewed
-- [ ] Accessibility tested
-- [ ] Performance validated
-- [ ] [Criterion 3]
-
-## Technical Notes
-[Any technical considerations, constraints, or dependencies]
-
-## Open Questions
-- [Any uncertainties that need resolution]
-
-## Estimate
-**Size**: [XS/S/M/L/XL or story points]  
-**Confidence**: [High/Medium/Low]
-
-## Dependencies
-- [Other stories or work that must be completed first]
-```
+**Do not use a hardcoded template** - always read and follow the user-selected template.
 
 ## Success Criteria
+- [ ] **Stories use the selected template structure** exactly as specified
+- [ ] **Granularity setting is applied** consistently across all stories
 - [ ] Each story follows standard format (As a... I want... So that...)
 - [ ] Persona uses general descriptions (Conference Attendee, Conference Organizer, Event Planner)
 - [ ] No specific stakeholder names in stories
@@ -171,7 +107,7 @@ So that [benefit/outcome].
 - [ ] **Design requirements captured** from prototype/screenshots
 - [ ] Traceability to most recent synthesis is maintained
 - [ ] Focus on business requirements with obvious technical needs included
-- [ ] Stories are small enough to complete in one iteration (if not, note need to split)
+- [ ] Stories are appropriately sized for the selected granularity
 - [ ] Technical feasibility is considered (flag blockers)
 - [ ] Labels include cycle name for easy filtering
 - [ ] Both synthesis capabilities AND design screens reviewed for story creation

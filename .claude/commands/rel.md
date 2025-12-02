@@ -33,7 +33,7 @@ Assume CI/CD practices: everything committed to main/master has been deployed.
   - Technical details mentioned in commit messages
 
 ## 4. Match Commits to Stories
-- Read the backlog (`context/shared-backlog.md`) to get the list of un-built stories
+- Read the backlog (`context/product/backlog.md`) to get the list of un-built stories
 - For each story in the backlog, check if git evidence suggests it was built
 - Compare commit messages, file changes, and technical details against story acceptance criteria
 - Build a suggested list of completed stories with supporting evidence
@@ -47,14 +47,14 @@ Assume CI/CD practices: everything committed to main/master has been deployed.
 This approach reduces PM effort - they review and confirm rather than recall from memory.
 
 ## 6. Read the Release Prompt
-**Read and follow the instructions in**: `prompts/pm-release-and-update-spec.md`
+**Read and follow the instructions in**: `prompts/product/release-and-update-spec.md`
 
 This prompt contains the canonical instructions for:
 - How to update story statuses (Ready → Built)
 - How to handle capabilities built without matching stories
 - How to remove built stories from backlog
 - How to create release artifacts (in `product/releases/`)
-- Release template format (in `templates/pm-release-template.md`)
+- Release template format (in `templates/product/release-template.md`)
 - How to update the product specification
 
 ## 7. Execute Release Process
@@ -63,9 +63,9 @@ Follow the instructions from the prompt to create the release.
 **Key requirements:**
 - Only include stories confirmed by PM in the release
 - Update story files: status Ready → Built, add build date from git timestamp
-- **Remove built stories from `context/shared-backlog.md`**
+- **Remove built stories from `context/product/backlog.md`**
 - Create release artifact in `product/releases/`
-- Update `context/shared-product-spec.md` with newly built capabilities
+- Update `context/product/product-spec.md` with newly built capabilities
 - **Add built stories to product spec appendix**
 - **Create entries for capabilities built without matching stories**
 
@@ -89,9 +89,9 @@ Follow the instructions from the prompt to create the release.
 - **Git log is the source of truth** for what was built
 - **Do not assume stories were built** - confirm each one through git evidence and PM interview
 - The prompt file contains detailed release logic
-- Users can customize release behavior by editing `prompts/pm-release-and-update-spec.md`
+- Users can customize release behavior by editing `prompts/product/release-and-update-spec.md`
 - Stories go directly from Ready to Built (no intermediate "Building" status)
 - Release process is atomic: git analysis → PM confirmation → story updates → remove from backlog → product spec
 - Release artifacts are stored in `product/releases/` (not iteration-specific, since iterations can be concurrent)
-- Use the template in `templates/pm-release-template.md` for release format
+- Use the template in `templates/product/release-template.md` for release format
 - **Track capabilities built without stories** - these represent gaps in the planning process

@@ -25,7 +25,7 @@ This command orchestrates the Jira loading workflow by reading the canonical pro
 - If no stories found, inform the user they need to run `/req` first
 
 ## 4. Read the Jira Loading Prompt
-**Read and follow the instructions in**: `prompts/pm-load-stories-to-tracker.md`
+**Read and follow the instructions in**: `prompts/product/load-stories-to-tracker.md`
 
 This prompt contains the canonical instructions for:
 - How to get Jira project information
@@ -61,7 +61,7 @@ Follow the instructions from the prompt to load the stories to Jira.
 # Important Notes
 
 - **The prompt file is the source of truth** for Jira loading logic
-- Users can customize Jira loading behavior by editing `prompts/pm-load-stories-to-tracker.md`
+- Users can customize Jira loading behavior by editing `prompts/product/load-stories-to-tracker.md`
 - This command handles workflow orchestration (finding files, timing, reporting)
 - The prompt handles the actual Jira API interaction logic
 - Requires Atlassian MCP to be configured with appropriate permissions

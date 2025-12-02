@@ -69,7 +69,7 @@ You are being asked to start a new product iteration for the NAM Demo applicatio
      [Context and findings]
      ```
    - Create `.synthesis-pending` marker file in discovery directory
-   - Copy interview template from `templates/pm-interview-template.md` to `discovery/interviews/` directory if it exists
+   - Copy interview template from `templates/product/interview-template.md` to `discovery/interviews/` directory if it exists
 
 4. **Conduct interview (if user said yes)**:
    - If the user wants to be interviewed:
@@ -94,7 +94,7 @@ You are being asked to start a new product iteration for the NAM Demo applicatio
      - Open questions
      - Tags
    - Save to `product/iterations/{iteration-date}/discovery/interviews/interview-{user-name}-{date}.md`
-   - Use the interview template format from `templates/pm-interview-template.md`
+   - Use the interview template format from `templates/product/interview-template.md`
 
 6. **Update discovery README**:
    - Update `product/iterations/{iteration-date}/discovery/README.md` with:

@@ -1,3 +1,8 @@
+---
+name: LLM Developer
+description: Streamlined stories with high-level acceptance criteria. Best for LLM-assisted development where the AI infers implementation details from context.
+---
+
 # User Story: [Story Title]
 
 **Story ID**: [Number]

@@ -7,9 +7,9 @@ You are helping a product manager set up Claude PM for their product. Conduct an
 ### 1. Introduction
 
 Say:
-> "I'll help you set up Claude PM by gathering information about your product. This will populate the context files that I'll reference during discovery cycles. We can go as deep or shallow as you'd like - you can always add more detail later.
+> "I'll help you set up Claude PM by gathering information about your product. This will populate the context files that I'll reference during discovery. We can go as deep or shallow as you'd like - you can always add more detail later.
 >
-> **Note**: If your engineering team has already documented technical architecture or tech stack information, you can add those files directly to `product/context/` or reference them if they're elsewhere in the repository. I'll be able to read them automatically."
+> **Note**: If your engineering team has already documented technical architecture or tech stack information, you can add those files directly to `context/product/` or reference them if they're elsewhere in the repository. I'll be able to read them automatically."
 
 ### 2. Depth Selection
 
@@ -42,7 +42,7 @@ Wait for user to choose Option 1, 2, or 3.
 
 ### Product Overview
 
-Ask these questions and populate `product/context/product-overview.md`:
+Ask these questions and populate `context/product/product-overview.md`:
 
 1. **Product Name**: "What's the name of your product or feature?"
 
@@ -55,7 +55,7 @@ Ask these questions and populate `product/context/product-overview.md`:
 5. **Core Problem**: "What's the main problem or pain point you're solving? (1-2 sentences)"
 
 After collecting responses, say:
-> "Great! I'll create your product overview now. You can add more detail to `product/context/product-overview.md` anytime."
+> "Great! I'll create your product overview now. You can add more detail to `context/product/product-overview.md` anytime."
 
 Then create the file with their responses.
 
@@ -69,7 +69,7 @@ Complete **Option 1** first, then continue:
 
 ### Target Users
 
-Ask these questions and populate `product/context/target-users.md`:
+Ask these questions and populate `context/product/target-users.md`:
 
 1. **Primary Persona Name/Role**: "What's the primary user persona? (e.g., Engineering Team Lead, Small Business Owner, etc.)"
 
@@ -84,7 +84,7 @@ Ask these questions and populate `product/context/target-users.md`:
 6. **Additional Personas**: "Are there other important user types? If yes, just give me their role/name and we can add details later. If no, that's fine."
 
 After collecting responses, say:
-> "Perfect! I'll create your target users file now. You can add more personas or detail to `product/context/target-users.md` anytime."
+> "Perfect! I'll create your target users file now. You can add more personas or detail to `context/product/target-users.md` anytime."
 
 Then create the file with their responses.
 
@@ -101,7 +101,7 @@ Complete **Option 2** first, then continue:
 Say:
 > "Let's capture your competitive positioning. This helps me understand how to differentiate during discovery."
 
-Ask these questions and populate `product/context/competitive-landscape.md`:
+Ask these questions and populate `context/product/competitive-landscape.md`:
 
 1. **Top 2-3 Direct Competitors**: "Who are your main direct competitors? (products that solve the same problem)"
 
@@ -117,18 +117,18 @@ Ask these questions and populate `product/context/competitive-landscape.md`:
 ### Technical Context
 
 Say:
-> "Now let's talk about technical context. **Important**: If your engineering team has already documented architecture, tech stack, or technical constraints, you can skip this and just point me to those files or add them to `product/context/` directly."
+> "Now let's talk about technical context. **Important**: If your engineering team has already documented architecture, tech stack, or technical constraints, you can skip this and just point me to those files or add them to `context/product/` directly."
 
 Ask:
 > "Do you have existing technical documentation I should reference? (yes/no)"
 
 **If YES**:
 - Ask: "Where can I find it? (file path or just tell me to look in a specific directory)"
-- Say: "Great! I'll reference that documentation. You can also copy key files to `product/context/technical-context.md` if you want me to always have quick access."
+- Say: "Great! I'll reference that documentation. You can also copy key files to `context/product/technical-context.md` if you want me to always have quick access."
 - Skip technical questions
 
 **If NO**:
-Ask these questions and populate `product/context/technical-context.md`:
+Ask these questions and populate `context/product/technical-context.md`:
 
 1. **Tech Stack Known**: "Do you know what tech stack you're using or planning to use? (It's okay if this is TBD)"
 
@@ -150,9 +150,9 @@ Say:
 Ask:
 > "Are there any domain-specific terms, acronyms, or jargon I should know? This helps me understand interviews and write better stories. (If none come to mind, we can skip this - you can add them later as they come up)"
 
-**If YES**: Ask them to list 3-5 key terms and their definitions, then populate `product/context/glossary.md`
+**If YES**: Ask them to list 3-5 key terms and their definitions, then populate `context/product/glossary.md`
 
-**If NO**: Say "No problem! You can add terms to `product/context/glossary.md` as they come up during discovery."
+**If NO**: Say "No problem! You can add terms to `context/product/glossary.md` as they come up during discovery."
 
 ---
 
@@ -160,32 +160,32 @@ Ask:
 
 After completing the interview (regardless of option chosen), say:
 
-> "✅ **Setup Complete!**
+> "**Setup Complete!**
 >
-> I've created your product context files in `product/context/`. You can review and edit them anytime.
+> I've created your product context files in `context/product/`. You can review and edit them anytime.
 >
 > ### What you can do now:
 >
-> 1. **Start your first discovery cycle**:
->    - Type `/cycle` to begin
+> 1. **Start your first iteration**:
+>    - Type `/iter` to begin
 >    - I'll help you conduct stakeholder interviews or add research
 >
 > 2. **Add more context** (optional):
->    - Review files in `product/context/` and add detail
->    - If you have existing technical docs, copy them to `product/context/`
+>    - Review files in `context/product/` and add detail
+>    - If you have existing technical docs, copy them to `context/product/`
 >    - Engineering team can add architecture diagrams, tech stack details, etc.
 >
 > 3. **Learn the workflow**:
->    - Read `SETUP.md` for detailed guides
 >    - Read `product/README.md` for workflow overview
 >
 > ### Quick Reference:
-> - `/cycle` - Start discovery cycle (interviews, research)
+> - `/iter` - Start new iteration (interviews, research)
 > - `/synth` - Synthesize discovery findings
 > - `/req` - Extract user stories from synthesis
+> - `/map` - Create Miro story map
 > - `/jira` - Load stories to Jira (if Atlassian MCP configured)
 >
-> **Ready to start your first cycle?** Just type `/cycle` when you're ready!"
+> **Ready to start your first iteration?** Just type `/iter` when you're ready!"
 
 ---
 
@@ -193,7 +193,7 @@ After completing the interview (regardless of option chosen), say:
 
 When creating context files:
 
-1. **Use the templates** in `product/context/` as a base
+1. **Use the templates** in `context/product/` as a base
 2. **Replace placeholder sections** with user's responses
 3. **Keep examples** if user provided minimal info (they can reference them later)
 4. **Mark TBD clearly** for sections they skipped
@@ -258,13 +258,13 @@ Throughout the interview:
 ## Handling Edge Cases
 
 **If user says "I don't know" or "TBD"**:
-- Say: "No problem! I'll mark that as TBD. You can add it later or we'll discover it during cycles."
+- Say: "No problem! I'll mark that as TBD. You can add it later or we'll discover it during iterations."
 
 **If user wants to skip everything**:
-- Say: "Totally fine! You can manually edit the context files in `product/context/` whenever you're ready. Want to jump straight to `/cycle` to start discovery?"
+- Say: "Totally fine! You can manually edit the context files in `context/product/` whenever you're ready. Want to jump straight to `/iter` to start discovery?"
 
 **If user has existing documentation**:
-- Say: "Perfect! You can copy those files directly into `product/context/` or just point me to them and I'll reference them. This interview is optional if you already have good docs."
+- Say: "Perfect! You can copy those files directly into `context/product/` or just point me to them and I'll reference them. This interview is optional if you already have good docs."
 
 **If this is a sub-product or module in a larger product**:
 - Say: "Since this is part of a larger product, you can reference the parent product's context or create a focused version just for this module. Whichever makes more sense for your workflow."

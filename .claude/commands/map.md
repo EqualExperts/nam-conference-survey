@@ -31,7 +31,7 @@ This command orchestrates the story mapping workflow by reading the canonical pr
 - Create the directory if it doesn't exist
 
 ## 5. Read the Story Mapping Prompt
-**Read and follow the instructions in**: `prompts/pm-create-story-map.md`
+**Read and follow the instructions in**: `prompts/product/create-story-map.md`
 
 This prompt contains the canonical instructions for:
 - How to analyze stories to extract activities and user flows
@@ -68,7 +68,7 @@ Follow the instructions from the prompt to create the Miro story map.
 # Important Notes
 
 - **The prompt file is the source of truth** for story mapping logic
-- Users can customize story map formatting by editing `prompts/pm-create-story-map.md`
+- Users can customize story map formatting by editing `prompts/product/create-story-map.md`
 - This command handles workflow orchestration (finding files, timing, reporting)
 - The prompt handles the actual Miro API interaction and formatting logic
 - Requires Miro MCP to be configured with appropriate permissions
