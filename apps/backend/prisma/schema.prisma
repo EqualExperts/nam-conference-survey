@@ -1,0 +1,77 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+  output        = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String           @id @default(uuid())
+  email       String           @unique
+  name        String?
+  picture     String?
+  role        Role             @default(PARTICIPANT)
+  createdAt   DateTime         @default(now())
+  lastLoginAt DateTime         @default(now())
+  responses   SurveyResponse[]
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+model SurveyResponse {
+  id                           String   @id @default(uuid())
+  userId                       String
+  status                       Status   @default(SUBMITTED)
+  q1OverallRating              Int?
+  q1Comment                    String?
+  q2ReturnIntent               Int?
+  q2Comment                    String?
+  q3CoworkingEffectiveness     String?
+  q3Comment                    String?
+  q5ConnectionDepth            Int?
+  q5Comment                    String?
+  q6LearningValue              Int?
+  q6Comment                    String?
+  q8SaturdayWorth              String?
+  q8Comment                    String?
+  q9PreConferenceCommunication Int?
+  q10AccommodationsVenue       String?
+  q13ComparisonToPD            String?
+  q4ConnectionTypes            String[] @default([])
+  q4ConnectionOther            String?
+  q17FeedbackConfidence        String[] @default([])
+  q11SessionRankings           Json?
+  q12ConferenceLength          String?
+  q16Improvements              String?
+  q16Comment                   String?
+  q7FutureTopics               String?
+  q14LikedMost                 String?
+  q15AdditionalFeedback        String?
+  q18EmploymentStatus          String?
+  q19Name                      String?
+  q19Location                  String?
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime @updatedAt
+  user                         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("survey_responses")
+}
+
+enum Role {
+  ADMIN
+  PARTICIPANT
+}
+
+enum Status {
+  DRAFT
+  SUBMITTED
+}
