@@ -1,0 +1,155 @@
+{
+  "board_id": "uXjVJpSkPjY=",
+  "board_name": "Story Map - 2025-11-12 - NAM Conference MVP",
+  "board_url": "https://miro.com/app/board/uXjVJpSkPjY=",
+  "cycle": "2025-11-12-mvp",
+  "epic": "EPIC-001",
+  "created_at": "2025-11-17T20:35:17Z",
+  "last_synced_at": "2025-11-17T22:46:00Z",
+  "sync_direction": "markdown_to_miro",
+  "refinements_applied": {
+    "title_formatting": true,
+    "persona_emojis": true,
+    "persona_legend": true,
+    "swim_lanes": true,
+    "color_by_story_type": true,
+    "stories_above_swim_lanes": true
+  },
+  "items": {
+    "epic_header": {
+      "id": "3458764648781522465",
+      "type": "text",
+      "content": "Story Map - NAM Conference Feedback Collection - 2025-11-12-mvp",
+      "formatted": "bold",
+      "style": {
+        "color": "#000000",
+        "fontSize": 48,
+        "textAlign": "left",
+        "width": 1600
+      },
+      "position": {
+        "x": -575,
+        "y": -900
+      }
+    },
+    "persona_legend": {
+      "id": "3458764648783479144",
+      "type": "sticky_note",
+      "content": "PERSONAS\n\n📋 Conference Attendee\n👥 Conference Planners\n🎯 Leadership",
+      "color": "gray"
+    },
+    "swim_lanes": [
+      {
+        "label_id": "3458764648789982478",
+        "label_content": "NOW ↑",
+        "connector_id": "3458764648789982303",
+        "anchor_left_id": "3458764648789982109",
+        "anchor_right_id": "3458764648789982115",
+        "type": "connector",
+        "label_position": {"x": -1300, "y": 625},
+        "connector_y": 675,
+        "connector_style": {"strokeColor": "#000000", "strokeWidth": 12},
+        "anchor_color": "gray",
+        "stories_above": "001-016 positioned at y: -400 to 400",
+        "capacity": "16 stories (5 columns × 4 rows)",
+        "spacing": "161px gap from last card (bottom at 514) to connector at 675"
+      },
+      {
+        "label_id": "3458764648789982486",
+        "label_content": "NEXT ↑",
+        "connector_id": "3458764648789982306",
+        "anchor_left_id": "3458764648789982128",
+        "anchor_right_id": "3458764648789982137",
+        "type": "connector",
+        "label_position": {"x": -1300, "y": 1603},
+        "connector_y": 1653,
+        "connector_style": {"strokeColor": "#000000", "strokeWidth": 12},
+        "anchor_color": "gray",
+        "stories_above": "017 positioned at y: 889",
+        "capacity": "3 stories vertically (y: 889, 1139, 1389)",
+        "spacing": "214px gap from connector to first card (top at 775), 650px gap from last card to connector"
+      },
+      {
+        "label_id": "3458764648789982491",
+        "label_content": "LATER ↑",
+        "connector_id": "3458764648789982317",
+        "anchor_left_id": "3458764648789982146",
+        "anchor_right_id": "3458764648789982156",
+        "type": "connector",
+        "label_position": {"x": -1300, "y": 2581},
+        "connector_y": 2631,
+        "connector_style": {"strokeColor": "#000000", "strokeWidth": 12},
+        "anchor_color": "gray",
+        "stories_above": "018 positioned at y: 1867",
+        "capacity": "3 stories vertically (y: 1867, 2117, 2367)",
+        "spacing": "214px gap from connector to first card (top at 1753), 650px gap from last card to connector"
+      }
+    ],
+    "activity_headers": [
+      {
+        "id": "3458764648781639978",
+        "type": "sticky_note",
+        "content": "Foundation & Trust Building",
+        "color": "blue"
+      },
+      {
+        "id": "3458764648781639976",
+        "type": "sticky_note",
+        "content": "Emotional Sentiment",
+        "color": "blue"
+      },
+      {
+        "id": "3458764648781639974",
+        "type": "sticky_note",
+        "content": "Logistics Feedback",
+        "color": "blue"
+      },
+      {
+        "id": "3458764648781639979",
+        "type": "sticky_note",
+        "content": "Learning Outcomes",
+        "color": "blue"
+      },
+      {
+        "id": "3458764648781639980",
+        "type": "sticky_note",
+        "content": "Networking Effectiveness",
+        "color": "blue"
+      }
+    ],
+    "must_have_stories": 16,
+    "should_have_stories": 1,
+    "could_have_stories": 1,
+    "total_story_cards": 18
+  },
+  "statistics": {
+    "total_items_created": 37,
+    "story_cards": 18,
+    "activity_headers": 5,
+    "text_items": 4,
+    "persona_legend": 1,
+    "swim_lane_connectors": 3,
+    "swim_lane_labels": 3,
+    "swim_lane_anchors": 6,
+    "api_items": 37,
+    "deleted_items": 14
+  },
+  "story_colors": {
+    "yellow": 16,
+    "cyan": 1,
+    "light_blue": 2,
+    "note": "Story 016 (Database Schema) intended to be cyan but Miro API may not support this color"
+  },
+  "personas": {
+    "conference_attendee": {
+      "emoji": "📋",
+      "name": "Conference Attendee",
+      "story_count": 15
+    },
+    "conference_planners": {
+      "emoji": "👥",
+      "name": "Conference Planners",
+      "story_count": 3
+    }
+  }
+}

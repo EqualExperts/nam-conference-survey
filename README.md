@@ -58,6 +58,7 @@ apps/
   frontend/     # React + Vite
 packages/
   shared/       # Shared TypeScript types
+product/        # Product discovery, iterations, releases
 rules/          # Development guidelines
 context/        # Additional context
 prompts/        # Feature prompts
@@ -69,6 +70,7 @@ prompts/        # Feature prompts
 - Prompts: See `prompts/` directory
 - Additional context: See `context/` directory
 - Database schema: `apps/backend/prisma/schema.prisma`
+- Product management: See `product/README.md`
 
 ## Contributing
 

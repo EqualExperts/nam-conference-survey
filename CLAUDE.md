@@ -13,6 +13,22 @@ NAM Conference Survey is a mobile-first survey application for the Equal Experts
 - Rate limiting: 10 submissions/hour per IP
 - Monorepo structure using pnpm workspaces
 
+## Product Management
+
+Product discovery, requirements, and release workflows are separate from engineering activities. See **[product/README.md](product/README.md)** for the complete index of product management resources.
+
+| Directory | Purpose |
+|-----------|---------|
+| `product/` | Iterations, releases, metrics, story maps |
+| `context/product/` | Product context (personas, glossary, specs) |
+| `prompts/product/` | AI behavior for PM workflows |
+| `templates/product/` | Output structures for PM artifacts |
+| `rules/product/` | PM-specific LLM guidelines |
+
+PM slash commands: `/synth`, `/req`, `/rel`, `/map`, `/jira`, `/iter`, `/demap`
+
+**Do not reference these directories during engineering implementation.**
+
 ## Tech Stack
 
 ```
