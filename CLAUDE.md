@@ -74,35 +74,35 @@ docker-compose exec backend sh
 
 ```bash
 # Backend unit tests
-cd apps/backend && pnpm test
+docker-compose exec backend pnpm test
 
 # Backend test watch mode
-cd apps/backend && pnpm test:watch
+docker-compose exec backend pnpm test:watch
 
 # Backend test coverage
-cd apps/backend && pnpm test:cov
+docker-compose exec backend pnpm test:cov
 
 # Backend E2E tests
-cd apps/backend && pnpm test:e2e
+docker-compose exec backend pnpm test:e2e
 
 # Frontend tests
-cd apps/frontend && pnpm test
+docker-compose exec frontend pnpm test
 
 # Frontend E2E tests (Playwright)
-cd apps/frontend && pnpm exec playwright test
+docker-compose exec frontend pnpm exec playwright test
 ```
 
 ### Linting and Formatting
 
 ```bash
 # Backend lint
-cd apps/backend && pnpm lint
+docker-compose exec backend pnpm lint
 
 # Backend format
-cd apps/backend && pnpm format
+docker-compose exec backend pnpm format
 
 # Frontend type check
-cd apps/frontend && pnpm type-check
+docker-compose exec frontend pnpm type-check
 ```
 
 ### Cleanup

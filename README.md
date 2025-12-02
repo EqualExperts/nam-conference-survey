@@ -44,7 +44,7 @@ pnpm logs
 pnpm prisma:studio
 
 # Run backend tests
-cd apps/backend && pnpm test
+docker-compose exec backend pnpm test
 
 # Clean everything (⚠️ deletes data)
 pnpm clean
@@ -59,12 +59,15 @@ apps/
 packages/
   shared/       # Shared TypeScript types
 rules/          # Development guidelines
+context/        # Additional context
+prompts/        # Feature prompts
 ```
 
 ## Documentation
 
 - Architecture & coding rules: See `rules/` directory
-- Developer guide: See `CLAUDE.md`
+- Prompts: See `prompts/` directory
+- Additional context: See `context/` directory
 - Database schema: `apps/backend/prisma/schema.prisma`
 
 ## Contributing
@@ -74,6 +77,7 @@ rules/          # Development guidelines
 git checkout -b feature/my-feature
 
 # Make changes, commit
+git add .
 git commit -m "feat: add my feature"
 
 # Push and create PR
@@ -84,7 +88,7 @@ Code standards: TypeScript strict mode, ESLint, Prettier, Conventional Commits.
 
 ## Support
 
-Questions? Check the `rules/` documentation or contact Katie Coleman (Product Owner).
+Questions? Contact Mike Mitchell (Product Owner)
 
 ## License
 
