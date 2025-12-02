@@ -1,0 +1,41 @@
+{
+  "name": "nam-conf-survey",
+  "version": "1.0.0",
+  "description": "NAM Conference Survey - Equal Experts feedback collection application",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "docker-compose up",
+    "dev:bg": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "clean": "docker-compose down -v",
+    "logs": "docker-compose logs -f",
+    "logs:frontend": "docker-compose logs -f frontend",
+    "logs:backend": "docker-compose logs -f backend",
+    "logs:postgres": "docker-compose logs -f postgres",
+    "backend": "cd apps/backend && pnpm run start:dev",
+    "frontend": "cd apps/frontend && pnpm run dev",
+    "prisma:studio": "docker-compose exec backend pnpm prisma studio",
+    "prisma:migrate": "docker-compose exec backend pnpm prisma migrate dev",
+    "prisma:seed": "docker-compose exec backend pnpm prisma db seed"
+  },
+  "keywords": [
+    "survey",
+    "equal-experts",
+    "conference",
+    "feedback"
+  ],
+  "author": "Equal Experts",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.3.3"
+  }
+}
