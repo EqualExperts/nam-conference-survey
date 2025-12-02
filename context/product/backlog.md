@@ -1,6 +1,6 @@
 # Product Backlog
 
-**Last Updated**: 2025-11-21
+**Last Updated**: 2025-12-02
 
 ## Overview
 
@@ -11,6 +11,9 @@ Master index of all stories that have been created but not yet built. Stories ar
 | ID | Title | Priority | Iteration |
 |----|-------|----------|-----------|
 | STORY-044 | Load Testing for Concurrent User Support | Must Have | 2025-11-12-mvp |
+| STORY-045 | Admin Dashboard | Must Have | 2025-12-02-admin-page |
+| STORY-046 | Admin Data Export | Must Have | 2025-12-02-admin-page |
+| STORY-047 | Dark Mode for Reduced Eye Strain | High | 2025-12-02-dark-mode |
 
 ---
 

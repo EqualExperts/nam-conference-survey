@@ -1,0 +1,7 @@
+# Synthesis Pending
+
+This marker file indicates that discovery materials exist that have not yet been synthesized.
+
+Run `/synth` to generate synthesis from discovery materials.
+
+Created: 2025-12-02
