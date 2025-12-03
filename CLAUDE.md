@@ -27,7 +27,9 @@ Product discovery, requirements, and release workflows are separate from enginee
 
 PM slash commands: `/synth`, `/req`, `/rel`, `/map`, `/jira`, `/iter`, `/demap`
 
-**Do not reference these directories during engineering implementation.**
+**For PM tasks without slash commands**: Read `rules/product/pm-workflow.md` for task recognition and routing to the correct prompts/templates.
+
+**For engineering implementation**: Read stories as requirements, but don't modify PM artifacts.
 
 ## Tech Stack
 

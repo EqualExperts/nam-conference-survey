@@ -16,7 +16,10 @@ Control AI behavior during product discovery and requirements workflows:
 | release-and-update-spec.md | /rel | How to process releases |
 | create-meta-synthesis.md | - | Cross-iteration analysis |
 
-**When to read**: When running PM slash commands
+**When to read**:
+- When running PM slash commands, OR
+- When `rules/product/pm-workflow.md` routes a natural language PM request here
+
 **When to skip**: Pure engineering tasks
 
 ---

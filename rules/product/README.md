@@ -2,12 +2,18 @@
 
 This directory contains rules that guide LLM behavior for product management tasks.
 
-## Product Rules
+## Rules Index
 
-Product management guidelines for story writing, synthesis, and requirements.
+| File | Purpose |
+|------|---------|
+| [pm-workflow.md](pm-workflow.md) | Task recognition and routing for PM work without slash commands |
 
-**When to read**: During PM workflows
-**When to skip**: Pure engineering tasks
+## When to Read These Rules
+
+- **Read `pm-workflow.md`**: When the user asks for PM work (stories, synthesis, etc.) without using a slash command
+- **Skip for engineering**: Pure implementation tasks that don't involve PM artifacts
+
+The rules enable Claude to use the prompts/templates infrastructure even when the user doesn't invoke slash commands explicitly.
 
 ---
 
