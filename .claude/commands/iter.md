@@ -27,21 +27,19 @@ You are being asked to start a new product iteration for the NAM Demo applicatio
 
      # Step 2: Create other top-level directories (use full absolute paths, quoted)
      mkdir -p "{full-path}/product/iterations/{iteration-date}/stories"
-     mkdir -p "{full-path}/product/iterations/{iteration-date}/releases"
      mkdir -p "{full-path}/product/iterations/{iteration-date}/story-maps"
      mkdir -p "{full-path}/product/iterations/{iteration-date}/design"
      ```
-   - Expected directories (all 9 must exist):
+   - Expected directories (all 8 must exist):
      - `product/iterations/{iteration-date}/`
      - `product/iterations/{iteration-date}/discovery/`
      - `product/iterations/{iteration-date}/discovery/interviews/`
      - `product/iterations/{iteration-date}/discovery/observations/`
      - `product/iterations/{iteration-date}/discovery/synthesis/`
      - `product/iterations/{iteration-date}/stories/`
-     - `product/iterations/{iteration-date}/releases/`
      - `product/iterations/{iteration-date}/story-maps/`
      - `product/iterations/{iteration-date}/design/`
-   - **VALIDATION REQUIRED**: After creating directories, run `ls -la` on BOTH the iteration root AND the discovery directory to confirm all 9 directories exist. If any are missing, create them individually before proceeding. Do NOT continue until validation passes.
+   - **VALIDATION REQUIRED**: After creating directories, run `ls -la` on BOTH the iteration root AND the discovery directory to confirm all 8 directories exist. If any are missing, create them individually before proceeding. Do NOT continue until validation passes.
    - Create initial discovery README.md:
      ```markdown
      # Iteration Discovery: {iteration-date}
