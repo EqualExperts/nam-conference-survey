@@ -1,14 +1,29 @@
 import { Card, Title, Text, Radio, Stack, Textarea } from '@mantine/core';
 
+interface LikertOption {
+  value: string;
+  label: string;
+}
+
 interface LikertQuestionProps {
   id: string;
   question: string;
   transparency: string;
   value: number | null;
   onChange: (value: number | null) => void;
+  options?: LikertOption[];
   comment?: string;
   onCommentChange?: (comment: string) => void;
+  commentPlaceholder?: string;
 }
+
+const DEFAULT_OPTIONS: LikertOption[] = [
+  { value: '5', label: '5 - Strongly Agree' },
+  { value: '4', label: '4 - Agree' },
+  { value: '3', label: '3 - Neutral' },
+  { value: '2', label: '2 - Disagree' },
+  { value: '1', label: '1 - Strongly Disagree' },
+];
 
 export function LikertQuestion({
   id,
@@ -16,8 +31,10 @@ export function LikertQuestion({
   transparency,
   value,
   onChange,
+  options = DEFAULT_OPTIONS,
   comment,
   onCommentChange,
+  commentPlaceholder = 'Share any additional thoughts...',
 }: LikertQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -36,11 +53,9 @@ export function LikertQuestion({
           name={id}
         >
           <Stack gap="sm">
-            <Radio value="1" label="1 - Strongly Disagree" />
-            <Radio value="2" label="2 - Disagree" />
-            <Radio value="3" label="3 - Neutral" />
-            <Radio value="4" label="4 - Agree" />
-            <Radio value="5" label="5 - Strongly Agree" />
+            {options.map((option) => (
+              <Radio key={option.value} value={option.value} label={option.label} />
+            ))}
           </Stack>
         </Radio.Group>
 
@@ -49,7 +64,7 @@ export function LikertQuestion({
             label="Additional comments (optional)"
             value={comment || ''}
             onChange={(e) => onCommentChange(e.currentTarget.value)}
-            placeholder="Share any additional thoughts..."
+            placeholder={commentPlaceholder}
             minRows={2}
             autosize
           />

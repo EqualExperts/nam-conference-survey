@@ -1,4 +1,4 @@
-import { Card, Title, Text, Checkbox, Stack, TextInput } from '@mantine/core';
+import { Card, Title, Text, Checkbox, Stack, TextInput, Textarea } from '@mantine/core';
 
 interface MultipleSelectQuestionProps {
   id: string;
@@ -9,6 +9,9 @@ interface MultipleSelectQuestionProps {
   onChange: (values: string[]) => void;
   otherValue?: string;
   onOtherChange?: (value: string) => void;
+  comment?: string;
+  onCommentChange?: (comment: string) => void;
+  commentPlaceholder?: string;
 }
 
 export function MultipleSelectQuestion({
@@ -20,6 +23,9 @@ export function MultipleSelectQuestion({
   onChange,
   otherValue,
   onOtherChange,
+  comment,
+  onCommentChange,
+  commentPlaceholder = 'Share any additional thoughts...',
 }: MultipleSelectQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -50,6 +56,17 @@ export function MultipleSelectQuestion({
             value={otherValue || ''}
             onChange={(e) => onOtherChange(e.currentTarget.value)}
             placeholder="Please specify..."
+          />
+        )}
+
+        {onCommentChange && (
+          <Textarea
+            label="Additional comments (optional)"
+            value={comment || ''}
+            onChange={(e) => onCommentChange(e.currentTarget.value)}
+            placeholder={commentPlaceholder}
+            minRows={2}
+            autosize
           />
         )}
       </Stack>

@@ -28,34 +28,79 @@ model SurveyResponse {
   id                           String   @id @default(uuid())
   userId                       String
   status                       Status   @default(SUBMITTED)
+
+  // Q1: Overall Rating - Likert scale (1-5)
   q1OverallRating              Int?
   q1Comment                    String?
+
+  // Q2: Return Intent - Likert scale (1-5)
   q2ReturnIntent               Int?
   q2Comment                    String?
+
+  // Q3: Coworking Effectiveness - Likert with N/A
   q3CoworkingEffectiveness     String?
   q3Comment                    String?
-  q5ConnectionDepth            Int?
-  q5Comment                    String?
-  q6LearningValue              Int?
-  q6Comment                    String?
-  q8SaturdayWorth              String?
-  q8Comment                    String?
-  q9PreConferenceCommunication Int?
-  q10AccommodationsVenue       String?
-  q13ComparisonToPD            String?
+
+  // Q4: Connection Types - Multiple select
   q4ConnectionTypes            String[] @default([])
   q4ConnectionOther            String?
-  q17FeedbackConfidence        String[] @default([])
+  q4Comment                    String?
+
+  // Q5: Connection Depth - Likert scale (1-5)
+  q5ConnectionDepth            Int?
+  q5Comment                    String?
+
+  // Q6: Learning Value - Likert scale (1-5)
+  q6LearningValue              Int?
+  q6Comment                    String?
+
+  // Q7: Future Topics - Open-ended
+  q7FutureTopics               String?
+
+  // Q8: Saturday Worth - Likert with N/A
+  q8SaturdayWorth              String?
+  q8Comment                    String?
+
+  // Q9: Pre-Conference Communication - Likert scale (1-5)
+  q9PreConferenceCommunication Int?
+  q9Comment                    String?
+
+  // Q10: Accommodations Venue - Likert with N/A
+  q10AccommodationsVenue       String?
+  q10Comment                   String?
+
+  // Q11: Session Rankings - Ranking (JSON)
   q11SessionRankings           Json?
+
+  // Q12: Conference Length - Single choice
   q12ConferenceLength          String?
+  q12Comment                   String?
+
+  // Q13: Comparison to PD - Likert with N/A
+  q13ComparisonToPD            String?
+  q13Comment                   String?
+
+  // Q14: Liked Most - Open-ended
+  q14LikedMost                 String?
+
+  // Q15: Additional Feedback - Open-ended
+  q15AdditionalFeedback        String?
+
+  // Q16: Improvements - Single choice
   q16Improvements              String?
   q16Comment                   String?
-  q7FutureTopics               String?
-  q14LikedMost                 String?
-  q15AdditionalFeedback        String?
+
+  // Q17: Feedback Confidence - Multiple select
+  q17FeedbackConfidence        String[] @default([])
+  q17FeedbackOther             String?
+
+  // Q18: Employment Status - Single choice
   q18EmploymentStatus          String?
+
+  // Q19: Name and Location - Text fields
   q19Name                      String?
   q19Location                  String?
+
   createdAt                    DateTime @default(now())
   updatedAt                    DateTime @updatedAt
   user                         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
