@@ -132,7 +132,8 @@ export class CreateSurveyResponseDto {
   @IsOptional()
   @IsString()
   @IsIn(['too_short', 'just_right', 'too_long', 'unsure'], {
-    message: 'q12ConferenceLength must be too_short, just_right, too_long, or unsure',
+    message:
+      'q12ConferenceLength must be too_short, just_right, too_long, or unsure',
   })
   q12ConferenceLength?: string;
 
@@ -165,9 +166,20 @@ export class CreateSurveyResponseDto {
   // Q16: Improvements from last year (single choice with comment)
   @IsOptional()
   @IsString()
-  @IsIn(['yes_clear', 'some', 'no_changes', 'not_sure', 'did_not_attend', 'first_conference'], {
-    message: 'q16Improvements must be yes_clear, some, no_changes, not_sure, did_not_attend, or first_conference',
-  })
+  @IsIn(
+    [
+      'yes_clear',
+      'some',
+      'no_changes',
+      'not_sure',
+      'did_not_attend',
+      'first_conference',
+    ],
+    {
+      message:
+        'q16Improvements must be yes_clear, some, no_changes, not_sure, did_not_attend, or first_conference',
+    },
+  )
   q16Improvements?: string;
 
   @IsOptional()
@@ -187,9 +199,19 @@ export class CreateSurveyResponseDto {
   // Q18: Employment status (single choice)
   @IsOptional()
   @IsString()
-  @IsIn(['employee', 'active_associate', 'alumni_associate', 'client', 'prefer_not'], {
-    message: 'q18EmploymentStatus must be employee, active_associate, alumni_associate, client, or prefer_not',
-  })
+  @IsIn(
+    [
+      'employee',
+      'active_associate',
+      'alumni_associate',
+      'client',
+      'prefer_not',
+    ],
+    {
+      message:
+        'q18EmploymentStatus must be employee, active_associate, alumni_associate, client, or prefer_not',
+    },
+  )
   q18EmploymentStatus?: string;
 
   // Q19: Name and location (demographics)
