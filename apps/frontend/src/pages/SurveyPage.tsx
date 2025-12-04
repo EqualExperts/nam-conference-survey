@@ -470,6 +470,7 @@ export default function SurveyPage() {
             { value: 'direct_response', label: 'Direct response acknowledging my specific feedback' },
             { value: 'explain_decisions', label: 'Conference organizers explaining decisions and trade-offs' },
             { value: 'already_confident', label: 'Nothing - I already feel confident feedback is valued' },
+            { value: 'other', label: 'Other' },
           ]}
           values={formData.q17FeedbackConfidence}
           onChange={(values) => updateField('q17FeedbackConfidence', values)}
