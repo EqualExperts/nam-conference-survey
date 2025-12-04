@@ -57,6 +57,10 @@ export class CreateSurveyResponseDto {
   @IsString()
   q4ConnectionOther?: string;
 
+  @IsOptional()
+  @IsString()
+  q4Comment?: string;
+
   // Q5: Connection depth (Likert 1-5)
   @IsOptional()
   @IsInt()
@@ -103,6 +107,10 @@ export class CreateSurveyResponseDto {
   @Max(5)
   q9PreConferenceCommunication?: number;
 
+  @IsOptional()
+  @IsString()
+  q9Comment?: string;
+
   // Q10: Accommodations, venue & catering (Likert with N/A)
   @IsOptional()
   @IsString()
@@ -110,6 +118,10 @@ export class CreateSurveyResponseDto {
     message: 'q10AccommodationsVenue must be 1-5 or NA',
   })
   q10AccommodationsVenue?: string;
+
+  @IsOptional()
+  @IsString()
+  q10Comment?: string;
 
   // Q11: Session format rankings (JSON object)
   @IsOptional()
@@ -119,10 +131,15 @@ export class CreateSurveyResponseDto {
   // Q12: Conference length (single choice)
   @IsOptional()
   @IsString()
-  @IsIn(['too_short', 'just_right', 'too_long'], {
-    message: 'q12ConferenceLength must be too_short, just_right, or too_long',
+  @IsIn(['too_short', 'just_right', 'too_long', 'unsure'], {
+    message:
+      'q12ConferenceLength must be too_short, just_right, too_long, or unsure',
   })
   q12ConferenceLength?: string;
+
+  @IsOptional()
+  @IsString()
+  q12Comment?: string;
 
   // Q13: Comparison to other PD (Likert with N/A)
   @IsOptional()
@@ -131,6 +148,10 @@ export class CreateSurveyResponseDto {
     message: 'q13ComparisonToPD must be 1-5 or NA',
   })
   q13ComparisonToPD?: string;
+
+  @IsOptional()
+  @IsString()
+  q13Comment?: string;
 
   // Q14: What you liked most (open-ended)
   @IsOptional()
@@ -145,6 +166,20 @@ export class CreateSurveyResponseDto {
   // Q16: Improvements from last year (single choice with comment)
   @IsOptional()
   @IsString()
+  @IsIn(
+    [
+      'yes_clear',
+      'some',
+      'no_changes',
+      'not_sure',
+      'did_not_attend',
+      'first_conference',
+    ],
+    {
+      message:
+        'q16Improvements must be yes_clear, some, no_changes, not_sure, did_not_attend, or first_conference',
+    },
+  )
   q16Improvements?: string;
 
   @IsOptional()
@@ -157,13 +192,26 @@ export class CreateSurveyResponseDto {
   @IsString({ each: true })
   q17FeedbackConfidence?: string[];
 
+  @IsOptional()
+  @IsString()
+  q17FeedbackOther?: string;
+
   // Q18: Employment status (single choice)
   @IsOptional()
   @IsString()
-  @IsIn(['employee', 'contractor', 'client', 'other'], {
-    message:
-      'q18EmploymentStatus must be employee, contractor, client, or other',
-  })
+  @IsIn(
+    [
+      'employee',
+      'active_associate',
+      'alumni_associate',
+      'client',
+      'prefer_not',
+    ],
+    {
+      message:
+        'q18EmploymentStatus must be employee, active_associate, alumni_associate, client, or prefer_not',
+    },
+  )
   q18EmploymentStatus?: string;
 
   // Q19: Name and location (demographics)

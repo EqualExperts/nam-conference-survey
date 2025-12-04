@@ -1,14 +1,31 @@
 import { Card, Title, Text, Radio, Stack, Textarea } from '@mantine/core';
 
+interface LikertOption {
+  value: string;
+  label: string;
+}
+
 interface LikertWithNAQuestionProps {
   id: string;
   question: string;
   transparency: string;
   value: string | null;
   onChange: (value: string | null) => void;
+  options?: LikertOption[];
+  naLabel?: string;
   comment?: string;
   onCommentChange?: (comment: string) => void;
+  commentPlaceholder?: string;
+  commentLabel?: string;
 }
+
+const DEFAULT_OPTIONS: LikertOption[] = [
+  { value: '5', label: '5 - Strongly Agree' },
+  { value: '4', label: '4 - Agree' },
+  { value: '3', label: '3 - Neutral' },
+  { value: '2', label: '2 - Disagree' },
+  { value: '1', label: '1 - Strongly Disagree' },
+];
 
 export function LikertWithNAQuestion({
   id,
@@ -16,9 +33,16 @@ export function LikertWithNAQuestion({
   transparency,
   value,
   onChange,
+  options = DEFAULT_OPTIONS,
+  naLabel = 'Not Applicable',
   comment,
   onCommentChange,
+  commentPlaceholder = 'Share any additional thoughts...',
+  commentLabel = 'Additional comments (optional)',
 }: LikertWithNAQuestionProps) {
+  // Combine provided options with N/A option
+  const allOptions = [...options, { value: 'NA', label: naLabel }];
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
@@ -36,21 +60,18 @@ export function LikertWithNAQuestion({
           name={id}
         >
           <Stack gap="sm">
-            <Radio value="1" label="1 - Strongly Disagree" />
-            <Radio value="2" label="2 - Disagree" />
-            <Radio value="3" label="3 - Neutral" />
-            <Radio value="4" label="4 - Agree" />
-            <Radio value="5" label="5 - Strongly Agree" />
-            <Radio value="NA" label="Not Applicable" />
+            {allOptions.map((option) => (
+              <Radio key={option.value} value={option.value} label={option.label} />
+            ))}
           </Stack>
         </Radio.Group>
 
         {onCommentChange && (
           <Textarea
-            label="Additional comments (optional)"
+            label={commentLabel}
             value={comment || ''}
             onChange={(e) => onCommentChange(e.currentTarget.value)}
-            placeholder="Share any additional thoughts..."
+            placeholder={commentPlaceholder}
             minRows={2}
             autosize
           />
