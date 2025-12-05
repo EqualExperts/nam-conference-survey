@@ -9,7 +9,7 @@
 
 ## User Personas
 
-[Brief summary of who uses this product. Reference `product/context/target-users.md` for full details, or include key persona descriptions here.]
+[Brief summary of who uses this product. Reference `knowledge/product/target-users.md` for full details, or include key persona descriptions here.]
 
 - **[Persona 1]**: [Role and primary use case]
 - **[Persona 2]**: [Role and primary use case]

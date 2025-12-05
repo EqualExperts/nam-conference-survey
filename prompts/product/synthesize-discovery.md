@@ -6,7 +6,7 @@ Please analyze the interview files for a specific discovery cycle and create a s
 **Discovery Cycle**: [Specify the cycle directory, e.g., `2025-03-mobile-experience`]
 
 ## Context Files to Review
-- All files in `product/context/` (for product background)
+- All files in `knowledge/product/` (for product background)
 - All files in `product/discovery/[CYCLE-NAME]/interviews/` (except the template file)
 - **All files in `product/discovery/[CYCLE-NAME]/observations/`** (ALWAYS read this directory - may contain key requirements, historical data, or additional context beyond interviews)
 - All files in `product/discovery/[CYCLE-NAME]/surveys/`

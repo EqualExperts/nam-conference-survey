@@ -261,7 +261,7 @@ css: {
 
 - rules/performance-rules.md - Bundle size limits and optimization targets
 - rules/typescript-rules.md - TypeScript configuration integration
-- context/docker-setup.md - Container-specific Vite configuration
+- knowledge/docker-setup.md - Container-specific Vite configuration
 
 ---
 

@@ -2,54 +2,99 @@
 
 **Iteration**: Admin Dashboard
 **Created**: 2025-12-02
-**Last Updated**: 2025-12-03
-**Total Stories**: 2
-**Total Effort**: L + M
+**Last Updated**: 2025-12-05
+**Total Stories**: 6
+**Total Effort**: S + S + M + M + M + M
 
 ## Stories
 
 | ID | Title | Priority | Size | Status |
 |----|-------|----------|------|--------|
-| STORY-045 | Admin Dashboard | Must Have | L | Ready |
-| STORY-046 | Admin Data Export | Must Have | M | Ready |
+| STORY-045 | Admin Overview Page | Must Have | S | Ready |
+| STORY-046 | Response Detail Modal | Must Have | S | Ready |
+| STORY-047 | Responses Tab | Must Have | M | Ready |
+| STORY-048 | Analytics Tab | Must Have | M | Ready |
+| STORY-049 | Sentiment Analysis Tab | Should Have | M | Ready |
+| STORY-050 | Data Export | Should Have | M | Ready |
 
 ## Priority Summary
 
 | Priority | Count |
 |----------|-------|
-| Must Have | 2 |
+| Must Have | 4 |
+| Should Have | 2 |
 
 ## Story Details
 
-### STORY-045: Admin Dashboard
-**File**: `story-045-admin-dashboard.md`
+### STORY-045: Admin Overview Page
+**File**: `story-045-admin-overview.md`
 
-Complete admin interface at `/admin` with tab-based navigation:
-- **Overview tab**: Metric cards (completed/in-progress counts), latest 5 responses with "View" links
-- **Responses tab**: Master-detail layout with respondent list (left) and full answer detail (right)
-- **Analytics tab**: Scrolling page with charts for all 19 questions (pie for Likert, bar for categorical, text list for essays)
+Foundational admin page at `/admin` with:
+- Page header: "Admin Dashboard"
+- Two metric cards (completed/in-progress counts)
+- Recent Responses list showing 5 most recent submissions with "View" links
 
-UX specifications include ASCII wireframes, navigation patterns, empty states, and loading behavior.
+No tab navigation yet - this is the base page.
 
-### STORY-046: Admin Data Export
-**File**: `story-046-admin-export.md`
+### STORY-046: Response Detail Modal
+**File**: `story-046-response-detail-modal.md`
 
-Export functionality accessible from dashboard header on all tabs:
-- **CSV export**: Full dataset download (all responses, all questions), opens in Excel/Sheets/Numbers
-- **PDF export**: Chart visualizations for non-essay questions with title page and Equal Experts branding
+Modal overlay triggered by "View" links on Overview page:
+- Shows all 19 questions with respondent's answers
+- Question display varies by type (stars for Likert, bullets for multi-select, numbered list for ranking, quoted text for open-ended)
+- Close via X button, overlay click, or Escape key
 
-UX specifications include button placement, loading states, file naming conventions, error handling.
+### STORY-047: Responses Tab
+**File**: `story-047-responses-tab.md`
+
+Introduces tab navigation and adds Responses tab:
+- Tab bar with Overview and Responses tabs
+- Master-detail layout for browsing all responses
+- List pagination with "Load More"
+- Updates Overview "View" links to navigate to Responses tab with item selected
+
+### STORY-048: Analytics Tab
+**File**: `story-048-analytics-tab.md`
+
+Adds Analytics tab to navigation:
+- Scrolling page with charts for fixed-answer questions only
+- Pie charts for Likert-scale questions
+- Bar charts for multi-select and ranking questions
+- Open-ended text questions excluded (covered in STORY-049)
+
+### STORY-049: Sentiment Analysis Tab
+**File**: `story-049-sentiment-tab.md`
+
+Adds Sentiment tab to navigation:
+- AI-generated narrative summaries for each open-ended question
+- Overall sentiment label (Positive/Mixed/Negative)
+- Key themes with mention counts
+- Expandable view to see all raw responses
+- Minimum 3 responses required for analysis
+
+### STORY-050: Data Export
+**File**: `story-050-data-export.md`
+
+Adds export buttons to dashboard header:
+- CSV export: Full dataset download, all responses and questions
+- PDF export: Formatted report with charts and sentiment summaries
+- Buttons visible on all tabs
 
 ## Dependencies
 
 ```
-STORY-045 (Admin Dashboard)
-    └── STORY-046 (Admin Export) - depends on charts from 045
+STORY-045 (Admin Overview)
+    └── STORY-046 (Response Detail Modal)
+    └── STORY-047 (Responses Tab)
+            └── STORY-048 (Analytics Tab)
+                    └── STORY-049 (Sentiment Tab)
+                            └── STORY-050 (Data Export)
 ```
 
 ## Notes
 
-- Stories updated 2025-12-03 with detailed UX specifications including wireframes
-- Open questions flagged as implementation decisions (chart library, PDF generation approach)
+- Stories split from original combined STORY-045 on 2025-12-05
+- Each story that adds a tab explicitly includes adding the tab to navigation
+- Open questions flagged as implementation decisions (chart library, PDF generation approach, sentiment LLM)
 - Respondent identification uses sequential submission ID (e.g., #42)
 - No authentication required per stakeholder decision

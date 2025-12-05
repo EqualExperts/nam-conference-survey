@@ -83,7 +83,7 @@ Follow the instructions from the prompts to create the stories.
   - Fine: Create more, smaller stories (each discrete capability or screen element)
   - Standard: Create balanced stories (logical user-facing capabilities)
   - Coarse: Create fewer, larger stories (group related functionality)
-- Include product context from `context/product/*` files
+- Include product context from `knowledge/product/*` files
 - Review BOTH synthesis capabilities AND design screens for story creation
 - Reference screenshots in stories where design artifacts exist
 - Use general personas (Conference Attendee, Conference Organizer, Event Planner)
@@ -100,7 +100,7 @@ Follow the instructions from the prompts to create the stories.
   - Total effort estimate
 
 ## 10. Add Stories to Backlog
-- Read `context/product/backlog.md` (create from template if doesn't exist)
+- Read `knowledge/product/backlog.md` (create from template if doesn't exist)
 - Add each new story to the backlog table with: ID, Title, Priority, Iteration
 - The backlog is the master index of all un-built stories
 - Update the "Last Updated" date

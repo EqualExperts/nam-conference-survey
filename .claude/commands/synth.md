@@ -36,7 +36,7 @@ Follow the instructions from the prompt to create the synthesis document.
 **Key requirements:**
 - Use the synthesis template from `templates/product/synthesis-template.md`
 - Review all discovery materials in the iteration's discovery directory
-- Include product context from `context/product/*` files
+- Include product context from `knowledge/product/*` files
 - Cross-reference with previous synthesis from this or other iterations
 - Provide evidence-based recommendations
 

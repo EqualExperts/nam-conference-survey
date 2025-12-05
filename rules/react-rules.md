@@ -175,7 +175,7 @@ function UserProfile({ userId }) {
 
 - rules/typescript-rules.md - Type safety patterns for React components
 - rules/design-rules.md - UI component implementation standards
-- context/design-system.md - React component library specifications
+- knowledge/design-system.md - React component library specifications
 
 ## References
 

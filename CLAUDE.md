@@ -20,7 +20,7 @@ Product discovery, requirements, and release workflows are separate from enginee
 | Directory | Purpose |
 |-----------|---------|
 | `product/` | Iterations, releases, metrics, story maps |
-| `context/product/` | Product context (personas, glossary, specs) |
+| `knowledge/product/` | Product context (personas, glossary, specs) |
 | `prompts/product/` | AI behavior for PM workflows |
 | `templates/product/` | Output structures for PM artifacts |
 | `rules/product/` | PM-specific LLM guidelines |

@@ -19,7 +19,7 @@ Use this prompt to load user stories from markdown files into your issue tracker
 
 - The specific story files you want to load
 - `product/requirements/user-stories/stories-by-cycle.md` (for context)
-- `product/context/target-users.md` (if you need to map personas to assignees)
+- `knowledge/product/target-users.md` (if you need to map personas to assignees)
 
 ## Instructions
 

@@ -9,9 +9,9 @@ Please review the synthesis document(s) and extract well-formed user stories wit
 **Granularity Setting**: [fine | standard | coarse]
 
 ## Context Files to Review
-- `product/context/product-overview.md` (for product scope and constraints)
-- `product/context/target-users.md` (for persona details)
-- `product/context/technical-context.md` (for technical constraints affecting AC)
+- `knowledge/product/product-overview.md` (for product scope and constraints)
+- `knowledge/product/target-users.md` (for persona details)
+- `knowledge/product/technical-context.md` (for technical constraints affecting AC)
 - **`product/discovery/[CYCLE-NAME]/synthesis-[MOST-RECENT-DATE].md`** (the MOST RECENT synthesis for this cycle - use only this, older synthesis files are historical record only)
 - `product/design/[CYCLE-NAME]/` (for screenshots and design requirements)
 - `product/requirements/stories-by-cycle.md` (to avoid duplication and understand existing stories)

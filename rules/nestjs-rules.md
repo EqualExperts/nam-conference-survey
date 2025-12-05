@@ -151,7 +151,7 @@ export class EmailService {
 
 - rules/typescript-rules.md - Type safety patterns for NestJS
 - rules/domain-driven-design.md - Domain modeling integration
-- context/database-schema.md - Database design standards
+- knowledge/database-schema.md - Database design standards
 
 ## References
 

@@ -117,7 +117,7 @@ Should I:
 - Update story metadata: Status → Archived, Archived date
 
 **If moving to backlog**:
-- Add entry to `context/product/backlog.md` under appropriate priority section
+- Add entry to `knowledge/product/backlog.md` under appropriate priority section
 - Update story metadata: Status → Backlog, Backlog date
 - Keep story file in current location (just update metadata)
 

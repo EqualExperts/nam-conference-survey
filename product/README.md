@@ -23,7 +23,7 @@ Working outputs of product discovery and release management.
 
 | Directory | Purpose |
 |-----------|---------|
-| `context/product/` | Product context (personas, glossary, specs) |
+| `knowledge/product/` | Product context (personas, glossary, specs) |
 | `prompts/product/` | AI behavior for PM workflows |
 | `templates/product/` | Output structures for PM artifacts |
 | `rules/product/` | PM-specific LLM guidelines |
@@ -31,8 +31,8 @@ Working outputs of product discovery and release management.
 
 ## Key Shared Files
 
-- `context/product/product-spec.md` - What we're building (updated via /rel)
-- `context/product/backlog.md` - What's left to build (managed via /req and /rel)
+- `knowledge/product/product-spec.md` - What we're building (updated via /rel)
+- `knowledge/product/backlog.md` - What's left to build (managed via /req and /rel)
 
 ## Slash Commands
 
@@ -71,4 +71,4 @@ Stories are numbered **sequentially across all iterations** (never reset):
 
 ---
 
-**Note**: Product management artifacts are in `/product` subdirectories within `context/`, `prompts/`, `templates/`, and `rules/`. Engineering artifacts remain at the root level of those directories.
+**Note**: Product management artifacts are in `/product` subdirectories within `knowledge/`, `prompts/`, `templates/`, and `rules/`. Engineering artifacts remain at the root level of those directories.

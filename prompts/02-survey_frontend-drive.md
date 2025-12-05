@@ -14,7 +14,7 @@ This feature implements the public-facing survey form that allows conference att
 - Success: redirect to thank you page with submission confirmation
 - Error: display inline error messages without losing form data
 - Loading state during submission with disabled form
-- Equal Experts branding (logo, colors, typography per [`context/design-system.md`](../context/design-system.md))
+- Equal Experts branding (logo, colors, typography per [`knowledge/design-system.md`](../knowledge/design-system.md))
 - WCAG 2.1 AA accessibility (keyboard navigation, screen reader support, color contrast)
 
 ## Rules
@@ -172,7 +172,7 @@ interface RankingQuestionProps {
 
 - **State Management**: Use React Hook Form with Zod validation schema
 - **API Client**: Use Axios with TanStack Query for submission mutation
-- **UI Components**: Mantine UI v7 components per [`context/design-system.md`](../context/design-system.md)
+- **UI Components**: Mantine UI v7 components per [`knowledge/design-system.md`](../knowledge/design-system.md)
 - **Styling**: Mantine theme customization with Equal Experts colors
 - **Routing**: React Router for navigation to thank you page
 - **Form Layout**: Single scrollable page with Cards for each question group
@@ -356,7 +356,7 @@ interface RankingQuestionProps {
 - [ ] Success: redirects to thank you page
 - [ ] Error: displays clear message without losing form data
 - [ ] Form validation prevents invalid submissions
-- [ ] API integration sends correct payload structure per [`context/api-spec.md`](../context/api-spec.md)
+- [ ] API integration sends correct payload structure per [`knowledge/api-spec.md`](../knowledge/api-spec.md)
 - [ ] Partial submissions work (any subset of questions)
 - [ ] Empty submission acceptable (zero questions answered)
 - [ ] Page load completes in <2 seconds

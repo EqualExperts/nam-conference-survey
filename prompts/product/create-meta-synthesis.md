@@ -25,8 +25,8 @@ Required:
 - `product/requirements/stories-by-cycle.md` (to see how insights translated to requirements)
 
 For context:
-- `product/context/product-overview.md`
-- `product/context/target-users.md`
+- `knowledge/product/product-overview.md`
+- `knowledge/product/target-users.md`
 
 ## Instructions
 

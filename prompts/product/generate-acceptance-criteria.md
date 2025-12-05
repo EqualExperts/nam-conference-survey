@@ -3,8 +3,8 @@
 Please create detailed, testable acceptance criteria for a given user story.
 
 ## Context Files to Review
-- `product/context/product-overview.md` (for constraints and requirements)
-- `product/context/technical-context.md` (for technical constraints)
+- `knowledge/product/product-overview.md` (for constraints and requirements)
+- `knowledge/product/technical-context.md` (for technical constraints)
 - The specific user story file you're working with
 
 ## Instructions

@@ -33,7 +33,7 @@ Assume CI/CD practices: everything committed to main/master has been deployed.
   - Technical details mentioned in commit messages
 
 ## 4. Match Commits to Stories
-- Read the backlog (`context/product/backlog.md`) to get the list of un-built stories
+- Read the backlog (`knowledge/product/backlog.md`) to get the list of un-built stories
 - For each story in the backlog, check if git evidence suggests it was built
 - Compare commit messages, file changes, and technical details against story acceptance criteria
 - Build a suggested list of completed stories with supporting evidence
@@ -63,9 +63,9 @@ Follow the instructions from the prompt to create the release.
 **Key requirements:**
 - Only include stories confirmed by PM in the release
 - Update story files: status Ready → Built, add build date from git timestamp
-- **Remove built stories from `context/product/backlog.md`**
+- **Remove built stories from `knowledge/product/backlog.md`**
 - Create release artifact in `product/releases/`
-- Update `context/product/product-spec.md` with newly built capabilities
+- Update `knowledge/product/product-spec.md` with newly built capabilities
 - **Add built stories to product spec appendix**
 - **Create entries for capabilities built without matching stories**
 

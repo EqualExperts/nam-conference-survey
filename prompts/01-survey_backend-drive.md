@@ -25,7 +25,7 @@ This feature implements the backend API and data layer for anonymous conference 
 ## Domain
 
 ```typescript
-// Core domain entities from context/database-schema.md
+// Core domain entities from knowledge/database-schema.md
 
 enum Role {
   ADMIN = 'ADMIN',
@@ -135,13 +135,13 @@ interface SurveyResponseDto {
 
 - **Anonymous User Management**: Create anonymous user on first submission if not exists
 - **Validation Strategy**: Use class-validator decorators in DTOs for all field types
-- **Prisma Schema Alignment**: Ensure field names match exactly with [`context/database-schema.md`](../context/database-schema.md)
+- **Prisma Schema Alignment**: Ensure field names match exactly with [`knowledge/database-schema.md`](../knowledge/database-schema.md)
 - **Array Defaults**: Empty arrays for `q4ConnectionTypes` and `q17FeedbackConfidence` if not provided
 - **Null vs Undefined**: Treat both as skipped questions - store as null in database
 - **String vs Integer Likert**: Questions with N/A option use string type ('1'-'5', 'NA'), others use integer
-- **JSON Validation**: Validate ranking structure for [`q11SessionRankings`](../context/database-schema.md)
+- **JSON Validation**: Validate ranking structure for [`q11SessionRankings`](../knowledge/database-schema.md)
 - **Transaction Safety**: Use Prisma transactions if creating anonymous user during submission
-- **Error Response Format**: Follow format specified in [`context/api-spec.md`](../context/api-spec.md)
+- **Error Response Format**: Follow format specified in [`knowledge/api-spec.md`](../knowledge/api-spec.md)
 
 ## Testing Considerations
 
@@ -295,4 +295,4 @@ Content-Type: application/json
 - [ ] Database indexes created on userId, status, createdAt
 - [ ] Submission completes in <500ms (P95)
 - [ ] Integration tests cover complete, partial, and empty submissions
-- [ ] Error responses follow API spec format from [`context/api-spec.md`](../context/api-spec.md)
+- [ ] Error responses follow API spec format from [`knowledge/api-spec.md`](../knowledge/api-spec.md)

@@ -26,9 +26,9 @@ When a PM task is recognized:
 
 ### 2. Load Product Context
 Always read these files for PM tasks:
-- `context/product/product-spec.md` - What we're building
-- `context/product/personas.md` - Who we're building for
-- `context/product/backlog.md` - What's left to build
+- `knowledge/product/product-spec.md` - What we're building
+- `knowledge/product/personas.md` - Who we're building for
+- `knowledge/product/backlog.md` - What's left to build
 
 ### 3. Identify Current Iteration
 - Scan `product/iterations/` for directories
@@ -57,7 +57,7 @@ Always read these files for PM tasks:
 
 ### 7. Update Backlog
 After creating stories:
-- Add each story to `context/product/backlog.md`
+- Add each story to `knowledge/product/backlog.md`
 - Include: ID, Title, Priority, Iteration
 
 ## When to Use Slash Commands Instead

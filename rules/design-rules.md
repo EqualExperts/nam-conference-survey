@@ -12,7 +12,7 @@ Provide consistent, accessible, and brand-aligned user interfaces across all app
 
 ## Core Principles
 
-1. **Design System First:** Always use components and patterns from the design system (`context/design-system.md`) before creating custom solutions. Consistency trumps novelty.
+1. **Design System First:** Always use components and patterns from the design system (`knowledge/design-system.md`) before creating custom solutions. Consistency trumps novelty.
 2. **Accessibility is Non-Negotiable:** WCAG 2.1 AA compliance is a requirement, not a feature. Every user must be able to complete the survey regardless of ability.
 3. **Mobile-First Implementation:** Design and build for the smallest screen first (375px), then enhance for larger viewports. Most users will access the survey on mobile devices.
 4. **Brand Consistency:** Equal Experts branding (colors, typography, visual identity) must be maintained across all interfaces to build trust and recognition.
