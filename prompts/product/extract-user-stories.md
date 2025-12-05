@@ -18,6 +18,16 @@ Please review the synthesis document(s) and extract well-formed user stories wit
 
 ## Instructions
 
+### Pre-Creation Verification (CRITICAL)
+Before creating ANY stories, determine the next available story number:
+
+1. **Scan ALL iterations**: Check `product/iterations/*/stories/` across every iteration directory
+2. **Find highest story number**: Identify the maximum STORY-XXX number in use
+3. **Verify with backlog**: Cross-check against `knowledge/product/backlog.md`
+4. **Start at next number**: New stories begin at (highest + 1)
+
+Story numbers are globally unique and never reset between iterations. A story created today might follow one created months ago in a different iteration.
+
 ### Story Creation
 1. Review the "Required System Capabilities" section from the cycle's synthesis
 2. Review the `product/design/[CYCLE-NAME]/` directory for screenshots and design artifacts
@@ -93,6 +103,8 @@ Read the full template file and use its exact structure for all stories created.
 **Do not use a hardcoded template** - always read and follow the user-selected template.
 
 ## Success Criteria
+- [ ] **Story numbers verified** against ALL iterations before creation
+- [ ] **No duplicate story numbers** across the entire backlog
 - [ ] **Stories use the selected template structure** exactly as specified
 - [ ] **Granularity setting is applied** consistently across all stories
 - [ ] Each story follows standard format (As a... I want... So that...)

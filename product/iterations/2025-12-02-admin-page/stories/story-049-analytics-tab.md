@@ -1,6 +1,6 @@
 # User Story: Analytics Tab
 
-**Story ID**: STORY-048
+**Story ID**: STORY-049
 **Iteration**: 2025-12-02-admin-page
 **Priority**: Must Have
 **Status**: Ready
@@ -12,7 +12,7 @@ I want to view aggregate charts for questions with fixed answer options,
 So that I can understand overall trends in attendee feedback at a glance.
 
 ## Context
-Individual response review (STORY-046, STORY-047) shows one respondent at a time. This story adds an Analytics tab with aggregate visualizations for questions that have fixed answer options (Likert scales, multi-select, ranking). Open-ended text questions are excluded from this tab - they will be covered in STORY-049.
+Individual response review (STORY-046, STORY-048) shows one respondent at a time. This story adds an Analytics tab with aggregate visualizations for questions that have fixed answer options (Likert scales, multi-select, ranking). Open-ended text questions are excluded from this tab - they will be covered in STORY-050.
 
 ## Source
 **Discovery Cycle**: 2025-12-02-admin-page
@@ -196,7 +196,7 @@ Individual response review (STORY-046, STORY-047) shows one respondent at a time
 - Chart library selection: Implementation decision (Recharts recommended for React/Mantine compatibility)
 
 ## Dependencies
-- STORY-047: Responses Tab (establishes tab navigation pattern)
+- STORY-048: Responses Tab (establishes tab navigation pattern)
 - Survey submission functionality from MVP iteration (existing)
 
 ## Estimate

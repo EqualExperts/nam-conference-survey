@@ -12,10 +12,10 @@
 |----|-------|----------|------|--------|
 | STORY-045 | Admin Overview Page | Must Have | S | Ready |
 | STORY-046 | Response Detail Modal | Must Have | S | Ready |
-| STORY-047 | Responses Tab | Must Have | M | Ready |
-| STORY-048 | Analytics Tab | Must Have | M | Ready |
-| STORY-049 | Sentiment Analysis Tab | Should Have | M | Ready |
-| STORY-050 | Data Export | Should Have | M | Ready |
+| STORY-048 | Responses Tab | Must Have | M | Ready |
+| STORY-049 | Analytics Tab | Must Have | M | Ready |
+| STORY-050 | Sentiment Analysis Tab | Should Have | M | Ready |
+| STORY-051 | Data Export | Should Have | M | Ready |
 
 ## Priority Summary
 
@@ -44,8 +44,8 @@ Modal overlay triggered by "View" links on Overview page:
 - Question display varies by type (stars for Likert, bullets for multi-select, numbered list for ranking, quoted text for open-ended)
 - Close via X button, overlay click, or Escape key
 
-### STORY-047: Responses Tab
-**File**: `story-047-responses-tab.md`
+### STORY-048: Responses Tab
+**File**: `story-048-responses-tab.md`
 
 Introduces tab navigation and adds Responses tab:
 - Tab bar with Overview and Responses tabs
@@ -53,17 +53,17 @@ Introduces tab navigation and adds Responses tab:
 - List pagination with "Load More"
 - Updates Overview "View" links to navigate to Responses tab with item selected
 
-### STORY-048: Analytics Tab
-**File**: `story-048-analytics-tab.md`
+### STORY-049: Analytics Tab
+**File**: `story-049-analytics-tab.md`
 
 Adds Analytics tab to navigation:
 - Scrolling page with charts for fixed-answer questions only
 - Pie charts for Likert-scale questions
 - Bar charts for multi-select and ranking questions
-- Open-ended text questions excluded (covered in STORY-049)
+- Open-ended text questions excluded (covered in STORY-050)
 
-### STORY-049: Sentiment Analysis Tab
-**File**: `story-049-sentiment-tab.md`
+### STORY-050: Sentiment Analysis Tab
+**File**: `story-050-sentiment-tab.md`
 
 Adds Sentiment tab to navigation:
 - AI-generated narrative summaries for each open-ended question
@@ -72,8 +72,8 @@ Adds Sentiment tab to navigation:
 - Expandable view to see all raw responses
 - Minimum 3 responses required for analysis
 
-### STORY-050: Data Export
-**File**: `story-050-data-export.md`
+### STORY-051: Data Export
+**File**: `story-051-data-export.md`
 
 Adds export buttons to dashboard header:
 - CSV export: Full dataset download, all responses and questions
@@ -85,15 +85,16 @@ Adds export buttons to dashboard header:
 ```
 STORY-045 (Admin Overview)
     └── STORY-046 (Response Detail Modal)
-    └── STORY-047 (Responses Tab)
-            └── STORY-048 (Analytics Tab)
-                    └── STORY-049 (Sentiment Tab)
-                            └── STORY-050 (Data Export)
+    └── STORY-048 (Responses Tab)
+            └── STORY-049 (Analytics Tab)
+                    └── STORY-050 (Sentiment Tab)
+                            └── STORY-051 (Data Export)
 ```
 
 ## Notes
 
 - Stories split from original combined STORY-045 on 2025-12-05
+- STORY-047 reserved for Dark Mode iteration
 - Each story that adds a tab explicitly includes adding the tab to navigation
 - Open questions flagged as implementation decisions (chart library, PDF generation approach, sentiment LLM)
 - Respondent identification uses sequential submission ID (e.g., #42)

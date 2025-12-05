@@ -1,6 +1,6 @@
 # User Story: Data Export
 
-**Story ID**: STORY-050
+**Story ID**: STORY-051
 **Iteration**: 2025-12-02-admin-page
 **Priority**: Should Have
 **Status**: Ready
@@ -77,7 +77,7 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
   - One page per question type grouping
   - Pie charts for Likert questions
   - Bar charts for multi-select and ranking questions
-- Sentiment section (if STORY-049 implemented):
+- Sentiment section (if STORY-050 implemented):
   - Narrative summaries for each open-ended question
   - Key themes listed
 
@@ -197,8 +197,8 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
 
 ## Dependencies
 - STORY-045: Admin Overview Page (provides header location for buttons)
-- STORY-048: Analytics Tab (chart data for PDF)
-- STORY-049: Sentiment Analysis Tab (optional - sentiment summaries for PDF)
+- STORY-049: Analytics Tab (chart data for PDF)
+- STORY-050: Sentiment Analysis Tab (optional - sentiment summaries for PDF)
 
 ## Estimate
 **Size**: M

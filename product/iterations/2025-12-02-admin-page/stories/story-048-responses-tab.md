@@ -1,6 +1,6 @@
 # User Story: Responses Tab
 
-**Story ID**: STORY-047
+**Story ID**: STORY-048
 **Iteration**: 2025-12-02-admin-page
 **Priority**: Must Have
 **Status**: Ready
@@ -187,6 +187,8 @@ The admin overview page (STORY-045) shows only the 5 most recent responses. This
 ## Dependencies
 - STORY-045: Admin Overview Page (provides base page structure)
 - STORY-046: Response Detail Modal (shares question display component)
+
+Note: STORY-048 adds the Responses tab and updates the Overview "View" links to navigate to it.
 
 ## Estimate
 **Size**: M

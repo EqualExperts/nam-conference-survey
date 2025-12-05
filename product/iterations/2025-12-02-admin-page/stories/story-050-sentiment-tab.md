@@ -1,6 +1,6 @@
 # User Story: Sentiment Analysis Tab
 
-**Story ID**: STORY-049
+**Story ID**: STORY-050
 **Iteration**: 2025-12-02-admin-page
 **Priority**: Should Have
 **Status**: Ready
@@ -247,7 +247,7 @@ The Analytics tab (STORY-048) covers questions with fixed answer options but exc
 - Consider rate limiting or background processing for large response sets
 
 ## Dependencies
-- STORY-048: Analytics Tab (establishes pattern for question-based analysis)
+- STORY-049: Analytics Tab (establishes pattern for question-based analysis)
 - Survey submission functionality from MVP iteration (existing)
 - LLM API access for sentiment analysis
 

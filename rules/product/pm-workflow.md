@@ -43,10 +43,21 @@ Always read these files for PM tasks:
 - Read the template's YAML front matter for name and description
 
 ### 5. Determine Story Numbering
-- Scan ALL `product/iterations/*/stories/` directories
-- Find the highest STORY-XXX number
-- New stories start at next sequential number
-- Story numbers never reset between iterations
+
+**CRITICAL**: Story numbers are globally unique across ALL iterations. Before creating ANY new story:
+
+1. Scan ALL `product/iterations/*/stories/` directories
+2. Find the highest STORY-XXX number across the entire backlog
+3. New stories start at next sequential number
+4. Story numbers NEVER reset between iterations
+5. Verify the backlog.md shows no conflicts with planned numbers
+
+**Why this matters**: Stories may exist in different iterations that were created at different times. A story in iteration A might use STORY-047 while a story in iteration B uses STORY-048. Always check ALL iterations, not just the current one.
+
+**Verification command**:
+```bash
+grep -rh "Story ID.*STORY-" product/iterations/*/stories/*.md | sort -t- -k2 -n
+```
 
 ### 6. Save Outputs
 | Artifact type | Save location |
