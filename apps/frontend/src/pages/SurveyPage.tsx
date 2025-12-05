@@ -64,7 +64,7 @@ export default function SurveyPage() {
   const updateField = <K extends keyof SurveyFormState>(
     field: K,
     value: SurveyFormState[K]
-  ) => {
+  ): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

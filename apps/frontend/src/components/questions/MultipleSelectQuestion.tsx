@@ -4,7 +4,7 @@ interface MultipleSelectQuestionProps {
   id: string;
   question: string;
   transparency: string;
-  options: { value: string; label: string }[];
+  readonly options: readonly { value: string; label: string }[];
   values: string[];
   onChange: (values: string[]) => void;
   otherValue?: string;

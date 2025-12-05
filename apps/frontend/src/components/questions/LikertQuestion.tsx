@@ -11,7 +11,7 @@ interface LikertQuestionProps {
   transparency: string;
   value: number | null;
   onChange: (value: number | null) => void;
-  options?: LikertOption[];
+  readonly options?: readonly LikertOption[];
   comment?: string;
   onCommentChange?: (comment: string) => void;
   commentPlaceholder?: string;

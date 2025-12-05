@@ -11,7 +11,7 @@ interface LikertWithNAQuestionProps {
   transparency: string;
   value: string | null;
   onChange: (value: string | null) => void;
-  options?: LikertOption[];
+  readonly options?: readonly LikertOption[];
   naLabel?: string;
   comment?: string;
   onCommentChange?: (comment: string) => void;
