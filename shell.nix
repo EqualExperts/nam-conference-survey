@@ -21,6 +21,9 @@ pkgs.mkShell {
 
     # Database client (optional, for debugging)
     postgresql_15
+
+    # Shell
+    zsh
   ];
 
   shellHook = ''
@@ -36,6 +39,11 @@ pkgs.mkShell {
     echo "Node version: $(node --version)"
     echo "pnpm version: $(pnpm --version)"
     echo ""
+
+    # Launch zsh if available
+    if command -v zsh &> /dev/null; then
+      exec zsh
+    fi
   '';
 
   # Set environment variables
