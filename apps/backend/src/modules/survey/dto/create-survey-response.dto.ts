@@ -1,126 +1,86 @@
+import { IsOptional, IsObject } from 'class-validator';
 import {
-  IsInt,
-  IsString,
-  IsArray,
-  IsOptional,
-  Min,
-  Max,
-  IsIn,
-  IsObject,
-} from 'class-validator';
-
-// Custom validators for Likert scales with N/A
-const LIKERT_WITH_NA_VALUES = ['1', '2', '3', '4', '5', 'NA'];
+  OptionalString,
+  OptionalInt,
+  OptionalEnum,
+  OptionalStringArray,
+} from '../../../common/decorators/validation.decorators';
+import {
+  LIKERT_WITH_NA_VALUES,
+  CONFERENCE_LENGTH_VALUES,
+  IMPROVEMENTS_VALUES,
+  EMPLOYMENT_STATUS_VALUES,
+} from '../constants/validation.constants';
 
 export class CreateSurveyResponseDto {
   // Q1: Overall conference rating (Likert 1-5)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
+  @OptionalInt(1, 5)
   q1OverallRating?: number;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q1Comment?: string;
 
   // Q2: Return attendance intent (Likert 1-5)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
+  @OptionalInt(1, 5)
   q2ReturnIntent?: number;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q2Comment?: string;
 
   // Q3: Coworking day effectiveness (Likert with N/A)
-  @IsOptional()
-  @IsString()
-  @IsIn(LIKERT_WITH_NA_VALUES, {
-    message: 'q3CoworkingEffectiveness must be 1-5 or NA',
-  })
+  @OptionalEnum(LIKERT_WITH_NA_VALUES, 'q3CoworkingEffectiveness')
   q3CoworkingEffectiveness?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q3Comment?: string;
 
   // Q4: Connection types (multiple select)
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @OptionalStringArray()
   q4ConnectionTypes?: string[];
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q4ConnectionOther?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q4Comment?: string;
 
   // Q5: Connection depth (Likert 1-5)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
+  @OptionalInt(1, 5)
   q5ConnectionDepth?: number;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q5Comment?: string;
 
   // Q6: Learning value (Likert 1-5)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
+  @OptionalInt(1, 5)
   q6LearningValue?: number;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q6Comment?: string;
 
   // Q7: Future learning topics (open-ended)
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q7FutureTopics?: string;
 
   // Q8: Saturday personal time worth (Likert with N/A)
-  @IsOptional()
-  @IsString()
-  @IsIn(LIKERT_WITH_NA_VALUES, {
-    message: 'q8SaturdayWorth must be 1-5 or NA',
-  })
+  @OptionalEnum(LIKERT_WITH_NA_VALUES, 'q8SaturdayWorth')
   q8SaturdayWorth?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q8Comment?: string;
 
   // Q9: Pre-conference communication (Likert 1-5)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
+  @OptionalInt(1, 5)
   q9PreConferenceCommunication?: number;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q9Comment?: string;
 
   // Q10: Accommodations, venue & catering (Likert with N/A)
-  @IsOptional()
-  @IsString()
-  @IsIn(LIKERT_WITH_NA_VALUES, {
-    message: 'q10AccommodationsVenue must be 1-5 or NA',
-  })
+  @OptionalEnum(LIKERT_WITH_NA_VALUES, 'q10AccommodationsVenue')
   q10AccommodationsVenue?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q10Comment?: string;
 
   // Q11: Session format rankings (JSON object)
@@ -129,97 +89,49 @@ export class CreateSurveyResponseDto {
   q11SessionRankings?: Record<string, number>;
 
   // Q12: Conference length (single choice)
-  @IsOptional()
-  @IsString()
-  @IsIn(['too_short', 'just_right', 'too_long', 'unsure'], {
-    message:
-      'q12ConferenceLength must be too_short, just_right, too_long, or unsure',
-  })
+  @OptionalEnum(CONFERENCE_LENGTH_VALUES, 'q12ConferenceLength')
   q12ConferenceLength?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q12Comment?: string;
 
   // Q13: Comparison to other PD (Likert with N/A)
-  @IsOptional()
-  @IsString()
-  @IsIn(LIKERT_WITH_NA_VALUES, {
-    message: 'q13ComparisonToPD must be 1-5 or NA',
-  })
+  @OptionalEnum(LIKERT_WITH_NA_VALUES, 'q13ComparisonToPD')
   q13ComparisonToPD?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q13Comment?: string;
 
   // Q14: What you liked most (open-ended)
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q14LikedMost?: string;
 
   // Q15: Additional feedback (open-ended)
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q15AdditionalFeedback?: string;
 
   // Q16: Improvements from last year (single choice with comment)
-  @IsOptional()
-  @IsString()
-  @IsIn(
-    [
-      'yes_clear',
-      'some',
-      'no_changes',
-      'not_sure',
-      'did_not_attend',
-      'first_conference',
-    ],
-    {
-      message:
-        'q16Improvements must be yes_clear, some, no_changes, not_sure, did_not_attend, or first_conference',
-    },
-  )
+  @OptionalEnum(IMPROVEMENTS_VALUES, 'q16Improvements')
   q16Improvements?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q16Comment?: string;
 
   // Q17: Feedback confidence (multiple select)
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @OptionalStringArray()
   q17FeedbackConfidence?: string[];
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q17FeedbackOther?: string;
 
   // Q18: Employment status (single choice)
-  @IsOptional()
-  @IsString()
-  @IsIn(
-    [
-      'employee',
-      'active_associate',
-      'alumni_associate',
-      'client',
-      'prefer_not',
-    ],
-    {
-      message:
-        'q18EmploymentStatus must be employee, active_associate, alumni_associate, client, or prefer_not',
-    },
-  )
+  @OptionalEnum(EMPLOYMENT_STATUS_VALUES, 'q18EmploymentStatus')
   q18EmploymentStatus?: string;
 
   // Q19: Name and location (demographics)
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q19Name?: string;
 
-  @IsOptional()
-  @IsString()
+  @OptionalString()
   q19Location?: string;
 }
