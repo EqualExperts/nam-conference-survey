@@ -10,6 +10,7 @@ import {
   Loader,
   Center,
   Text,
+  Box,
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
@@ -155,24 +156,39 @@ export default function SurveyPage() {
   return (
     <Container size="md" py="xl">
       <Stack gap="xl">
-        {/* Header */}
-        <Stack align="center" gap="md">
-          <Image
-            src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
-            alt="Equal Experts"
-            h={60}
-            w="auto"
-          />
-          <Title order={1} ta="center" c="equalBlue.4">
-            NAM Conference Survey
-          </Title>
-          <Text size="lg" ta="center" c="dimmed">
-            Your feedback helps us improve future conferences. All questions are optional.
-          </Text>
-        </Stack>
+        {/* Sticky Header and Progress */}
+        <Box
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 100,
+            backgroundColor: 'var(--mantine-color-body)',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            marginTop: '-1rem',
+          }}
+        >
+          <Stack gap="md">
+            {/* Header */}
+            <Stack align="center" gap="md">
+              <Image
+                src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
+                alt="Equal Experts"
+                h={60}
+                w="auto"
+              />
+              <Title order={1} ta="center" c="equalBlue.4">
+                NAM Conference Survey
+              </Title>
+              <Text size="lg" ta="center" c="dimmed">
+                Your feedback helps us improve future conferences. All questions are optional.
+              </Text>
+            </Stack>
 
-        {/* Progress Indicator */}
-        <ProgressIndicator answered={calculateAnswered()} total={TOTAL_QUESTIONS} />
+            {/* Progress Indicator */}
+            <ProgressIndicator answered={calculateAnswered()} total={TOTAL_QUESTIONS} />
+          </Stack>
+        </Box>
 
         {/* Error Alert */}
         {error && (

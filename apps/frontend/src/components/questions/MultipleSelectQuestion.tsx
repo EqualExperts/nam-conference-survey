@@ -1,4 +1,5 @@
-import { Card, Title, Text, Checkbox, Stack, TextInput, Textarea } from '@mantine/core';
+import { Card, Title, Text, Checkbox, Stack, TextInput, Textarea, Group } from '@mantine/core';
+import { useMemo } from 'react';
 
 interface MultipleSelectQuestionProps {
   id: string;
@@ -9,9 +10,11 @@ interface MultipleSelectQuestionProps {
   onChange: (values: string[]) => void;
   otherValue?: string;
   onOtherChange?: (value: string) => void;
+  otherMaxLength?: number;
   comment?: string;
   onCommentChange?: (comment: string) => void;
   commentPlaceholder?: string;
+  commentMaxLength?: number;
   questionNumber?: number;
   totalQuestions?: number;
 }

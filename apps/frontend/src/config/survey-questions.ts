@@ -16,6 +16,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: '1', label: '1 - Poor' },
     ],
     commentPlaceholder: 'Additional context about your rating...',
+    commentMaxLength: 250,
   },
   {
     id: 'q2',
@@ -32,6 +33,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: '1', label: '1 - Definitely not' },
     ],
     commentPlaceholder: 'Additional context about your response...',
+    commentMaxLength: 250,
   },
   {
     id: 'q3',
@@ -49,6 +51,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     ],
     naLabel: 'N/A - Did not attend coworking day',
     commentPlaceholder: 'Additional context about the coworking day...',
+    commentMaxLength: 250,
   },
   {
     id: 'q4',
@@ -66,6 +69,8 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: 'different_work', label: "People I wouldn't normally interact with in day-to-day work" },
     ],
     commentPlaceholder: 'Additional context about connections you made...',
+    commentMaxLength: 250,
+    otherMaxLength: 100,
   },
   {
     id: 'q5',
@@ -82,6 +87,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: '1', label: '1 - Minimal meaningful interaction' },
     ],
     commentPlaceholder: 'Additional context about connection quality...',
+    commentMaxLength: 250,
   },
   {
     id: 'q6',
@@ -98,6 +104,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: '1', label: '1 - Poor - did not learn anything meaningful' },
     ],
     commentPlaceholder: 'Additional context about learning value...',
+    commentMaxLength: 250,
   },
   {
     id: 'q7',
@@ -106,6 +113,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     question: 'What topics would you like to see at future conferences?',
     transparency: 'This gives us ideas for future conference programming based on what you want to learn.',
     placeholder: 'Share topic ideas...',
+    maxLength: 500,
   },
   {
     id: 'q8',
@@ -123,6 +131,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     ],
     naLabel: 'N/A - Did not attend Saturday',
     commentPlaceholder: 'Additional context about the Saturday time commitment...',
+    commentMaxLength: 250,
   },
   {
     id: 'q9',
@@ -139,6 +148,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: '1', label: '1 - Very unclear - arrived unsure what to expect' },
     ],
     commentPlaceholder: 'Additional context about pre-conference communication...',
+    commentMaxLength: 250,
   },
   {
     id: 'q10',
@@ -157,6 +167,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     naLabel: 'N/A - Did not stay at conference hotel',
     commentLabel: 'Please comment if you answered Neutral or below',
     commentPlaceholder: 'Additional context about accommodations, venue, or food...',
+    commentMaxLength: 250,
   },
   {
     id: 'q11',
@@ -184,6 +195,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: 'too_long', label: 'Too long - felt too much time commitment' },
       { value: 'unsure', label: 'Unsure' },
     ],
+    commentMaxLength: 250,
   },
   {
     id: 'q13',
@@ -201,6 +213,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     ],
     naLabel: "N/A - Haven't attended other professional development events",
     commentPlaceholder: 'Additional context about the comparison...',
+    commentMaxLength: 250,
   },
   {
     id: 'q14',
@@ -209,6 +222,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     question: 'What did you like most about the conference?',
     transparency: "This helps us understand what's working well so we can preserve and enhance those elements.",
     placeholder: 'Share what you enjoyed...',
+    maxLength: 500,
   },
   {
     id: 'q15',
@@ -234,6 +248,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: 'did_not_attend', label: 'Did not attend last conference' },
       { value: 'first_conference', label: 'This is my first NAM Conference' },
     ],
+    commentMaxLength: 250,
   },
   {
     id: 'q17',
@@ -251,6 +266,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
       { value: 'already_confident', label: 'Nothing - I already feel confident feedback is valued' },
       { value: 'other', label: 'Other' },
     ],
+    otherMaxLength: 100,
   },
   {
     id: 'q18',
@@ -277,12 +293,14 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
         label: 'Your Name',
         field: 'q19Name',
         placeholder: 'Leave blank to remain anonymous',
+        maxLength: 100,
       },
       {
         id: 'location',
         label: 'City and State',
         field: 'q19Location',
         placeholder: 'Leave blank to remain anonymous',
+        maxLength: 100,
       },
     ],
   },

@@ -27,6 +27,7 @@ export interface LikertQuestionConfig extends BaseQuestionConfig {
   commentField: keyof SurveyFormState;
   options: LikertOption[];
   commentPlaceholder?: string;
+  commentMaxLength?: number;
 }
 
 export interface LikertWithNAQuestionConfig extends BaseQuestionConfig {
@@ -37,6 +38,7 @@ export interface LikertWithNAQuestionConfig extends BaseQuestionConfig {
   naLabel: string;
   commentPlaceholder?: string;
   commentLabel?: string;
+  commentMaxLength?: number;
 }
 
 export interface MultipleSelectOption {
@@ -51,6 +53,8 @@ export interface MultipleSelectQuestionConfig extends BaseQuestionConfig {
   commentField?: keyof SurveyFormState;
   options: MultipleSelectOption[];
   commentPlaceholder?: string;
+  commentMaxLength?: number;
+  otherMaxLength?: number;
 }
 
 export interface SingleChoiceOption {
@@ -63,6 +67,7 @@ export interface SingleChoiceQuestionConfig extends BaseQuestionConfig {
   field: keyof SurveyFormState;
   commentField?: keyof SurveyFormState;
   options: SingleChoiceOption[];
+  commentMaxLength?: number;
 }
 
 export interface RankingOption {
@@ -96,6 +101,7 @@ export interface TextFieldQuestionConfig extends BaseQuestionConfig {
     label: string;
     field: keyof SurveyFormState;
     placeholder?: string;
+    maxLength?: number;
   }>;
 }
 
