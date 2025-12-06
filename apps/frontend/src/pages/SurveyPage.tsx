@@ -10,17 +10,24 @@ import {
   Loader,
   Center,
   Text,
+  Box,
+  Group,
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
 import { ProgressIndicator } from '../components/ProgressIndicator';
 import { QuestionRenderer } from '../components/QuestionRenderer';
+import { LanguageToggle } from '../components/LanguageToggle';
 import { SurveyFormState } from '../types/survey';
 import { submitSurvey } from '../api/survey';
 import { SURVEY_QUESTIONS, TOTAL_QUESTIONS } from '../config/survey-questions';
+import { useLanguage } from '../contexts/LanguageContext';
+import { uiTranslations } from '../translations/ui';
 
 export default function SurveyPage() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = uiTranslations[language];
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -99,21 +106,36 @@ export default function SurveyPage() {
       setIsSubmitting(true);
       setError(null);
 
+      // Validate Q15 character limit
+      if (formData.q15AdditionalFeedback.length > 250) {
+        const errorMsg = `${t.pleaseReduceComment} 250 ${t.charactersOrFewer}`;
+        setError(errorMsg);
+        notifications.show({
+          title: t.validationError,
+          message: errorMsg,
+          color: 'red',
+          icon: <IconAlertCircle />,
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       await submitSurvey(formData);
 
       notifications.show({
-        title: 'Success!',
-        message: 'Your survey has been submitted successfully',
+        title: t.successTitle,
+        message: t.successMessage,
         color: 'green',
         icon: <IconCheck />,
       });
 
-      navigate('/thanks');
+      // Rick Roll redirect
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to submit survey';
       setError(message);
       notifications.show({
-        title: 'Submission Error',
+        title: t.submissionError,
         message,
         color: 'red',
         icon: <IconAlertCircle />,
@@ -130,7 +152,7 @@ export default function SurveyPage() {
           <Stack align="center" gap="md">
             <Loader color="equalBlue" size="lg" />
             <Text size="sm" c="dimmed">
-              Submitting your survey...
+              {t.submittingMessage}
             </Text>
           </Stack>
         </Center>
@@ -141,30 +163,50 @@ export default function SurveyPage() {
   return (
     <Container size="md" py="xl">
       <Stack gap="xl">
-        {/* Header */}
-        <Stack align="center" gap="md">
-          <Image
-            src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
-            alt="Equal Experts"
-            h={60}
-            w="auto"
-          />
-          <Title order={1} ta="center" c="equalBlue.4">
-            NAM Conference Survey
-          </Title>
-          <Text size="lg" ta="center" c="dimmed">
-            Your feedback helps us improve future conferences. All questions are optional.
-          </Text>
-        </Stack>
+        {/* Sticky Header and Progress */}
+        <Box
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 100,
+            backgroundColor: 'var(--mantine-color-body)',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            marginTop: '-1rem',
+          }}
+        >
+          <Stack gap="md">
+            {/* Language Toggle */}
+            <Group justify="flex-end">
+              <LanguageToggle />
+            </Group>
 
-        {/* Progress Indicator */}
-        <ProgressIndicator answered={calculateAnswered()} total={TOTAL_QUESTIONS} />
+            {/* Header */}
+            <Stack align="center" gap="md">
+              <Image
+                src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
+                alt="Equal Experts"
+                h={60}
+                w="auto"
+              />
+              <Title order={1} ta="center" c="equalBlue.4">
+                {t.title}
+              </Title>
+              <Text size="lg" ta="center" c="dimmed">
+                {t.subtitle}
+              </Text>
+            </Stack>
+
+            {/* Progress Indicator */}
+            <ProgressIndicator answered={calculateAnswered()} total={TOTAL_QUESTIONS} />
+          </Stack>
+        </Box>
 
         {/* Error Alert */}
         {error && (
           <Alert
             icon={<IconAlertCircle />}
-            title="Submission Error"
+            title={t.submissionError}
             color="red"
             withCloseButton
             onClose={() => setError(null)}
@@ -174,12 +216,14 @@ export default function SurveyPage() {
         )}
 
         {/* Survey Questions */}
-        {SURVEY_QUESTIONS.map((config) => (
+        {SURVEY_QUESTIONS.map((config, index) => (
           <QuestionRenderer
             key={config.id}
             config={config}
             formData={formData}
             updateField={updateField}
+            questionNumber={index + 1}
+            totalQuestions={TOTAL_QUESTIONS}
           />
         ))}
 
@@ -191,11 +235,11 @@ export default function SurveyPage() {
           loading={isSubmitting}
           fullWidth
         >
-          Submit Survey
+          {t.submitButton}
         </Button>
 
         <Text size="sm" c="dimmed" ta="center">
-          All questions are optional. Submit with as many or as few answers as you like.
+          {t.optionalNote}
         </Text>
       </Stack>
     </Container>

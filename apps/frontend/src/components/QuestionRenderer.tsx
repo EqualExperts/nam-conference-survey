@@ -8,27 +8,46 @@ import { SingleChoiceQuestion } from './questions/SingleChoiceQuestion';
 import { TextFieldQuestion } from './questions/TextFieldQuestion';
 import { QuestionConfig } from '../config/question-types';
 import { SurveyFormState } from '../types/survey';
+import { useLanguage } from '../contexts/LanguageContext';
+import { questionTranslations } from '../translations/questions';
+import { uiTranslations } from '../translations/ui';
 
 interface QuestionRendererProps {
   config: QuestionConfig;
   formData: SurveyFormState;
   updateField: <K extends keyof SurveyFormState>(field: K, value: SurveyFormState[K]) => void;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
-function QuestionRendererComponent({ config, formData, updateField }: QuestionRendererProps) {
+function QuestionRendererComponent({ config, formData, updateField, questionNumber, totalQuestions }: QuestionRendererProps) {
+  const { language } = useLanguage();
+  const qt = questionTranslations[language];
+  const t = uiTranslations[language];
+
+  // Get question-specific translations
+  const qKey = config.id as keyof typeof qt;
+  const qTrans = qt[qKey] as any;
+
   switch (config.type) {
     case 'likert':
       return (
         <LikertQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
-          options={config.options}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
+          options={config.options.map((opt, idx) => ({
+            value: opt.value,
+            label: qTrans.options[idx],
+          }))}
           value={formData[config.field] as number | null}
           onChange={(value) => updateField(config.field, value)}
           comment={formData[config.commentField] as string}
           onCommentChange={(comment) => updateField(config.commentField, comment)}
-          commentPlaceholder={config.commentPlaceholder}
+          commentPlaceholder={qTrans.commentPlaceholder}
+          commentMaxLength={config.commentMaxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -36,16 +55,22 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <LikertWithNAQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
-          options={config.options}
-          naLabel={config.naLabel}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
+          options={config.options.map((opt, idx) => ({
+            value: opt.value,
+            label: qTrans.options[idx],
+          }))}
+          naLabel={qTrans.naLabel}
           value={formData[config.field] as string | null}
           onChange={(value) => updateField(config.field, value)}
           comment={formData[config.commentField] as string}
           onCommentChange={(comment) => updateField(config.commentField, comment)}
-          commentPlaceholder={config.commentPlaceholder}
-          commentLabel={config.commentLabel}
+          commentPlaceholder={qTrans.commentPlaceholder}
+          commentLabel={qTrans.commentLabel || t.additionalComments}
+          commentMaxLength={config.commentMaxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -53,22 +78,26 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <MultipleSelectQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
-          options={config.options}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
+          options={qTrans.options}
           values={formData[config.field] as string[]}
           onChange={(values) => updateField(config.field, values)}
           otherValue={config.otherField ? (formData[config.otherField] as string) : undefined}
           onOtherChange={
             config.otherField ? (value) => updateField(config.otherField!, value) : undefined
           }
+          otherMaxLength={config.otherMaxLength}
           comment={config.commentField ? (formData[config.commentField] as string) : undefined}
           onCommentChange={
             config.commentField
               ? (comment) => updateField(config.commentField!, comment)
               : undefined
           }
-          commentPlaceholder={config.commentPlaceholder}
+          commentPlaceholder={qTrans.commentPlaceholder}
+          commentMaxLength={config.commentMaxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -76,9 +105,9 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <SingleChoiceQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
-          options={config.options}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
+          options={qTrans.options}
           value={formData[config.field] as string}
           onChange={(value) => updateField(config.field, value)}
           comment={config.commentField ? (formData[config.commentField] as string) : undefined}
@@ -87,6 +116,9 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
               ? (comment) => updateField(config.commentField!, comment)
               : undefined
           }
+          commentMaxLength={config.commentMaxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -94,11 +126,13 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <RankingQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
-          options={config.options}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
+          options={qTrans.options}
           rankings={formData[config.field] as Record<string, number>}
           onChange={(rankings) => updateField(config.field, rankings)}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -106,11 +140,14 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <OpenEndedQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
           value={formData[config.field] as string}
           onChange={(value) => updateField(config.field, value)}
-          placeholder={config.placeholder}
+          placeholder={qTrans.placeholder}
+          maxLength={config.maxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -118,15 +155,18 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
       return (
         <TextFieldQuestion
           id={config.id}
-          question={config.question}
-          transparency={config.transparency}
+          question={qTrans.question}
+          transparency={qTrans.transparency}
           fields={config.fields.map((fieldConfig) => ({
             id: fieldConfig.id,
-            label: fieldConfig.label,
+            label: qTrans.fields[fieldConfig.id].label,
             value: formData[fieldConfig.field] as string,
             onChange: (value) => updateField(fieldConfig.field, value),
-            placeholder: fieldConfig.placeholder,
+            placeholder: qTrans.fields[fieldConfig.id].placeholder,
+            maxLength: fieldConfig.maxLength,
           }))}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
