@@ -17,6 +17,7 @@ Master index of all stories that have been created but not yet built. Stories ar
 | STORY-049 | Analytics Tab | Must Have | 2025-12-02-admin-page |
 | STORY-050 | Sentiment Analysis Tab | Should Have | 2025-12-02-admin-page |
 | STORY-051 | Data Export | Should Have | 2025-12-02-admin-page |
+| STORY-052 | Survey Question Numbering | Must Have | 2025-12-06-question-numbers |
 
 ---
 
