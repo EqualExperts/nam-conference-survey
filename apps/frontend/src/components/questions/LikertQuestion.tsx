@@ -15,6 +15,8 @@ interface LikertQuestionProps {
   comment?: string;
   onCommentChange?: (comment: string) => void;
   commentPlaceholder?: string;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 const DEFAULT_OPTIONS: LikertOption[] = [
@@ -35,10 +37,17 @@ export function LikertQuestion({
   comment,
   onCommentChange,
   commentPlaceholder = 'Share any additional thoughts...',
+  questionNumber,
+  totalQuestions,
 }: LikertQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

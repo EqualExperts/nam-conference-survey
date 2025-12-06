@@ -9,6 +9,8 @@ interface OpenEndedQuestionProps {
   onChange: (value: string) => void;
   placeholder?: string;
   maxLength?: number;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 export function OpenEndedQuestion({
@@ -19,6 +21,8 @@ export function OpenEndedQuestion({
   onChange,
   placeholder = 'Share your thoughts...',
   maxLength,
+  questionNumber,
+  totalQuestions,
 }: OpenEndedQuestionProps) {
   const charCount = value.length;
   const remaining = maxLength ? maxLength - charCount : null;
@@ -52,6 +56,11 @@ export function OpenEndedQuestion({
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

@@ -13,9 +13,11 @@ interface QuestionRendererProps {
   config: QuestionConfig;
   formData: SurveyFormState;
   updateField: <K extends keyof SurveyFormState>(field: K, value: SurveyFormState[K]) => void;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
-function QuestionRendererComponent({ config, formData, updateField }: QuestionRendererProps) {
+function QuestionRendererComponent({ config, formData, updateField, questionNumber, totalQuestions }: QuestionRendererProps) {
   switch (config.type) {
     case 'likert':
       return (
@@ -29,6 +31,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
           comment={formData[config.commentField] as string}
           onCommentChange={(comment) => updateField(config.commentField, comment)}
           commentPlaceholder={config.commentPlaceholder}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -46,6 +50,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
           onCommentChange={(comment) => updateField(config.commentField, comment)}
           commentPlaceholder={config.commentPlaceholder}
           commentLabel={config.commentLabel}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -69,6 +75,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
               : undefined
           }
           commentPlaceholder={config.commentPlaceholder}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -87,6 +95,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
               ? (comment) => updateField(config.commentField!, comment)
               : undefined
           }
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -99,6 +109,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
           options={config.options}
           rankings={formData[config.field] as Record<string, number>}
           onChange={(rankings) => updateField(config.field, rankings)}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -112,6 +124,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
           onChange={(value) => updateField(config.field, value)}
           placeholder={config.placeholder}
           maxLength={config.maxLength}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 
@@ -128,6 +142,8 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
             onChange: (value) => updateField(fieldConfig.field, value),
             placeholder: fieldConfig.placeholder,
           }))}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions}
         />
       );
 

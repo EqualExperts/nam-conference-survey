@@ -7,6 +7,8 @@ interface RankingQuestionProps {
   options: { value: string; label: string }[];
   rankings: Record<string, number>;
   onChange: (rankings: Record<string, number>) => void;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 export function RankingQuestion({
@@ -16,12 +18,19 @@ export function RankingQuestion({
   options,
   rankings,
   onChange,
+  questionNumber,
+  totalQuestions,
 }: RankingQuestionProps) {
   const rankOptions = ['1', '2', '3', '4'];
 
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

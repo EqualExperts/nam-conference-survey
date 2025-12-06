@@ -11,6 +11,8 @@ interface TextFieldQuestionProps {
     onChange: (value: string) => void;
     placeholder?: string;
   }[];
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 export function TextFieldQuestion({
@@ -18,10 +20,17 @@ export function TextFieldQuestion({
   question,
   transparency,
   fields,
+  questionNumber,
+  totalQuestions,
 }: TextFieldQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

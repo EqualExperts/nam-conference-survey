@@ -9,6 +9,8 @@ interface SingleChoiceQuestionProps {
   onChange: (value: string) => void;
   comment?: string;
   onCommentChange?: (comment: string) => void;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 export function SingleChoiceQuestion({
@@ -20,10 +22,17 @@ export function SingleChoiceQuestion({
   onChange,
   comment,
   onCommentChange,
+  questionNumber,
+  totalQuestions,
 }: SingleChoiceQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

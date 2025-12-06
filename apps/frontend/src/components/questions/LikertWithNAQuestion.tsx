@@ -17,6 +17,8 @@ interface LikertWithNAQuestionProps {
   onCommentChange?: (comment: string) => void;
   commentPlaceholder?: string;
   commentLabel?: string;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 const DEFAULT_OPTIONS: LikertOption[] = [
@@ -39,6 +41,8 @@ export function LikertWithNAQuestion({
   onCommentChange,
   commentPlaceholder = 'Share any additional thoughts...',
   commentLabel = 'Additional comments (optional)',
+  questionNumber,
+  totalQuestions,
 }: LikertWithNAQuestionProps) {
   // Combine provided options with N/A option
   const allOptions = [...options, { value: 'NA', label: naLabel }];
@@ -46,6 +50,11 @@ export function LikertWithNAQuestion({
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>

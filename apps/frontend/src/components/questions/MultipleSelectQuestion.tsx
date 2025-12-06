@@ -12,6 +12,8 @@ interface MultipleSelectQuestionProps {
   comment?: string;
   onCommentChange?: (comment: string) => void;
   commentPlaceholder?: string;
+  questionNumber?: number;
+  totalQuestions?: number;
 }
 
 export function MultipleSelectQuestion({
@@ -26,10 +28,17 @@ export function MultipleSelectQuestion({
   comment,
   onCommentChange,
   commentPlaceholder = 'Share any additional thoughts...',
+  questionNumber,
+  totalQuestions,
 }: MultipleSelectQuestionProps) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
+        {questionNumber && totalQuestions && (
+          <Text size="xs" c="dimmed" fw={500}>
+            Question {questionNumber} of {totalQuestions}
+          </Text>
+        )}
         <Title order={3} size="h4">
           {question}
         </Title>
