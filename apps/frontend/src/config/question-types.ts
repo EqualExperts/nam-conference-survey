@@ -80,6 +80,7 @@ export interface OpenEndedQuestionConfig extends BaseQuestionConfig {
   type: 'open-ended';
   field: keyof SurveyFormState;
   placeholder?: string;
+  maxLength?: number;
 }
 
 export interface TextFieldConfig {

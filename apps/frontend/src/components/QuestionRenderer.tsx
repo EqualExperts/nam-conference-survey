@@ -111,6 +111,7 @@ function QuestionRendererComponent({ config, formData, updateField }: QuestionRe
           value={formData[config.field] as string}
           onChange={(value) => updateField(config.field, value)}
           placeholder={config.placeholder}
+          maxLength={config.maxLength}
         />
       );
 

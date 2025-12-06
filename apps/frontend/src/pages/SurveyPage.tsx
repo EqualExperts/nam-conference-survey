@@ -99,6 +99,20 @@ export default function SurveyPage() {
       setIsSubmitting(true);
       setError(null);
 
+      // Validate Q15 character limit
+      if (formData.q15AdditionalFeedback.length > 250) {
+        const errorMsg = 'Please reduce your additional feedback (Q15) to 250 characters or fewer before submitting.';
+        setError(errorMsg);
+        notifications.show({
+          title: 'Validation Error',
+          message: errorMsg,
+          color: 'red',
+          icon: <IconAlertCircle />,
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       await submitSurvey(formData);
 
       notifications.show({

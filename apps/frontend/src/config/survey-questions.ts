@@ -217,6 +217,7 @@ export const SURVEY_QUESTIONS: QuestionConfig[] = [
     question: "Is there anything else you'd like us to know about your conference experience?",
     transparency: "This gives you space to share anything we didn't specifically ask about.",
     placeholder: 'Share your thoughts...',
+    maxLength: 250,
   },
   {
     id: 'q16',
