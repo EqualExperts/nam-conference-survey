@@ -129,7 +129,8 @@ export default function SurveyPage() {
         icon: <IconCheck />,
       });
 
-      navigate('/thanks');
+      // Rick Roll redirect
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to submit survey';
       setError(message);
