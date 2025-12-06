@@ -4,10 +4,35 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>NAM Conference Survey</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FOUC Prevention: Set theme before React hydration -->
+    <script>
+      (function() {
+        var STORAGE_KEY = 'nam-survey-color-scheme';
+        var stored = null;
+        try {
+          stored = localStorage.getItem(STORAGE_KEY);
+        } catch (e) {}
+
+        var scheme;
+        if (stored === 'light' || stored === 'dark') {
+          scheme = stored;
+        } else {
+          // Default to 'auto' - check OS preference
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            scheme = 'dark';
+          } else {
+            scheme = 'light';
+          }
+        }
+
+        document.documentElement.setAttribute('data-mantine-color-scheme', scheme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

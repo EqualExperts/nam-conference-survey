@@ -5,7 +5,6 @@ import {
   Stack,
   Title,
   Button,
-  Image,
   Alert,
   Loader,
   Center,
@@ -143,12 +142,6 @@ export default function SurveyPage() {
       <Stack gap="xl">
         {/* Header */}
         <Stack align="center" gap="md">
-          <Image
-            src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
-            alt="Equal Experts"
-            h={60}
-            w="auto"
-          />
           <Title order={1} ta="center" c="equalBlue.4">
             NAM Conference Survey
           </Title>

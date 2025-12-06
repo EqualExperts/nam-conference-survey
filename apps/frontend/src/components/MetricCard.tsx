@@ -28,10 +28,10 @@ export function MetricCard({ label, value, loading = false, ariaLabel }: MetricC
       aria-label={ariaLabel || `${label} count`}
     >
       <Stack gap="xs" align="center">
-        <Text size="48px" fw={700} c="#1795d4">
+        <Text size="48px" fw={700} c="equalBlue.4">
           {value ?? 0}
         </Text>
-        <Text size="lg" fw={500} c="#2c3234">
+        <Text size="lg" fw={500}>
           {label}
         </Text>
       </Stack>
