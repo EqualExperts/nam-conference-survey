@@ -1,4 +1,5 @@
-import { Card, Title, Text, Stack, Select } from '@mantine/core';
+import { Card, Title, Text, Stack, Select, Group } from '@mantine/core';
+import { QuestionNumber } from '../QuestionNumber';
 
 interface RankingQuestionProps {
   id: string;
@@ -7,6 +8,8 @@ interface RankingQuestionProps {
   options: { value: string; label: string }[];
   rankings: Record<string, number>;
   onChange: (rankings: Record<string, number>) => void;
+  questionNumber: number;
+  totalQuestions: number;
 }
 
 export function RankingQuestion({
@@ -16,15 +19,28 @@ export function RankingQuestion({
   options,
   rankings,
   onChange,
+  questionNumber,
+  totalQuestions,
 }: RankingQuestionProps) {
   const rankOptions = ['1', '2', '3', '4'];
+  const ariaLabel = `Question ${questionNumber} of ${totalQuestions}: ${question}`;
 
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
-        <Title order={3} size="h4">
-          {question}
-        </Title>
+        <Group gap="md" align="flex-start" wrap="nowrap" visibleFrom="xs">
+          <QuestionNumber current={questionNumber} total={totalQuestions} />
+          <Title order={3} size="h4" style={{ flex: 1 }} aria-label={ariaLabel}>
+            {question}
+          </Title>
+        </Group>
+
+        <Stack gap={4} hiddenFrom="xs">
+          <QuestionNumber current={questionNumber} total={totalQuestions} />
+          <Title order={3} size="h4" aria-label={ariaLabel}>
+            {question}
+          </Title>
+        </Stack>
 
         <Text size="sm" c="dimmed">
           {transparency}

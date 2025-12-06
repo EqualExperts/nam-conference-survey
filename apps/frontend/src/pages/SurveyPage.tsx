@@ -167,12 +167,14 @@ export default function SurveyPage() {
         )}
 
         {/* Survey Questions */}
-        {SURVEY_QUESTIONS.map((config) => (
+        {SURVEY_QUESTIONS.map((config, index) => (
           <QuestionRenderer
             key={config.id}
             config={config}
             formData={formData}
             updateField={updateField}
+            questionNumber={index + 1}
+            totalQuestions={TOTAL_QUESTIONS}
           />
         ))}
 
