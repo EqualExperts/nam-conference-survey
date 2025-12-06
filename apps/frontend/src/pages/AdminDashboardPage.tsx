@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Stack, Title, SimpleGrid, Alert, Image } from '@mantine/core';
+import { Container, Stack, Title, SimpleGrid, Alert } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
 import { MetricCard } from '../components/MetricCard';
 import { RecentResponsesSection } from '../components/RecentResponsesSection';
@@ -40,19 +40,10 @@ export default function AdminDashboardPage() {
   return (
     <Container size="lg" py="xl">
       <Stack gap="xl">
-        {/* Header with Logo */}
-        <Stack gap="md" align="center">
-          <Image
-            src="https://www.equalexperts.com/wp-content/uploads/2024/10/2024-Logo.svg"
-            alt="Equal Experts Logo"
-            h={60}
-            w="auto"
-            fit="contain"
-          />
-          <Title order={1} ta="center" c="#22567c">
-            Admin Dashboard
-          </Title>
-        </Stack>
+        {/* Header */}
+        <Title order={1} ta="center" c="equalNavy.5">
+          Admin Dashboard
+        </Title>
 
         {/* Error State */}
         {error && (
@@ -68,7 +59,7 @@ export default function AdminDashboardPage() {
 
         {/* Metrics Section */}
         <Stack gap="md">
-          <Title order={2} size="h3" c="#2c3234">
+          <Title order={2} size="h3">
             Survey Metrics
           </Title>
           <SimpleGrid

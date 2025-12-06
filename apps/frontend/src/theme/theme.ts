@@ -124,7 +124,7 @@ export const theme: MantineThemeOverride = createTheme({
       },
       styles: {
         root: {
-          border: '1px solid #e0e0e0',
+          border: '1px solid var(--mantine-color-default-border)',
         },
       },
     },

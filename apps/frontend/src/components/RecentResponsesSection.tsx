@@ -35,7 +35,7 @@ export function RecentResponsesSection({ responses, loading = false }: RecentRes
   if (loading) {
     return (
       <Stack gap="md">
-        <Text size="xl" fw={600} c="#2c3234">
+        <Text size="xl" fw={600}>
           Recent Responses
         </Text>
         <Stack gap="xs">
@@ -50,7 +50,7 @@ export function RecentResponsesSection({ responses, loading = false }: RecentRes
   if (!responses || responses.length === 0) {
     return (
       <Stack gap="md">
-        <Text size="xl" fw={600} c="#2c3234">
+        <Text size="xl" fw={600}>
           Recent Responses
         </Text>
         <Text c="dimmed" ta="center" py="xl">
