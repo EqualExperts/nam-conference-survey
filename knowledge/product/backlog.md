@@ -17,6 +17,11 @@ Master index of all stories that have been created but not yet built. Stories ar
 | STORY-049 | Analytics Tab | Must Have | 2025-12-02-admin-page |
 | STORY-050 | Sentiment Analysis Tab | Should Have | 2025-12-02-admin-page |
 | STORY-051 | Data Export | Should Have | 2025-12-02-admin-page |
+| STORY-052 | Webhook Dispatch on Submission | Must Have | 2025-12-06-webhooks |
+| STORY-053 | Summary Payload Schema | Must Have | 2025-12-06-webhooks |
+| STORY-054 | Webhook Config File | Should Have | 2025-12-06-webhooks |
+| STORY-055 | Webhook Error Logging | Should Have | 2025-12-06-webhooks |
+| STORY-056 | Slack Payload Formatting | Could Have | 2025-12-06-webhooks |
 
 ---
 
