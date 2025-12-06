@@ -1,4 +1,5 @@
-import { Card, Title, Text, TextInput, Stack } from '@mantine/core';
+import { Card, Title, Text, TextInput, Stack, Group } from '@mantine/core';
+import { useMemo } from 'react';
 
 interface TextFieldQuestionProps {
   id: string;
@@ -10,6 +11,7 @@ interface TextFieldQuestionProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    maxLength?: number;
   }[];
   questionNumber?: number;
   totalQuestions?: number;

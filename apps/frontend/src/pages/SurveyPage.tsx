@@ -11,17 +11,23 @@ import {
   Center,
   Text,
   Box,
+  Group,
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
 import { ProgressIndicator } from '../components/ProgressIndicator';
 import { QuestionRenderer } from '../components/QuestionRenderer';
+import { LanguageToggle } from '../components/LanguageToggle';
 import { SurveyFormState } from '../types/survey';
 import { submitSurvey } from '../api/survey';
 import { SURVEY_QUESTIONS, TOTAL_QUESTIONS } from '../config/survey-questions';
+import { useLanguage } from '../contexts/LanguageContext';
+import { uiTranslations } from '../translations/ui';
 
 export default function SurveyPage() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = uiTranslations[language];
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -102,10 +108,10 @@ export default function SurveyPage() {
 
       // Validate Q15 character limit
       if (formData.q15AdditionalFeedback.length > 250) {
-        const errorMsg = 'Please reduce your additional feedback (Q15) to 250 characters or fewer before submitting.';
+        const errorMsg = `${t.pleaseReduceComment} 250 ${t.charactersOrFewer}`;
         setError(errorMsg);
         notifications.show({
-          title: 'Validation Error',
+          title: t.validationError,
           message: errorMsg,
           color: 'red',
           icon: <IconAlertCircle />,
@@ -117,8 +123,8 @@ export default function SurveyPage() {
       await submitSurvey(formData);
 
       notifications.show({
-        title: 'Success!',
-        message: 'Your survey has been submitted successfully',
+        title: t.successTitle,
+        message: t.successMessage,
         color: 'green',
         icon: <IconCheck />,
       });
@@ -128,7 +134,7 @@ export default function SurveyPage() {
       const message = err instanceof Error ? err.message : 'Failed to submit survey';
       setError(message);
       notifications.show({
-        title: 'Submission Error',
+        title: t.submissionError,
         message,
         color: 'red',
         icon: <IconAlertCircle />,
@@ -145,7 +151,7 @@ export default function SurveyPage() {
           <Stack align="center" gap="md">
             <Loader color="equalBlue" size="lg" />
             <Text size="sm" c="dimmed">
-              Submitting your survey...
+              {t.submittingMessage}
             </Text>
           </Stack>
         </Center>
@@ -169,6 +175,11 @@ export default function SurveyPage() {
           }}
         >
           <Stack gap="md">
+            {/* Language Toggle */}
+            <Group justify="flex-end">
+              <LanguageToggle />
+            </Group>
+
             {/* Header */}
             <Stack align="center" gap="md">
               <Image
@@ -178,10 +189,10 @@ export default function SurveyPage() {
                 w="auto"
               />
               <Title order={1} ta="center" c="equalBlue.4">
-                NAM Conference Survey
+                {t.title}
               </Title>
               <Text size="lg" ta="center" c="dimmed">
-                Your feedback helps us improve future conferences. All questions are optional.
+                {t.subtitle}
               </Text>
             </Stack>
 
@@ -194,7 +205,7 @@ export default function SurveyPage() {
         {error && (
           <Alert
             icon={<IconAlertCircle />}
-            title="Submission Error"
+            title={t.submissionError}
             color="red"
             withCloseButton
             onClose={() => setError(null)}
@@ -223,11 +234,11 @@ export default function SurveyPage() {
           loading={isSubmitting}
           fullWidth
         >
-          Submit Survey
+          {t.submitButton}
         </Button>
 
         <Text size="sm" c="dimmed" ta="center">
-          All questions are optional. Submit with as many or as few answers as you like.
+          {t.optionalNote}
         </Text>
       </Stack>
     </Container>
