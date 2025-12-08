@@ -3,7 +3,7 @@
 **Story ID**: STORY-052
 **Iteration**: 2025-12-08-final-fixes
 **Priority**: Critical
-**Status**: Ready
+**Status**: Ready (reverted from production - needs API URL fix)
 **Labels**: 2025-12-08-final-fixes, conference-attendee, survey, bug-fix, llm-dev
 
 ## User Story
@@ -63,6 +63,15 @@ Testing revealed that the survey validation incorrectly requires all questions t
 
 ## Open Questions
 None - requirement is clear: remove all required validation from survey questions.
+
+## Implementation Notes
+
+**API URL Fix Required**: When deploying to production, the `VITE_API_URL` build argument must include `/api` at the end. The frontend constructs URLs as `${VITE_API_URL}/survey/submit`, but the backend expects `/api/survey/submit`.
+
+- Incorrect: `VITE_API_URL=https://nam-survey-backend-xxx.run.app`
+- Correct: `VITE_API_URL=https://nam-survey-backend-xxx.run.app/api`
+
+Update `deploy/gcp/cloudbuild.yaml` substitution `_BACKEND_URL` to include `/api` suffix before redeploying this story.
 
 ## Dependencies
 None - this is a fix to existing functionality.
