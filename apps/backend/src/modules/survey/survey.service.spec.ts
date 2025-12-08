@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { BadRequestException } from '@nestjs/common';
 import { SurveyService } from './survey.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateSurveyResponseDto } from './dto/create-survey-response.dto';
@@ -46,63 +47,26 @@ describe('SurveyService', () => {
   });
 
   describe('submitSurvey', () => {
-    it('should accept submission when all fields are empty (all questions optional)', async () => {
+    it('should throw BadRequestException when all fields are empty', async () => {
       const emptyDto: CreateSurveyResponseDto = {};
 
-      const mockResponse = {
-        id: 'empty-response',
-        userId: mockAnonymousUser.id,
-        status: Status.SUBMITTED,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      mockPrismaService.$transaction.mockImplementation(async (callback) => {
-        return callback({
-          user: {
-            findUnique: jest.fn().mockResolvedValue(mockAnonymousUser),
-          },
-          surveyResponse: {
-            create: jest.fn().mockResolvedValue(mockResponse),
-          },
-        });
-      });
-
-      const result = await service.submitSurvey(emptyDto);
-
-      expect(result).toBeDefined();
-      expect(result.status).toBe('submitted');
+      await expect(service.submitSurvey(emptyDto)).rejects.toThrow(
+        BadRequestException,
+      );
+      await expect(service.submitSurvey(emptyDto)).rejects.toThrow(
+        'Cannot submit empty survey',
+      );
     });
 
-    it('should accept submission when only empty arrays are provided (all questions optional)', async () => {
+    it('should throw BadRequestException when only empty arrays are provided', async () => {
       const dtoWithEmptyArrays: CreateSurveyResponseDto = {
         q4ConnectionTypes: [],
         q17FeedbackConfidence: [],
       };
 
-      const mockResponse = {
-        id: 'empty-arrays-response',
-        userId: mockAnonymousUser.id,
-        status: Status.SUBMITTED,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      mockPrismaService.$transaction.mockImplementation(async (callback) => {
-        return callback({
-          user: {
-            findUnique: jest.fn().mockResolvedValue(mockAnonymousUser),
-          },
-          surveyResponse: {
-            create: jest.fn().mockResolvedValue(mockResponse),
-          },
-        });
-      });
-
-      const result = await service.submitSurvey(dtoWithEmptyArrays);
-
-      expect(result).toBeDefined();
-      expect(result.status).toBe('submitted');
+      await expect(service.submitSurvey(dtoWithEmptyArrays)).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should create anonymous user if not exists', async () => {
