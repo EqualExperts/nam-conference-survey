@@ -25,6 +25,7 @@ export function OptionalInt(min: number, max: number): PropertyDecorator {
 
 /**
  * Combines @IsOptional(), @IsString(), and @IsIn() with auto-generated message
+ * Also accepts empty string '' (frontend sends '' for unselected options)
  */
 export function OptionalEnum(
   values: readonly string[],
@@ -33,7 +34,7 @@ export function OptionalEnum(
   return applyDecorators(
     IsOptional(),
     IsString(),
-    IsIn([...values], {
+    IsIn(['', ...values], {
       message: `${fieldName} must be ${values.join(', ')}`,
     }),
   );

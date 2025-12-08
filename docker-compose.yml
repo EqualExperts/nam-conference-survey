@@ -62,7 +62,9 @@ services:
     environment:
       NODE_ENV: development
       CI: "true"
-      VITE_API_URL: http://backend:3001
+      # API_PROXY_TARGET: Docker internal URL for Vite dev server proxy
+      # Don't set VITE_API_URL locally - let browser use /api proxy
+      API_PROXY_TARGET: http://backend:3001
     ports:
       - "3000:3000"
     volumes:

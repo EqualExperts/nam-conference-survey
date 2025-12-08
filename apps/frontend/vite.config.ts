@@ -10,7 +10,9 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:3001',
+        // Use API_PROXY_TARGET for Docker internal routing, not VITE_API_URL
+        // VITE_API_URL is for production builds where browser hits API directly
+        target: process.env.API_PROXY_TARGET || 'http://localhost:3001',
         changeOrigin: true,
       },
     },
