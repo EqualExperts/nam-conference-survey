@@ -53,11 +53,11 @@ For each story file specified:
    - Description: Formatted description from step 2
    - Issue Type: As specified in input
    - Project: As specified in input
-   - Priority: Map MoSCoW to tracker priorities:
-     - "Must have" → Highest/High
-     - "Should have" → Medium
-     - "Could have" → Low
-     - "Won't have" → Lowest (or don't create)
+   - Priority: Map story priorities to tracker priorities:
+     - "Critical" → Highest
+     - "High" → High
+     - "Medium" → Medium
+     - "Low" → Low/Lowest
    - Labels: Use labels from story metadata
    - Story Points: Use estimate if provided
 

@@ -95,7 +95,7 @@
 
 **Estimated Effort**: [S/M/L/XL]
 
-**Priority**: [Must Have / Should Have / Could Have]
+**Priority**: [Critical / High / Medium / Low]
 
 ---
 
@@ -110,7 +110,7 @@
 
 **Estimated Effort**: [S/M/L/XL]
 
-**Priority**: [Must Have / Should Have / Could Have]
+**Priority**: [Critical / High / Medium / Low]
 
 ---
 

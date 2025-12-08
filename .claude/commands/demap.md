@@ -128,7 +128,7 @@ For each story that exists both on Miro and locally:
 **Read story file** from `product/iterations/{iteration}/stories/story-{number}-*.md`
 
 **Update story metadata**:
-- Priority: {NOW/NEXT/LATER} based on swim lane
+- Priority: Critical/High (NOW), Medium (NEXT), Low (LATER) based on swim lane
 - Miro Position: y={coordinate}
 - Last Synced: {current date}
 - Status: Ready (if not already set)
@@ -136,7 +136,7 @@ For each story that exists both on Miro and locally:
 **Example metadata block**:
 ```markdown
 **Story ID**: STORY-019
-**Priority**: NOW
+**Priority**: Critical
 **Status**: Ready
 **Miro Position**: y=125
 **Last Synced**: 2025-11-20

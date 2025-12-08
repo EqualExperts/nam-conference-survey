@@ -15,6 +15,17 @@ Master index of all stories that have been created but not yet built. Stories ar
 
 ---
 
+## Priority Scale
+
+| Priority | Description |
+|----------|-------------|
+| Critical | Core functionality, blocks release |
+| High | Important, strong business value |
+| Medium | Nice to have, lower urgency |
+| Low | Deferred, may not be built |
+
+---
+
 ## Notes
 
 - Stories are added to backlog when created via `/req`

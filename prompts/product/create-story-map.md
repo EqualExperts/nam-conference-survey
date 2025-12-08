@@ -6,7 +6,7 @@ This prompt guides Claude in creating a production-grade story map in Miro from 
 
 You will create a visual story map on a Miro board that organizes user stories by:
 - **Activities** (vertical columns) - Major user activities or measurement areas
-- **Release Priority** (horizontal swim lanes) - Must Have (NOW), Should Have (NEXT), Could Have (LATER)
+- **Release Priority** (horizontal swim lanes) - Critical/High (NOW), Medium (NEXT), Low (LATER)
 - **Story Type** (color coding) - Infrastructure, Quality/Testing, Regular stories, etc.
 
 ## Input Files
@@ -45,11 +45,11 @@ Examine each story to determine its type:
 - **Documentation**: User guides, API docs, runbooks (look for "documentation", "guide", "README")
 - **Refactoring**: Code cleanup without new features (look for "refactor", "cleanup", "tech debt")
 
-### Extract MoSCoW Priority
+### Extract Priority
 From STORIES-SUMMARY.md or story metadata:
-- **Must Have**: Walking skeleton, critical path stories
-- **Should Have**: Important enhancements for release 2
-- **Could Have**: Nice to have features, deferred work
+- **Critical/High**: Walking skeleton, critical path stories → NOW swim lane
+- **Medium**: Important enhancements for next release → NEXT swim lane
+- **Low**: Nice to have features, deferred work → LATER swim lane
 
 ### Identify Personas
 - Look for persona references in stories (emoji prefixes like 📋, 👥, 🎯)
@@ -165,9 +165,9 @@ Must Have
 1. Group stories by activity (column)
 2. Within each activity, sort by priority (Must → Should → Could)
 3. Assign y-coordinates based on priority:
-   - Must Have → NOW section (y: -400 to 400)
-   - Should Have → NEXT section (y: 889+)
-   - Could Have → LATER section (y: 1867+)
+   - Critical/High → NOW section (y: -400 to 400)
+   - Medium → NEXT section (y: 889+)
+   - Low → LATER section (y: 1867+)
 4. Stack multiple stories in same activity+priority vertically (200px spacing)
 
 **Create each story card:**

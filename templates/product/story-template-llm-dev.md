@@ -7,7 +7,7 @@ description: Streamlined stories with high-level acceptance criteria. Best for L
 
 **Story ID**: [Number]
 **Iteration**: [iteration-name]
-**Priority**: [Must have/Should have/Could have/Won't have]
+**Priority**: [Critical/High/Medium/Low]
 **Status**: [Draft/Ready/Built]
 **Labels**: [iteration-name], [persona-name], [feature-area], [llm-dev]
 

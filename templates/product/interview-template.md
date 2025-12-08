@@ -77,7 +77,7 @@
 
 | Feature | Priority (Participant) | Notes |
 |---------|------------------------|-------|
-| [Feature 1] | Must have | [Context] |
+| [Feature 1] | Critical | [Context] |
 | [Feature 2] | Nice to have | [Context] |
 
 ---
