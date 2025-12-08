@@ -1,6 +1,6 @@
 import { SurveyFormState, SurveySubmissionResponse } from '../types/survey';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export async function submitSurvey(data: SurveyFormState): Promise<SurveySubmissionResponse> {
   const response = await fetch(`${API_BASE_URL}/survey/submit`, {

@@ -1,6 +1,6 @@
 import { AdminMetricsResponse, AdminRecentResponsesResponse } from '../types/admin';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export async function getAdminMetrics(): Promise<AdminMetricsResponse> {
   const response = await fetch(`${API_BASE_URL}/admin/metrics`, {
