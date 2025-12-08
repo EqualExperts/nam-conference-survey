@@ -2,7 +2,7 @@
 
 **Story ID**: 044
 **Epic**: EPIC-001 - NAM Conference Survey MVP
-**Priority**: Must have
+**Priority**: Low
 **Status**: Draft
 **Labels**: 2025-11-12-mvp, conference-organizer, performance, reliability
 

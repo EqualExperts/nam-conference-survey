@@ -2,7 +2,7 @@
 
 **Story ID**: STORY-047
 **Iteration**: 2025-12-02-dark-mode
-**Priority**: High
+**Priority**: Medium
 **Status**: Ready
 **Labels**: 2025-12-02-dark-mode, conference-attendee, accessibility, llm-dev
 

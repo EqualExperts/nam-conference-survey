@@ -1,6 +1,6 @@
 # Product Backlog
 
-**Last Updated**: 2025-12-06
+**Last Updated**: 2025-12-08
 
 ## Overview
 
@@ -10,13 +10,26 @@ Master index of all stories that have been created but not yet built. Stories ar
 
 | ID | Title | Priority | Iteration |
 |----|-------|----------|-----------|
-| STORY-044 | Load Testing for Concurrent User Support | Must Have | 2025-11-12-mvp |
-| STORY-046 | Response Detail Modal | Must Have | 2025-12-02-admin-page |
-| STORY-047 | Dark Mode for Reduced Eye Strain | High | 2025-12-02-dark-mode |
-| STORY-048 | Responses Tab | Must Have | 2025-12-02-admin-page |
-| STORY-049 | Analytics Tab | Must Have | 2025-12-02-admin-page |
-| STORY-050 | Sentiment Analysis Tab | Should Have | 2025-12-02-admin-page |
-| STORY-051 | Data Export | Should Have | 2025-12-02-admin-page |
+| STORY-044 | Load Testing for Concurrent User Support | Low | 2025-11-12-mvp |
+| STORY-046 | Response Detail Modal | Medium | 2025-12-02-admin-page |
+| STORY-047 | Dark Mode for Reduced Eye Strain | Medium | 2025-12-02-dark-mode |
+| STORY-048 | Responses Tab | High | 2025-12-02-admin-page |
+| STORY-049 | Analytics Tab | High | 2025-12-02-admin-page |
+| STORY-050 | Sentiment Analysis Tab | Low | 2025-12-02-admin-page |
+| STORY-051 | Data Export | Critical | 2025-12-02-admin-page |
+| STORY-052 | Optional Questions Bug Fix | Critical | 2025-12-08-final-fixes |
+| STORY-053 | Admin Password Protection | High | 2025-12-08-final-fixes |
+
+---
+
+## Priority Scale
+
+| Priority | Description |
+|----------|-------------|
+| Critical | Core functionality, blocks release |
+| High | Important, strong business value |
+| Medium | Nice to have, lower urgency |
+| Low | Deferred, may not be built |
 
 ---
 

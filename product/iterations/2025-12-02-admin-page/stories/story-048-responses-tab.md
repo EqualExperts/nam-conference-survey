@@ -2,7 +2,7 @@
 
 **Story ID**: STORY-048
 **Iteration**: 2025-12-02-admin-page
-**Priority**: Must Have
+**Priority**: High
 **Status**: Ready
 **Labels**: 2025-12-02-admin-page, conference-organizer, admin, llm-dev
 

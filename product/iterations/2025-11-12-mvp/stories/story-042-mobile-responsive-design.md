@@ -2,7 +2,7 @@
 
 **Story ID**: 042
 **Epic**: EPIC-001 - NAM Conference Survey MVP
-**Priority**: Must have
+**Priority**: Critical
 **Status**: Built
 **Build Date**: 2025-11-20
 **Labels**: 2025-11-12-mvp, conference-attendee, mobile-optimization, accessibility
