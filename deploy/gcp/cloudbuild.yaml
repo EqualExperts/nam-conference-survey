@@ -1,0 +1,119 @@
+# Cloud Build configuration for NAM Conference Survey
+# This builds and deploys both frontend and backend to Cloud Run
+#
+# Required substitutions (set in Cloud Build trigger or command line):
+#   _REGION: GCP region (e.g., us-central1)
+#   _BACKEND_SERVICE: Cloud Run service name for backend
+#   _FRONTEND_SERVICE: Cloud Run service name for frontend
+#   _CLOUD_SQL_CONNECTION: Cloud SQL connection string
+#   _BACKEND_URL: Public URL of the backend service
+
+steps:
+  # ==========================================================================
+  # Build Backend
+  # ==========================================================================
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:latest'
+      - '-f'
+      - 'deploy/gcp/backend.Dockerfile'
+      - '.'
+    id: 'build-backend'
+
+  # ==========================================================================
+  # Build Frontend (requires BACKEND_URL for API calls)
+  # ==========================================================================
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_FRONTEND_SERVICE}:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_FRONTEND_SERVICE}:latest'
+      - '-f'
+      - 'deploy/gcp/frontend.Dockerfile'
+      - '--build-arg'
+      - 'VITE_API_URL=${_BACKEND_URL}'
+      - '.'
+    id: 'build-frontend'
+
+  # ==========================================================================
+  # Push Backend Image
+  # ==========================================================================
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:$COMMIT_SHA']
+    id: 'push-backend'
+    waitFor: ['build-backend']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:latest']
+    waitFor: ['push-backend']
+
+  # ==========================================================================
+  # Push Frontend Image
+  # ==========================================================================
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/${_FRONTEND_SERVICE}:$COMMIT_SHA']
+    id: 'push-frontend'
+    waitFor: ['build-frontend']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/${_FRONTEND_SERVICE}:latest']
+    waitFor: ['push-frontend']
+
+  # ==========================================================================
+  # Deploy Backend to Cloud Run
+  # ==========================================================================
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_BACKEND_SERVICE}'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:$COMMIT_SHA'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--add-cloudsql-instances'
+      - '${_CLOUD_SQL_CONNECTION}'
+      - '--set-env-vars'
+      - 'NODE_ENV=production'
+    id: 'deploy-backend'
+    waitFor: ['push-backend']
+
+  # ==========================================================================
+  # Deploy Frontend to Cloud Run
+  # ==========================================================================
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_FRONTEND_SERVICE}'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/${_FRONTEND_SERVICE}:$COMMIT_SHA'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+    id: 'deploy-frontend'
+    waitFor: ['push-frontend']
+
+substitutions:
+  _REGION: 'us-central1'
+  _BACKEND_SERVICE: 'nam-survey-backend'
+  _FRONTEND_SERVICE: 'nam-survey-frontend'
+  # These must be set per environment:
+  # _CLOUD_SQL_CONNECTION: 'project:region:instance'
+  # _BACKEND_URL: 'https://nam-survey-backend-xxx.run.app'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
