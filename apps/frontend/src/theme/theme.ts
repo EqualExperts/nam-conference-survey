@@ -42,6 +42,19 @@ export const theme: MantineThemeOverride = createTheme({
       '#121415', // 8
       '#090a0a', // 9
     ],
+    // Dark mode color adjustments
+    dark: [
+      '#f8f9fa', // 0 - text on dark backgrounds
+      '#adb5bd', // 1 - secondary text
+      '#868e96', // 2 - tertiary text
+      '#495057', // 3 - borders
+      '#404548', // 4 - strong borders
+      '#3a3f41', // 5 - surface hover
+      '#2c3234', // 6 - surface (Equal Experts charcoal)
+      '#343738', // 7 - subtle borders
+      '#1a1d1f', // 8 - background
+      '#121415', // 9 - deepest background
+    ],
   },
 
   // Typography

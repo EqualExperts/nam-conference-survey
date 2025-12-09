@@ -8,6 +8,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+      // Theme initialization script - runs before React hydrates to prevent FOUC
+      (function() {
+        var STORAGE_KEY = 'survey-theme-preference';
+
+        function getSystemTheme() {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function getStoredTheme() {
+          try {
+            var stored = localStorage.getItem(STORAGE_KEY);
+            if (stored === 'light' || stored === 'dark' || stored === 'auto') {
+              return stored;
+            }
+          } catch (e) {}
+          return 'auto';
+        }
+
+        function resolveTheme(theme) {
+          return theme === 'auto' ? getSystemTheme() : theme;
+        }
+
+        var theme = getStoredTheme();
+        var resolved = resolveTheme(theme);
+        document.documentElement.setAttribute('data-theme', resolved);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

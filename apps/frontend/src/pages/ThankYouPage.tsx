@@ -1,8 +1,16 @@
-import { Container, Stack, Title, Text, Button, Image, Card } from '@mantine/core';
+import { Container, Stack, Title, Text, Button, Image, Card, Box, Group } from '@mantine/core';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export default function ThankYouPage() {
   return (
     <Container size="sm" py="xl">
+      {/* Theme Toggle - Top Right */}
+      <Box style={{ position: 'relative', marginBottom: '1rem' }}>
+        <Group justify="flex-end" style={{ position: 'absolute', top: 0, right: 0 }}>
+          <ThemeToggle size="md" />
+        </Group>
+      </Box>
+
       <Card shadow="md" padding="xl" radius="md" withBorder>
         <Stack align="center" gap="xl">
           <Image

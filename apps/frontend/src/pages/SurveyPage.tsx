@@ -10,11 +10,14 @@ import {
   Loader,
   Center,
   Text,
+  Box,
+  Group,
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
 import { ProgressIndicator } from '../components/ProgressIndicator';
 import { QuestionRenderer } from '../components/QuestionRenderer';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { SurveyFormState } from '../types/survey';
 import { submitSurvey } from '../api/survey';
 import { SURVEY_QUESTIONS, TOTAL_QUESTIONS } from '../config/survey-questions';
@@ -141,6 +144,13 @@ export default function SurveyPage() {
   return (
     <Container size="md" py="xl">
       <Stack gap="xl">
+        {/* Theme Toggle - Top Right */}
+        <Box style={{ position: 'relative' }}>
+          <Group justify="flex-end" style={{ position: 'absolute', top: 0, right: 0 }}>
+            <ThemeToggle size="md" />
+          </Group>
+        </Box>
+
         {/* Header */}
         <Stack align="center" gap="md">
           <Image

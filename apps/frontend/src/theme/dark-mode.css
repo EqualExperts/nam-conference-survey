@@ -1,0 +1,226 @@
+/* Dark Mode Color Variables and Styling */
+
+:root[data-theme='light'] {
+  /* Light mode colors */
+  --background: #ffffff;
+  --surface: #f8f9fa;
+  --surface-hover: #f1f3f5;
+  --border: #e0e0e0;
+  --border-subtle: #f0f0f0;
+  --text-primary: #212529;
+  --text-secondary: #868e96;
+  --text-tertiary: #adb5bd;
+  --card-border: #e0e0e0;
+  --card-background: #ffffff;
+  --input-background: #ffffff;
+  --input-border: #ced4da;
+  --input-focus-border: #1795d4;
+  --checkbox-background: #ffffff;
+  --checkbox-border: #ced4da;
+  --checkbox-checked: #1795d4;
+  --radio-background: #ffffff;
+  --radio-border: #ced4da;
+  --focus-ring: #1795d4;
+  --focus-ring-alpha: rgba(23, 149, 212, 0.25);
+}
+
+:root[data-theme='dark'] {
+  /* Dark mode colors - Equal Experts brand-aligned palette */
+  --background: #1a1d1f;
+  --surface: #2c3234;
+  --surface-hover: #3a3f41;
+  --border: #404548;
+  --border-subtle: #343738;
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --text-tertiary: #868e96;
+  --card-border: #404548;
+  --card-background: #2c3234;
+  --input-background: #2c3234;
+  --input-border: #495057;
+  --input-focus-border: #4db5e6;
+  --checkbox-background: #2c3234;
+  --checkbox-border: #495057;
+  --checkbox-checked: #1795d4;
+  --radio-background: #2c3234;
+  --radio-border: #495057;
+  --focus-ring: #4db5e6;
+  --focus-ring-alpha: rgba(77, 181, 230, 0.3);
+}
+
+/* Apply dark mode styles to body and root */
+:root[data-theme='dark'] {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] #root {
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+/* Mantine component overrides for dark mode */
+[data-theme='dark'] .mantine-Paper-root {
+  background-color: var(--card-background);
+  border-color: var(--card-border);
+}
+
+[data-theme='dark'] .mantine-Card-root {
+  background-color: var(--card-background);
+  border-color: var(--card-border);
+}
+
+[data-theme='dark'] .mantine-TextInput-input,
+[data-theme='dark'] .mantine-Textarea-input,
+[data-theme='dark'] .mantine-Select-input {
+  background-color: var(--input-background);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .mantine-TextInput-input::placeholder,
+[data-theme='dark'] .mantine-Textarea-input::placeholder,
+[data-theme='dark'] .mantine-Select-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+[data-theme='dark'] .mantine-TextInput-input:focus,
+[data-theme='dark'] .mantine-Textarea-input:focus,
+[data-theme='dark'] .mantine-Select-input:focus {
+  border-color: var(--input-focus-border);
+}
+
+[data-theme='dark'] .mantine-Checkbox-input {
+  background-color: var(--checkbox-background);
+  border-color: var(--checkbox-border);
+}
+
+[data-theme='dark'] .mantine-Checkbox-input:checked {
+  background-color: var(--checkbox-checked);
+  border-color: var(--checkbox-checked);
+}
+
+[data-theme='dark'] .mantine-Radio-radio {
+  background-color: var(--radio-background);
+  border-color: var(--radio-border);
+}
+
+[data-theme='dark'] .mantine-Radio-radio:checked {
+  border-color: var(--checkbox-checked);
+}
+
+/* Focus indicators for accessibility */
+[data-theme='dark'] *:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+[data-theme='dark'] .mantine-Button-root:focus-visible {
+  box-shadow: 0 0 0 3px var(--focus-ring-alpha);
+}
+
+/* Progress indicator */
+[data-theme='dark'] .mantine-Progress-root {
+  background-color: var(--surface);
+}
+
+/* Alert component */
+[data-theme='dark'] .mantine-Alert-root {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+/* Loading states */
+[data-theme='dark'] .mantine-Loader-root {
+  color: var(--focus-ring);
+}
+
+/* Dividers */
+[data-theme='dark'] .mantine-Divider-root {
+  border-color: var(--border);
+}
+
+/* Hover states for interactive elements */
+[data-theme='dark'] .mantine-Button-root:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+}
+
+[data-theme='dark'] .mantine-ActionIcon-root:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+}
+
+/* Stack and Container backgrounds */
+[data-theme='dark'] .mantine-Container-root {
+  background-color: transparent;
+}
+
+/* Text colors */
+[data-theme='dark'] .mantine-Text-root[data-dimmed] {
+  color: var(--text-secondary);
+}
+
+/* Titles */
+[data-theme='dark'] .mantine-Title-root {
+  color: var(--text-primary);
+}
+
+/* Select dropdown */
+[data-theme='dark'] .mantine-Select-dropdown {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme='dark'] .mantine-Select-item {
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .mantine-Select-item:hover {
+  background-color: var(--surface-hover);
+}
+
+[data-theme='dark'] .mantine-Select-item[data-selected] {
+  background-color: var(--checkbox-checked);
+  color: white;
+}
+
+/* Badge */
+[data-theme='dark'] .mantine-Badge-root {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
+/* Notification */
+[data-theme='dark'] .mantine-Notification-root {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+/* Tooltip */
+[data-theme='dark'] .mantine-Tooltip-tooltip {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
+/* Smooth theme transition - respects prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mantine-Paper-root,
+  .mantine-Card-root,
+  .mantine-TextInput-input,
+  .mantine-Textarea-input,
+  .mantine-Select-input,
+  .mantine-Checkbox-input,
+  .mantine-Radio-radio,
+  .mantine-Button-root,
+  .mantine-ActionIcon-root {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+}
