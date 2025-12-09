@@ -102,7 +102,20 @@ You are being asked to start a new product iteration for the NAM Demo applicatio
      - Timeline information
    - Keep it concise but informative
 
-7. **Record timing and report results**:
+7. **Update iterations index README**:
+   - Update `product/iterations/README.md` to add the new iteration to the table
+   - Format: `| [{iteration-date}]({iteration-date}/) | {YYYY-MM-DD} | Active | {description} |`
+   - Keep iterations in reverse chronological order (newest first)
+   - Example:
+     ```markdown
+     | Iteration                         | Started    | Status   | Focus                     |
+     | --------------------------------- | ---------- | -------- | ------------------------- |
+     | [2025-12-08-final-fixes](2025-12-08-final-fixes/) | 2025-12-08 | Active | Final bug fixes and polish |
+     | [2025-12-02-admin-page](2025-12-02-admin-page/) | 2025-12-02 | Active | Admin dashboard |
+     | [2025-11-12-mvp](2025-11-12-mvp/) | 2025-11-12 | Complete | Core survey functionality |
+     ```
+
+8. **Record timing and report results**:
    - Capture the end timestamp
    - Calculate duration in seconds
    - Append to centralized timing log at `product/metrics/timing-log.jsonl`:

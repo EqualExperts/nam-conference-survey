@@ -6,6 +6,9 @@ Product iterations organized by start date and initiative name.
 
 | Iteration                         | Started    | Status   | Focus                     |
 | --------------------------------- | ---------- | -------- | ------------------------- |
+| [2025-12-08-final-fixes](2025-12-08-final-fixes/) | 2025-12-08 | Active | Final bug fixes and polish |
+| [2025-12-02-dark-mode](2025-12-02-dark-mode/) | 2025-12-02 | Active | Dark mode theme |
+| [2025-12-02-admin-page](2025-12-02-admin-page/) | 2025-12-02 | Active | Admin dashboard |
 | [2025-11-12-mvp](2025-11-12-mvp/) | 2025-11-12 | Complete | Core survey functionality |
 
 

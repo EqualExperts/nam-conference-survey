@@ -1,7 +1,7 @@
 # NAM Conference Survey - Product Specification
 
 **Last Updated**: 2025-12-09
-**Version**: 1.2.0
+**Version**: 1.2.1
 
 ## Product Overview
 
@@ -38,7 +38,7 @@ The NAM Conference Survey is a web-based feedback collection tool designed for E
   - Open-ended feedback opportunities
 - Completion screen with thank you messaging
 - Progress through survey without authentication
-- All questions are optional - attendees answer what feels comfortable
+- All questions are optional - attendees can submit with zero, some, or all questions answered
 
 **User Experience**:
 Conference attendees receive a survey link and land on a welcoming screen that sets expectations. The survey flows through 19 questions, each with a transparency note explaining how feedback will be used. Attendees can skip any question and see a completion screen when finished.
@@ -159,6 +159,16 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 
 ## Appendix: Build History
 
+### Release 004 - 2025-12-09
+
+**Stories Built**: 1
+
+| ID | Title |
+|----|-------|
+| STORY-052 | Optional Questions Bug Fix |
+
+**Capabilities Built Without Stories**: 0
+
 ### Release 003 - 2025-12-09
 
 **Stories Built**: 1
@@ -239,6 +249,7 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 
 | Version | Date | Description |
 |---------|------|-------------|
+| 1.2.1 | 2025-12-09 | Optional questions bug fix - empty submissions allowed |
 | 1.2.0 | 2025-12-09 | Admin password protection, GCP production deployment |
 | 1.1.0 | 2025-12-06 | Admin dashboard overview page |
 | 1.0.0 | 2025-11-20 | MVP release with 24 stories built |

@@ -6,7 +6,10 @@ Release artifacts documenting what was built and deployed.
 
 | Release | Date | Stories |
 |---------|------|---------|
-| [release-001-2025-11-20.md](release-001-2025-11-20.md) | 2025-11-20 | 25 stories |
+| [release-004-2025-12-09.md](release-004-2025-12-09.md) | 2025-12-09 | 1 story |
+| [release-003-2025-12-09.md](release-003-2025-12-09.md) | 2025-12-09 | 1 story |
+| [release-002-2025-12-06.md](release-002-2025-12-06.md) | 2025-12-06 | 1 story |
+| [release-001-2025-11-20.md](release-001-2025-11-20.md) | 2025-11-20 | 24 stories |
 
 ## Release Format
 
