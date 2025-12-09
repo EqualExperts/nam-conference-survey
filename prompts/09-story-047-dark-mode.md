@@ -66,6 +66,7 @@ App
 
 ## Extra Considerations
 
+- **Contrast**: Ensure that grey outlines, bullets and checkboxes have enough contrast against dark background
 - **No Flash of Unstyled Content (FOUC)**: Theme must be applied before React hydrates. Use an inline script in the HTML head that reads localStorage and sets the data-theme attribute on the root element before first paint
 - **System preference detection**: Use `window.matchMedia('(prefers-color-scheme: dark)')` to detect system preference for auto mode
 - **System preference changes**: Listen for changes to system preference when in auto mode and update theme accordingly
@@ -102,6 +103,7 @@ App
 - **SSR considerations**: Since this is a client-side app (Vite/React), SSR isn't a concern, but still use inline script to prevent FOUC
 - **Performance target**: Theme switching should complete in <50ms without layout shift
 - **Reduced motion**: Respect `prefers-reduced-motion` media query when animating theme transitions
+- **Script blocks**: Ensure that no `<script>` blocks are generated in markup, but that JS scripts are imported on the page
 
 ## Specification by Example
 
