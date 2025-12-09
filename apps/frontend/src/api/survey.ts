@@ -12,9 +12,23 @@ export async function submitSurvey(data: SurveyFormState): Promise<SurveySubmiss
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Failed to submit survey');
+    let errorMessage = `Failed to submit survey: ${response.status} ${response.statusText}`;
+
+    try {
+      const errorData = await response.json();
+      if (errorData.message) {
+        errorMessage = errorData.message;
+      }
+    } catch (parseError) {
+      // Response body is not valid JSON, use the default error message
+    }
+
+    throw new Error(errorMessage);
   }
 
-  return response.json();
+  try {
+    return await response.json();
+  } catch (parseError) {
+    throw new Error('Invalid response from server. Please try again.');
+  }
 }

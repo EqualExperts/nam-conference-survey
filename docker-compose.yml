@@ -62,7 +62,7 @@ services:
     environment:
       NODE_ENV: development
       CI: "true"
-      VITE_API_URL: http://backend:3001
+      BACKEND_URL: http://backend:3001
     ports:
       - "3000:3000"
     volumes:
