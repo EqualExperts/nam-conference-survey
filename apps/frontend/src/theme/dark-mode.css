@@ -230,6 +230,29 @@
   color: var(--text-primary);
 }
 
+/* Equal Experts Logo Styling
+ *
+ * Context: The official Equal Experts SVG logo has white text designed for dark backgrounds.
+ * We cannot use the SVG's built-in color-scheme adaptation because it would make the logo
+ * invisible in light mode (white text on white background).
+ *
+ * Solution:
+ * - Light mode: invert(1) hue-rotate(180deg) converts white→black, preserves blue EE icon
+ * - Dark mode: filter: none keeps original white text
+ * - color-scheme: normal prevents browser's automatic SVG color adaptation
+ *
+ * Note: The hue-rotate(180deg) is necessary to restore the blue color after inversion,
+ * as invert(1) alone would turn the blue (#1c95d3) into orange.
+ */
+.ee-logo {
+  color-scheme: normal;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+[data-theme='dark'] .ee-logo {
+  filter: none;
+}
+
 /* Smooth theme transition - respects prefers-reduced-motion */
 @media (prefers-reduced-motion: no-preference) {
   :root {
@@ -246,5 +269,9 @@
   .mantine-Button-root,
   .mantine-ActionIcon-root {
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .ee-logo {
+    transition: filter 0.2s ease;
   }
 }

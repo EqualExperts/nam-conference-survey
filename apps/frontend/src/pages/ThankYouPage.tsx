@@ -18,6 +18,7 @@ export default function ThankYouPage() {
             alt="Equal Experts"
             h={60}
             w="auto"
+            className="ee-logo"
           />
 
           <Title order={1} ta="center" c="equalBlue.4">

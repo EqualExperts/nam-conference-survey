@@ -48,6 +48,7 @@ export default function AdminDashboardPage() {
             h={60}
             w="auto"
             fit="contain"
+            className="ee-logo"
           />
           <Title order={1} ta="center" c="#22567c">
             Admin Dashboard
