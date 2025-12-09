@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException } from '@nestjs/common';
 import { SurveyController } from './survey.controller';
 import { SurveyService } from './survey.service';
 import { CreateSurveyResponseDto } from './dto/create-survey-response.dto';
@@ -53,18 +52,6 @@ describe('SurveyController', () => {
       expect(result).toEqual(expectedResponse);
       expect(service.submitSurvey).toHaveBeenCalledWith(dto);
       expect(service.submitSurvey).toHaveBeenCalledTimes(1);
-    });
-
-    it('should handle service errors', async () => {
-      const dto: CreateSurveyResponseDto = {};
-
-      mockSurveyService.submitSurvey.mockRejectedValue(
-        new BadRequestException('Cannot submit empty survey'),
-      );
-
-      await expect(controller.submitSurvey(dto)).rejects.toThrow(
-        BadRequestException,
-      );
     });
 
     it('should accept partial submission', async () => {

@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException } from '@nestjs/common';
 import { SurveyService } from './survey.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateSurveyResponseDto } from './dto/create-survey-response.dto';
@@ -47,28 +46,6 @@ describe('SurveyService', () => {
   });
 
   describe('submitSurvey', () => {
-    it('should throw BadRequestException when all fields are empty', async () => {
-      const emptyDto: CreateSurveyResponseDto = {};
-
-      await expect(service.submitSurvey(emptyDto)).rejects.toThrow(
-        BadRequestException,
-      );
-      await expect(service.submitSurvey(emptyDto)).rejects.toThrow(
-        'Cannot submit empty survey',
-      );
-    });
-
-    it('should throw BadRequestException when only empty arrays are provided', async () => {
-      const dtoWithEmptyArrays: CreateSurveyResponseDto = {
-        q4ConnectionTypes: [],
-        q17FeedbackConfidence: [],
-      };
-
-      await expect(service.submitSurvey(dtoWithEmptyArrays)).rejects.toThrow(
-        BadRequestException,
-      );
-    });
-
     it('should create anonymous user if not exists', async () => {
       const dto: CreateSurveyResponseDto = {
         q1OverallRating: 5,

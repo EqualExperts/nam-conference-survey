@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateSurveyResponseDto } from './dto/create-survey-response.dto';
 import { SurveyResponseDto } from './dto/survey-response.dto';
@@ -12,51 +12,9 @@ export class SurveyService {
   constructor(private readonly prisma: PrismaService) {}
 
   /**
-   * Get or create the anonymous user for survey submissions
-   */
-  private async getOrCreateAnonymousUser() {
-    let user = await this.prisma.user.findUnique({
-      where: { email: this.ANONYMOUS_EMAIL },
-    });
-
-    if (!user) {
-      this.logger.log('Creating anonymous user');
-      user = await this.prisma.user.create({
-        data: {
-          email: this.ANONYMOUS_EMAIL,
-          name: 'Anonymous Survey User',
-          role: Role.PARTICIPANT,
-        },
-      });
-    }
-
-    return user;
-  }
-
-  /**
-   * Check if the submission has at least one field filled
-   */
-  private hasAnyFieldFilled(dto: CreateSurveyResponseDto): boolean {
-    const values = Object.values(dto);
-    return values.some((value) => {
-      if (value === null || value === undefined) return false;
-      if (Array.isArray(value)) return value.length > 0;
-      if (typeof value === 'object') return Object.keys(value).length > 0;
-      return true;
-    });
-  }
-
-  /**
    * Submit anonymous survey response
    */
   async submitSurvey(dto: CreateSurveyResponseDto): Promise<SurveyResponseDto> {
-    // Validate that at least one field is filled
-    if (!this.hasAnyFieldFilled(dto)) {
-      throw new BadRequestException(
-        'Cannot submit empty survey. Please answer at least one question.',
-      );
-    }
-
     // Get or create anonymous user and create response in a transaction
     const result = await this.prisma.$transaction(async (tx) => {
       // Get or create anonymous user
