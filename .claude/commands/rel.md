@@ -87,6 +87,18 @@ Example update:
 | [release-001-2025-11-20.md](release-001-2025-11-20.md) | 2025-11-20 | 24 stories |
 ```
 
+## 7b. Update Stories Index Files
+**For each story marked as Built, update its iteration's `stories-index.md`:**
+
+- Find the story's iteration directory: `product/iterations/{iteration}/stories/stories-index.md`
+- Update the story's Status from `Ready` to `Built` in the stories table
+- This keeps the iteration's story index in sync with individual story files
+
+Example: If STORY-052 was built in iteration 2025-12-08-final-fixes:
+```markdown
+| STORY-052 | Optional Questions Bug Fix | Critical | S | Built |
+```
+
 ## 8. Record Timing and Report Results
 - Capture the end timestamp
 - Calculate duration in seconds

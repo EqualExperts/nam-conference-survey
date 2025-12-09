@@ -216,6 +216,23 @@ The backlog is the master index of all un-built stories. Stories are added when 
 
 This ensures the releases directory index stays current and discoverable.
 
+### 8b. Update Stories Index Files
+
+**For each story marked as Built, update its iteration's stories-index.md:**
+
+- Locate the story's iteration: `product/iterations/{iteration}/stories/stories-index.md`
+- Update the story's Status column from `Ready` to `Built`
+- This keeps iteration indexes in sync with individual story file statuses
+
+Example change:
+```markdown
+# Before
+| STORY-052 | Optional Questions Bug Fix | Critical | S | Ready |
+
+# After
+| STORY-052 | Optional Questions Bug Fix | Critical | S | Built |
+```
+
 ### 9. Update Product Specification
 
 **Read** `product/product-spec.md` (create if doesn't exist)

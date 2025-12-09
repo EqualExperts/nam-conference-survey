@@ -10,22 +10,23 @@
 | Priority | Count |
 |----------|-------|
 | Critical | 1 |
-| High | 2 |
+| High | 3 |
 | Low | 3 |
-| **Total** | **6** |
+| **Total** | **7** |
 
-**Total Estimated Effort**: 6 x Small = ~6-12 days
+**Total Estimated Effort**: 7 x Small = ~7-14 days
 
 ## Stories
 
 | ID | Title | Priority | Size | Status |
 |----|-------|----------|------|--------|
-| STORY-052 | Optional Questions Bug Fix | Critical | S | Ready |
-| STORY-053 | Admin Password Protection | High | S | Ready |
+| STORY-052 | Optional Questions Bug Fix | Critical | S | Built |
+| STORY-053 | Admin Password Protection | High | S | Built |
 | STORY-054 | Sticky Survey Header | Low | S | Ready |
 | STORY-055 | Chaos Mode Theme | Low | S | Ready |
 | STORY-056 | Question Numbers Display | Low | S | Ready |
 | STORY-057 | Connection Types Missing "Other" Checkbox | High | S | Ready |
+| STORY-058 | GCP Secret Manager for Admin Credentials | High | S | Ready |
 
 ## Story Details
 
@@ -59,6 +60,11 @@ Display question numbers on each survey question (e.g., "Question 1 of 19") to h
 
 Add missing "Other (please specify)" checkbox to Question 4 (Connection Types). Currently only the text field exists without the corresponding checkbox option.
 
+### STORY-058: GCP Secret Manager for Admin Credentials
+**File**: `story-058-secret-manager-credentials.md`
+
+Store admin credentials in GCP Secret Manager instead of requiring command-line substitutions on every deployment. Improves security and deployment workflow.
+
 ## Dependencies
 
 ```
@@ -79,6 +85,9 @@ STORY-056 (Question Numbers Display)
 
 STORY-057 (Connection Types Missing "Other" Checkbox)
   └── No dependencies
+
+STORY-058 (GCP Secret Manager for Admin Credentials)
+  └── STORY-053 (Admin Password Protection) - already built
 ```
 
 ## Implementation Order

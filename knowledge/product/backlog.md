@@ -22,6 +22,7 @@ Master index of all stories that have been created but not yet built. Stories ar
 | STORY-055 | Chaos Mode Theme | Low | 2025-12-08-final-fixes |
 | STORY-056 | Question Numbers Display | Low | 2025-12-08-final-fixes |
 | STORY-057 | Connection Types Missing "Other" Checkbox | High | 2025-12-08-final-fixes |
+| STORY-058 | GCP Secret Manager for Admin Credentials | High | 2025-12-08-final-fixes |
 
 ---
 
