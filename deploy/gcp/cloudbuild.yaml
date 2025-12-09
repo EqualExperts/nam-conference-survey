@@ -7,6 +7,8 @@
 #   _FRONTEND_SERVICE: Cloud Run service name for frontend
 #   _CLOUD_SQL_CONNECTION: Cloud SQL connection string
 #   _BACKEND_URL: Public URL of the backend service
+#   _VITE_ADMIN_USERNAME: Admin username (default: admin)
+#   _VITE_ADMIN_PASSWORD: Admin password (default: password)
 
 steps:
   # ==========================================================================
@@ -25,7 +27,7 @@ steps:
     id: 'build-backend'
 
   # ==========================================================================
-  # Build Frontend (requires BACKEND_URL for API calls)
+  # Build Frontend (requires BACKEND_URL and admin credentials)
   # ==========================================================================
   - name: 'gcr.io/cloud-builders/docker'
     args:
@@ -38,6 +40,10 @@ steps:
       - 'deploy/gcp/frontend.Dockerfile'
       - '--build-arg'
       - 'VITE_API_URL=${_BACKEND_URL}'
+      - '--build-arg'
+      - 'VITE_ADMIN_USERNAME=${_VITE_ADMIN_USERNAME}'
+      - '--build-arg'
+      - 'VITE_ADMIN_PASSWORD=${_VITE_ADMIN_PASSWORD}'
       - '.'
     id: 'build-frontend'
 
@@ -111,6 +117,8 @@ substitutions:
   _REGION: 'us-central1'
   _BACKEND_SERVICE: 'nam-survey-backend'
   _FRONTEND_SERVICE: 'nam-survey-frontend'
+  _VITE_ADMIN_USERNAME: 'admin'
+  _VITE_ADMIN_PASSWORD: 'password'
   # These must be set per environment:
   # _CLOUD_SQL_CONNECTION: 'project:region:instance'
   # _BACKEND_URL: 'https://nam-survey-backend-xxx.run.app'

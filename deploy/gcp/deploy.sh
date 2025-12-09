@@ -19,6 +19,8 @@
 #   GCP_REGION         - GCP region (default: us-central1)
 #   CLOUD_SQL_CONNECTION - Cloud SQL connection string (project:region:instance)
 #   DATABASE_URL       - PostgreSQL connection URL
+#   VITE_ADMIN_USERNAME - Admin username (default: admin)
+#   VITE_ADMIN_PASSWORD - Admin password (default: password)
 #
 # =============================================================================
 
@@ -103,12 +105,14 @@ BACKEND_URL=$(gcloud run services describe "$BACKEND_SERVICE" \
     --format 'value(status.url)')
 echo -e "${GREEN}Backend deployed at: $BACKEND_URL${NC}"
 
-# Build frontend with backend URL
+# Build frontend with backend URL and admin credentials
 echo -e "${YELLOW}Building frontend image...${NC}"
 docker build \
     -t "gcr.io/$PROJECT_ID/$FRONTEND_SERVICE:latest" \
     -f deploy/gcp/frontend.Dockerfile \
     --build-arg "VITE_API_URL=$BACKEND_URL" \
+    --build-arg "VITE_ADMIN_USERNAME=${VITE_ADMIN_USERNAME:-admin}" \
+    --build-arg "VITE_ADMIN_PASSWORD=${VITE_ADMIN_PASSWORD:-password}" \
     .
 
 echo -e "${YELLOW}Pushing frontend image...${NC}"

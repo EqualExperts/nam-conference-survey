@@ -24,9 +24,13 @@ RUN pnpm install --frozen-lockfile || pnpm install
 # Copy source code
 COPY apps/frontend .
 
-# Build argument for API URL (must be set at build time for Vite)
+# Build arguments (must be set at build time for Vite)
 ARG VITE_API_URL
+ARG VITE_ADMIN_USERNAME
+ARG VITE_ADMIN_PASSWORD
 ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_ADMIN_USERNAME=$VITE_ADMIN_USERNAME
+ENV VITE_ADMIN_PASSWORD=$VITE_ADMIN_PASSWORD
 
 # Build the application
 RUN pnpm run build

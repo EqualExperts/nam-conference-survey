@@ -63,6 +63,8 @@ services:
       NODE_ENV: development
       CI: "true"
       BACKEND_URL: http://backend:3001
+      VITE_ADMIN_USERNAME: ${VITE_ADMIN_USERNAME:-admin}
+      VITE_ADMIN_PASSWORD: ${VITE_ADMIN_PASSWORD:-password}
     ports:
       - "3000:3000"
     volumes:

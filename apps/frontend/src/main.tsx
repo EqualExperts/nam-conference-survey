@@ -5,6 +5,7 @@ import { Notifications } from '@mantine/notifications';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { theme } from './theme/theme';
+import { AuthProvider } from './contexts/AuthContext';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <MantineProvider theme={theme}>
       <Notifications position="top-right" />
       <BrowserRouter>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </MantineProvider>
   </React.StrictMode>

@@ -66,7 +66,11 @@ export GCP_PROJECT_ID="your-project-id"
 export GCP_REGION="us-central1"
 export CLOUD_SQL_CONNECTION="your-project-id:us-central1:nam-survey-db"
 export DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@/nam_survey?host=/cloudsql/your-project-id:us-central1:nam-survey-db"
+export VITE_ADMIN_USERNAME="production_admin"
+export VITE_ADMIN_PASSWORD="secure_password_here"
 ```
+
+**Security Note:** `VITE_ADMIN_USERNAME` and `VITE_ADMIN_PASSWORD` are baked into the frontend JavaScript bundle at build time. Change these from the defaults for production.
 
 ## Step 3: Deploy
 
@@ -84,7 +88,7 @@ Set up a Cloud Build trigger connected to your repository:
 ```bash
 gcloud builds submit \
     --config=deploy/gcp/cloudbuild.yaml \
-    --substitutions=_BACKEND_URL="https://your-backend-url.run.app",_CLOUD_SQL_CONNECTION="project:region:instance"
+    --substitutions=_BACKEND_URL="https://your-backend-url.run.app",_CLOUD_SQL_CONNECTION="project:region:instance",_VITE_ADMIN_USERNAME="production_admin",_VITE_ADMIN_PASSWORD="secure_password_here"
 ```
 
 ### Option C: Manual Docker Commands
@@ -106,10 +110,12 @@ gcloud run deploy nam-survey-backend \
 # Get backend URL
 BACKEND_URL=$(gcloud run services describe nam-survey-backend --region $GCP_REGION --format 'value(status.url)')
 
-# Build frontend with backend URL
+# Build frontend with backend URL and admin credentials
 docker build -t gcr.io/$GCP_PROJECT_ID/nam-survey-frontend \
     -f deploy/gcp/frontend.Dockerfile \
-    --build-arg VITE_API_URL=$BACKEND_URL .
+    --build-arg VITE_API_URL=$BACKEND_URL \
+    --build-arg VITE_ADMIN_USERNAME=$VITE_ADMIN_USERNAME \
+    --build-arg VITE_ADMIN_PASSWORD=$VITE_ADMIN_PASSWORD .
 docker push gcr.io/$GCP_PROJECT_ID/nam-survey-frontend
 
 # Deploy frontend
@@ -136,6 +142,8 @@ gcloud run deploy nam-survey-frontend \
 | Argument | Description | Example |
 |----------|-------------|---------|
 | `VITE_API_URL` | Backend API URL (baked into build) | `https://nam-survey-backend-xxx.run.app` |
+| `VITE_ADMIN_USERNAME` | Admin username (baked into build) | `production_admin` |
+| `VITE_ADMIN_PASSWORD` | Admin password (baked into build) | `secure_password_here` |
 
 ## Post-Deployment
 
