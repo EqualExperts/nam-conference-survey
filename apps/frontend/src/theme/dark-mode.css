@@ -160,12 +160,36 @@
 }
 
 /* Text colors */
+[data-theme='dark'] .mantine-Text-root {
+  color: var(--text-primary);
+}
+
 [data-theme='dark'] .mantine-Text-root[data-dimmed] {
   color: var(--text-secondary);
 }
 
 /* Titles */
 [data-theme='dark'] .mantine-Title-root {
+  color: var(--text-primary) !important;
+}
+
+/* Radio labels */
+[data-theme='dark'] .mantine-Radio-label {
+  color: var(--text-primary);
+}
+
+/* Checkbox labels */
+[data-theme='dark'] .mantine-Checkbox-label {
+  color: var(--text-primary);
+}
+
+/* Input labels */
+[data-theme='dark'] .mantine-InputWrapper-label {
+  color: var(--text-primary);
+}
+
+/* All general text elements */
+[data-theme='dark'] .mantine-Container-root {
   color: var(--text-primary);
 }
 
