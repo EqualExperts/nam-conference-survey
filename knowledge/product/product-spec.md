@@ -1,7 +1,7 @@
 # NAM Conference Survey - Product Specification
 
-**Last Updated**: 2025-12-06
-**Version**: 1.1.0
+**Last Updated**: 2025-12-09
+**Version**: 1.2.0
 
 ## Product Overview
 
@@ -103,6 +103,7 @@ Conference attendees receive a survey link and land on a welcoming screen that s
 - Loading states with skeleton loaders
 - Error handling with user-friendly messages
 - Responsive layout for tablet and desktop
+- Password-protected access (shared password for organizer team)
 
 **User Experience**:
 Conference organizers navigate to `/admin` to see a dashboard with key metrics (completed and in-progress response counts) and a list of recent submissions. Each response shows an ID number and formatted timestamp. The page includes loading and empty states for a polished experience.
@@ -157,6 +158,23 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 ---
 
 ## Appendix: Build History
+
+### Release 003 - 2025-12-09
+
+**Stories Built**: 1
+
+| ID | Title |
+|----|-------|
+| STORY-053 | Admin Password Protection |
+
+**Capabilities Built Without Stories**: 4
+
+| Capability | Commit |
+|------------|--------|
+| GCP Cloud Run production deployment | c36fbaf |
+| VITE_API_URL production fix | c929648 |
+| Local dev environment fix | d5f5441 |
+| Deployment README documentation | 2d20799 |
 
 ### Release 002 - 2025-12-06
 
@@ -221,6 +239,7 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 
 | Version | Date | Description |
 |---------|------|-------------|
+| 1.2.0 | 2025-12-09 | Admin password protection, GCP production deployment |
 | 1.1.0 | 2025-12-06 | Admin dashboard overview page |
 | 1.0.0 | 2025-11-20 | MVP release with 24 stories built |
 

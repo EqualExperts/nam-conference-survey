@@ -1,6 +1,7 @@
+
 # Product Backlog
 
-**Last Updated**: 2025-12-08
+**Last Updated**: 2025-12-09
 
 ## Overview
 
@@ -18,7 +19,10 @@ Master index of all stories that have been created but not yet built. Stories ar
 | STORY-050 | Sentiment Analysis Tab | Low | 2025-12-02-admin-page |
 | STORY-051 | Data Export | Critical | 2025-12-02-admin-page |
 | STORY-052 | Optional Questions Bug Fix | Critical | 2025-12-08-final-fixes |
-| STORY-053 | Admin Password Protection | High | 2025-12-08-final-fixes |
+| STORY-054 | Sticky Survey Header | Low | 2025-12-08-final-fixes |
+| STORY-055 | Chaos Mode Theme | Low | 2025-12-08-final-fixes |
+| STORY-056 | Question Numbers Display | Low | 2025-12-08-final-fixes |
+| STORY-057 | Connection Types Missing "Other" Checkbox | High | 2025-12-08-final-fixes |
 
 ---
 

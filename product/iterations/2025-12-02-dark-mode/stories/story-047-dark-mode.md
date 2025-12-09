@@ -41,6 +41,12 @@ Many attendees complete surveys during evening sessions or in dimly lit venues. 
 - **When** they load any survey page
 - **Then** the page renders in dark mode immediately without flashing light theme first
 
+**Scenario 4: Equal Experts Logo in Dark Mode**
+- **Given** a user is viewing the survey in dark mode
+- **When** the Equal Experts logo is displayed
+- **Then** black pixels in the logo are inverted to white
+- **And** the logo remains clearly visible against the dark background
+
 ### Non-Functional Requirements
 - [ ] Accessibility: All text meets WCAG AA contrast requirements in dark mode
 - [ ] Accessibility: Focus indicators clearly visible in dark mode
@@ -52,10 +58,11 @@ Many attendees complete surveys during evening sessions or in dimly lit venues. 
 - [ ] All UI components work correctly in both modes
 - [ ] Theme toggle announces state change to screen readers
 - [ ] Works across Chrome, Safari, Firefox, Edge
+- [ ] Equal Experts logo displays correctly with inverted colors (black to white)
 
 ## Open Questions
 - Should we provide an "auto" option that always follows system preference?
-- Does Equal Experts have dark mode logo variants to use?
+- ~~Does Equal Experts have dark mode logo variants to use?~~ **Resolved**: Use CSS filter to invert black pixels to white in dark mode (no separate logo needed)
 
 ## Dependencies
 - MVP survey UI must be complete (stories 019-039)
@@ -69,5 +76,5 @@ Many attendees complete surveys during evening sessions or in dimly lit venues. 
 ## Metadata
 **Iteration**: 2025-12-02-dark-mode
 **Created**: 2025-12-02
-**Last Updated**: 2025-12-02
+**Last Updated**: 2025-12-08
 **Build Date**:

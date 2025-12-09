@@ -66,10 +66,21 @@ grep -rh "Story ID.*STORY-" product/iterations/*/stories/*.md | sort -t- -k2 -n
 | Synthesis | `product/iterations/{iteration}/discovery/synthesis/{date}-synthesis.md` |
 | Story index | `product/iterations/{iteration}/stories/stories-index.md` |
 
-### 7. Update Backlog
-After creating stories:
-- Add each story to `knowledge/product/backlog.md`
-- Include: ID, Title, Priority, Iteration
+### 7. Update Story Indexes (MANDATORY)
+
+**CRITICAL**: Every new story must be added to TWO places:
+
+1. **Iteration stories-index.md** (`product/iterations/{iteration}/stories/stories-index.md`)
+   - Add row to Stories table: ID, Title, Priority, Size, Status
+   - Add Story Details section with file reference and summary
+   - Update Dependencies section if applicable
+   - Update Summary counts
+
+2. **Master backlog** (`knowledge/product/backlog.md`)
+   - Add row: ID, Title, Priority, Iteration
+   - Stories remain in backlog until released via `/rel`
+
+**This applies regardless of how stories are added** - via `/req`, direct request, or any other method. No story creation is complete until both indexes are updated.
 
 ## When to Use Slash Commands Instead
 
