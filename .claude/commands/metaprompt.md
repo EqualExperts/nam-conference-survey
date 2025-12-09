@@ -1,15 +1,8 @@
 ---
 description: Generate/improve prompts for AI tools using project templates
-argument-hint: [unstructured background/context]
 ---
 
-You are helping the user transform unstructured thoughts into a well-structured, effective AI prompt.
-
-## User's Input
-
-The user has provided the following unstructured background and context:
-
-$ARGUMENTS
+You are helping the user create a well-structured, effective AI prompt through an interactive discovery process.
 
 ## Your Task
 
@@ -24,26 +17,41 @@ Help the user create a high-quality, production-ready prompt by:
    - **Examples and constraints**: Include concrete examples and explicit limitations
    - **Testable requirements**: Frame requirements as measurable acceptance criteria
 
-## Step 1: Understand the Context
+## Step 1: Discover the Context Through Questions
 
-First, analyze the user's input to extract:
-- **Primary objective**: What problem are they trying to solve?
-- **Key entities/concepts**: What are the main domain objects or components?
-- **Constraints**: Any technical, business, or design constraints mentioned?
-- **Success criteria**: How will they know when this is complete?
+Use the AskUserQuestion tool to gather the information needed to create an effective prompt. Ask targeted questions to understand:
 
-## Step 2: Choose the Template
+1. **Primary objective and scope**:
+   - What feature or system are you building?
+   - What problem does this solve?
+   - Is this frontend, backend, or both?
 
-Ask the user which template structure to use:
+2. **Template selection** (ask early to guide subsequent questions):
+   - Which template structure should we use?
+     - Backend (API endpoints, services, database schema, business logic)
+     - Frontend (UI components, pages, user interactions, visual design)
+     - Corrective Actions (TODO.md from code comments after a one-shot feature)
 
-**Available templates:**
-- **Backend** (`prompts/00-backend-prompt-template.md`) - For API endpoints, services, database schema, business logic
-- **Frontend** (`prompts/00-frontend-prompt-template.md`) - For UI components, pages, user interactions, visual design
-- **Corrective Actions** (`prompts/00-todo-template.md`) - For generating TODO.md from code comments after a one-shot feature
+3. **Key requirements**:
+   - What are the must-have features or acceptance criteria?
+   - What defines "done" for this work?
 
-Use the AskUserQuestion tool to present these options clearly.
+4. **Domain and technical details**:
+   - What are the main entities or components involved?
+   - Are there any technical constraints or preferences?
+   - What existing code or patterns should be followed?
 
-## Step 3: Generate the Structured Prompt
+5. **Testing and quality**:
+   - What level of testing is needed?
+   - Are there specific scenarios to test?
+
+6. **Additional context** (if needed):
+   - Are there edge cases or special considerations?
+   - Any examples or references to follow?
+
+**Important**: Don't ask all questions at once. Start with objective and template selection, then ask follow-up questions based on their answers. Keep the conversation focused and efficient.
+
+## Step 2: Generate the Structured Prompt
 
 Once you know which template to use:
 
@@ -65,7 +73,7 @@ Once you know which template to use:
 
 4. **Write the prompt to the prompts directory**
 
-## Step 4: Save the Prompt to File
+## Step 3: Save the Prompt to File
 
 After generating the structured prompt:
 
@@ -82,7 +90,7 @@ After generating the structured prompt:
 
 4. **Confirm the file location** to the user
 
-## Step 5: Iterate if Needed
+## Step 4: Iterate if Needed
 
 After saving the prompt, ask if the user wants to:
 - Refine any section
@@ -108,4 +116,6 @@ Common rules files in this project:
 - `rules/domain-driven-design.md` - DDD principles
 - `rules/code-quality-rules.md` - General quality standards
 
-Start by acknowledging the user's input and then proceed with Step 1.
+## Getting Started
+
+Begin by asking the user about their objective and which template type they want to use (Step 1). Use the AskUserQuestion tool to make this interactive and conversational. Once you understand what they need, gather additional details before generating the prompt.
