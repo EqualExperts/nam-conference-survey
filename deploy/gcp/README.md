@@ -2,6 +2,27 @@
 
 This directory contains configuration for deploying the NAM Conference Survey to Google Cloud Platform using Cloud Run.
 
+## Redeploy (Existing Environment)
+
+If Cloud SQL and the initial deployment already exist, just run:
+
+```bash
+export GCP_PROJECT_ID="nam-demo-476015"
+export GCP_REGION="europe-west1"
+export CLOUD_SQL_CONNECTION="nam-demo-476015:europe-west1:nam-survey-db"
+export DATABASE_URL="postgresql://postgres:NamSurvey2024!@/nam_survey?host=/cloudsql/nam-demo-476015:europe-west1:nam-survey-db"
+
+./deploy/gcp/deploy.sh
+```
+
+This builds new images and deploys them to the existing Cloud Run services.
+
+---
+
+## First-Time Setup
+
+The sections below are for initial infrastructure setup. Skip to [Architecture](#architecture) if you need to understand the system, or use the redeploy command above for routine deployments.
+
 ## Architecture
 
 ```

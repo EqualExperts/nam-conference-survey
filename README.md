@@ -64,6 +64,19 @@ knowledge/      # Additional context
 prompts/        # Feature prompts
 ```
 
+## Deployment
+
+**GCP Cloud Run**: See [`deploy/gcp/README.md`](deploy/gcp/README.md) for full deployment instructions.
+
+Quick deploy (requires GCP project with Cloud SQL):
+```bash
+export GCP_PROJECT_ID="your-project-id"
+export CLOUD_SQL_CONNECTION="project:region:instance"
+export DATABASE_URL="postgresql://user:pass@/db?host=/cloudsql/..."
+
+./deploy/gcp/deploy.sh
+```
+
 ## Documentation
 
 - Architecture & coding rules: See `rules/` directory
@@ -71,6 +84,7 @@ prompts/        # Feature prompts
 - Additional context: See `knowledge/` directory
 - Database schema: `apps/backend/prisma/schema.prisma`
 - Product management: See `product/README.md`
+- GCP deployment: See `deploy/gcp/README.md`
 
 ## Contributing
 
