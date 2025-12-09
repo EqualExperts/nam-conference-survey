@@ -104,3 +104,47 @@ Use direct PM workflow when:
 | "Fix the bug in SurveyPage.tsx" | No - engineering task |
 
 When doing engineering implementation, read stories as requirements but don't modify PM artifacts.
+
+## Generation Time Tracking (MANDATORY)
+
+When creating PM artifacts outside of slash commands, **always track generation time** for productivity metrics.
+
+### What to Track
+
+| Artifact | Track generation time? |
+|----------|----------------------|
+| Individual story | Yes - per story |
+| Synthesis document | Yes |
+| Story map | Yes |
+| Release notes | Yes |
+| Story refinement/rewrite | Yes |
+
+### How to Track
+
+1. **Before starting generation**: Note the current timestamp
+2. **After completing the artifact**: Note the end timestamp, calculate duration
+3. **Append to timing log** at `product/metrics/timing-log.jsonl`:
+
+**For individual stories:**
+```json
+{"timestamp": "{end_timestamp_ISO8601}", "command": "story", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "generation_seconds": {duration}, "status": "success", "metadata": {"story_id": "STORY-XXX", "source": "direct_request"}}
+```
+
+**For synthesis:**
+```json
+{"timestamp": "{end_timestamp_ISO8601}", "command": "synthesis", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "generation_seconds": {duration}, "status": "success", "metadata": {"source": "direct_request"}}
+```
+
+**For story maps:**
+```json
+{"timestamp": "{end_timestamp_ISO8601}", "command": "story_map", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "generation_seconds": {duration}, "status": "success", "metadata": {"source": "direct_request", "story_count": N}}
+```
+
+### Why This Matters
+
+Generation times measure AI productivity for tasks that would otherwise be done by humans. This data enables:
+- Comparison of AI vs human effort for PM tasks
+- Identification of which tasks benefit most from AI assistance
+- Tracking productivity improvements over time
+
+**This tracking applies regardless of whether slash commands are used.** The goal is complete coverage of PM artifact generation.

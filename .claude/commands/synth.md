@@ -47,11 +47,12 @@ Follow the instructions from the prompt to create the synthesis document.
 
 ## 6. Record Timing and Report Results
 - Capture the end timestamp
-- Calculate duration in seconds
+- Calculate duration in seconds (this is the generation time for the synthesis)
 - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
   ```json
-  {"timestamp": "{end_timestamp}", "command": "/synth", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"themes_identified": {count}, "pain_points": {count}}}
+  {"timestamp": "{end_timestamp}", "command": "/synth", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "generation_seconds": {duration}, "status": "success", "metadata": {"themes_identified": {count}, "pain_points": {count}}}
   ```
+  Note: For `/synth`, `generation_seconds` equals `duration_seconds` since the operation is primarily AI generation.
 - Tell the user:
   - The synthesis is complete
   - The file path

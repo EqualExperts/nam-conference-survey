@@ -91,6 +91,12 @@ Follow the instructions from the prompts to create the stories.
 - Ensure sequential story numbering across all iterations
 - Follow Given-When-Then format for acceptance criteria
 
+**Per-story generation timing:**
+- For EACH story, capture the timestamp immediately before starting to write it
+- After saving the story file, capture the end timestamp and calculate duration
+- Collect per-story timing: `{"story_id": "STORY-XXX", "generation_seconds": N}`
+- These will be included in the timing log metadata for productivity analysis
+
 ## 9. Save Stories
 - Stories are saved to `product/iterations/{iteration-name}/stories/`
 - Save each story as `story-{number}-{slug}.md`
@@ -110,7 +116,7 @@ Follow the instructions from the prompts to create the stories.
 - Calculate duration in seconds
 - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
   ```json
-  {"timestamp": "{end_timestamp}", "command": "/req", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"stories_created": {count}, "story_ids": ["STORY-XXX", "STORY-YYY"], "template": "{selected-template-name}", "granularity": "{selected-granularity}"}}
+  {"timestamp": "{end_timestamp}", "command": "/req", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"stories_created": {count}, "story_ids": ["STORY-XXX", "STORY-YYY"], "template": "{selected-template-name}", "granularity": "{selected-granularity}", "story_generation_times": [{"story_id": "STORY-XXX", "generation_seconds": N}, {"story_id": "STORY-YYY", "generation_seconds": M}]}}
   ```
 - Tell the user:
   - Story extraction is complete

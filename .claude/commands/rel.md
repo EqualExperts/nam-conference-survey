@@ -101,11 +101,12 @@ Example: If STORY-052 was built in iteration 2025-12-08-final-fixes:
 
 ## 8. Record Timing and Report Results
 - Capture the end timestamp
-- Calculate duration in seconds
+- Calculate duration in seconds (this is the generation time for the release)
 - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
   ```json
-  {"timestamp": "{end_timestamp}", "command": "/rel", "iteration": null, "release": "{release_number}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"stories_built": {count}, "capabilities_without_stories": {count}}}
+  {"timestamp": "{end_timestamp}", "command": "/rel", "iteration": null, "release": "{release_number}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "generation_seconds": {duration}, "status": "success", "metadata": {"stories_built": {count}, "capabilities_without_stories": {count}}}
   ```
+  Note: For `/rel`, `generation_seconds` equals `duration_seconds` since the operation is primarily AI generation (git analysis, release notes, spec updates).
 - Tell the user:
   - Release is complete
   - X stories marked as Built and removed from backlog

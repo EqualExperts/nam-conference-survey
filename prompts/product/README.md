@@ -15,6 +15,8 @@ Control AI behavior during product discovery and requirements workflows:
 | load-stories-to-tracker.md | /jira | How to format and load to Jira |
 | release-and-update-spec.md | /rel | How to process releases |
 | create-meta-synthesis.md | - | Cross-iteration analysis |
+| generate-activity-chart.md | - | Generate PM activity frequency chart from timing log |
+| generate-lifecycle-funnel.md | - | Generate iteration lifecycle funnel showing stage progression |
 
 **When to read**:
 - When running PM slash commands, OR

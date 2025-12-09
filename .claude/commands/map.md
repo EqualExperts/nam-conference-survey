@@ -54,11 +54,12 @@ Follow the instructions from the prompt to create the Miro story map.
 
 ## 7. Record Timing and Report Results
 - Capture the end timestamp
-- Calculate duration in seconds
+- Calculate total duration in seconds (this is the generation time for the story map)
 - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
   ```json
-  {"timestamp": "{end_timestamp}", "command": "/map", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"board_id": "xxx", "board_url": "https://miro.com/app/board/xxx", "total_items_created": {count}, "story_cards": {count}}}
+  {"timestamp": "{end_timestamp}", "command": "/map", "iteration": "{iteration-name}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "generation_seconds": {duration}, "status": "success", "metadata": {"board_id": "xxx", "board_url": "https://miro.com/app/board/xxx", "total_items_created": {count}, "story_cards": {count}}}
   ```
+  Note: For `/map`, `generation_seconds` equals `duration_seconds` since the entire operation is AI generation.
 - Tell the user:
   - Story map creation is complete
   - Direct link to the Miro board

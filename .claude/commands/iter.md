@@ -117,11 +117,13 @@ You are being asked to start a new product iteration for the NAM Demo applicatio
 
 8. **Record timing and report results**:
    - Capture the end timestamp
-   - Calculate duration in seconds
+   - Calculate setup duration in seconds (time from command start to completion)
+   - This measures iteration setup time, NOT total iteration duration (iterations can run for days/weeks)
    - Append to centralized timing log at `product/metrics/timing-log.jsonl`:
      ```json
-     {"timestamp": "{end_timestamp}", "command": "/iter", "iteration": "{iteration-date}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "status": "success", "metadata": {"interview_conducted": true/false}}
+     {"timestamp": "{end_timestamp}", "command": "/iter", "iteration": "{iteration-date}", "start": "{start_timestamp_ISO8601}", "end": "{end_timestamp_ISO8601}", "duration_seconds": {duration}, "setup_seconds": {duration}, "status": "success", "metadata": {"interview_conducted": true/false}}
      ```
+     Note: `setup_seconds` tracks the AI generation time for iteration setup (directory creation, README generation, interview if conducted). This is distinct from `duration_seconds` which may include human wait time.
    - Tell the user:
      - The iteration has been created
      - The iteration directory path
