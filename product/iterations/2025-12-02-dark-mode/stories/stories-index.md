@@ -9,7 +9,7 @@
 
 | ID | Title | Priority | Size | Status |
 |----|-------|----------|------|--------|
-| STORY-047 | Dark Mode for Reduced Eye Strain | High | S | Ready |
+| STORY-047 | Dark Mode for Reduced Eye Strain | High | S | Built |
 
 ## Priority Summary
 

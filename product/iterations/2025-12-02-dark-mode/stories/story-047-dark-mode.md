@@ -3,7 +3,8 @@
 **Story ID**: STORY-047
 **Iteration**: 2025-12-02-dark-mode
 **Priority**: Medium
-**Status**: Ready
+**Status**: Built
+**Build Date**: 2025-12-09
 **Labels**: 2025-12-02-dark-mode, conference-attendee, accessibility, llm-dev
 
 ## User Story

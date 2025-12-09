@@ -13,7 +13,6 @@ Master index of all stories that have been created but not yet built. Stories ar
 |----|-------|----------|-----------|
 | STORY-044 | Load Testing for Concurrent User Support | Low | 2025-11-12-mvp |
 | STORY-046 | Response Detail Modal | Medium | 2025-12-02-admin-page |
-| STORY-047 | Dark Mode for Reduced Eye Strain | Medium | 2025-12-02-dark-mode |
 | STORY-048 | Responses Tab | High | 2025-12-02-admin-page |
 | STORY-049 | Analytics Tab | High | 2025-12-02-admin-page |
 | STORY-050 | Sentiment Analysis Tab | Low | 2025-12-02-admin-page |

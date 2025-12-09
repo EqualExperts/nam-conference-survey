@@ -1,7 +1,7 @@
 # NAM Conference Survey - Product Specification
 
 **Last Updated**: 2025-12-09
-**Version**: 1.2.1
+**Version**: 1.3.0
 
 ## Product Overview
 
@@ -91,6 +91,12 @@ Conference attendees receive a survey link and land on a welcoming screen that s
 - Sufficient color contrast
 - Form labels and ARIA attributes
 - Focus states for interactive elements
+- Dark mode for reduced eye strain:
+  - Automatic detection of system dark mode preference
+  - Manual theme toggle with persistence across page loads
+  - No flash of light theme on page load
+  - Equal Experts logo inverted for visibility on dark backgrounds
+  - All text meets WCAG AA contrast requirements in dark mode
 
 ### 5. Admin Dashboard
 
@@ -158,6 +164,16 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 ---
 
 ## Appendix: Build History
+
+### Release 005 - 2025-12-09
+
+**Stories Built**: 1
+
+| ID | Title |
+|----|-------|
+| STORY-047 | Dark Mode for Reduced Eye Strain |
+
+**Capabilities Built Without Stories**: 0
 
 ### Release 004 - 2025-12-09
 
@@ -249,6 +265,7 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 
 | Version | Date | Description |
 |---------|------|-------------|
+| 1.3.0 | 2025-12-09 | Dark mode for accessibility and reduced eye strain |
 | 1.2.1 | 2025-12-09 | Optional questions bug fix - empty submissions allowed |
 | 1.2.0 | 2025-12-09 | Admin password protection, GCP production deployment |
 | 1.1.0 | 2025-12-06 | Admin dashboard overview page |
