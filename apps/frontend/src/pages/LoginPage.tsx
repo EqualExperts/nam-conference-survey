@@ -11,9 +11,12 @@ import {
   PasswordInput,
   Text,
   Alert,
+  Box,
+  Group,
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
 import { useAuth } from '../contexts/AuthContext';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -50,6 +53,13 @@ export default function LoginPage() {
   return (
     <Container size="xs" py="xl">
       <Stack gap="xl">
+        {/* Theme Toggle - Top Right */}
+        <Box style={{ position: 'relative' }}>
+          <Group justify="flex-end" style={{ position: 'absolute', top: 0, right: 0 }}>
+            <ThemeToggle size="md" />
+          </Group>
+        </Box>
+
         {/* Header */}
         <Stack align="center" gap="md">
           <Image
