@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AdminService } from './admin.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Status } from '@prisma/client';
+import { NotFoundException } from '@nestjs/common';
 
 describe('AdminService', () => {
   let service: AdminService;
@@ -10,6 +11,7 @@ describe('AdminService', () => {
     surveyResponse: {
       count: jest.fn(),
       findMany: jest.fn(),
+      findUnique: jest.fn(),
     },
   };
 
@@ -245,6 +247,577 @@ describe('AdminService', () => {
       expect(result.responses[0].submittedAt).toEqual(
         new Date('2025-12-03T14:34:22.123Z'),
       );
+    });
+  });
+
+  describe('getResponseDetail', () => {
+    it('should throw NotFoundException when response does not exist', async () => {
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(null);
+
+      await expect(service.getResponseDetail('non-existent-id')).rejects.toThrow(
+        NotFoundException,
+      );
+      await expect(service.getResponseDetail('non-existent-id')).rejects.toThrow(
+        'Response with ID non-existent-id not found',
+      );
+
+      expect(mockPrismaService.surveyResponse.findUnique).toHaveBeenCalledWith({
+        where: { id: 'non-existent-id' },
+      });
+    });
+
+    it('should return response detail with all 19 questions', async () => {
+      const mockResponse = {
+        id: '550e8400-e29b-41d4-a716-446655440047',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: 5,
+        q1Comment: 'Great conference!',
+        q2ReturnIntent: 5,
+        q2Comment: null,
+        q3CoworkingEffectiveness: '4',
+        q3Comment: null,
+        q4ConnectionTypes: ['leadership', 'associates'],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: 4,
+        q5Comment: null,
+        q6LearningValue: 5,
+        q6Comment: null,
+        q7FutureTopics: 'AI and Machine Learning',
+        q8SaturdayWorth: '5',
+        q8Comment: null,
+        q9PreConferenceCommunication: 4,
+        q9Comment: null,
+        q10AccommodationsVenue: '5',
+        q10Comment: null,
+        q11SessionRankings: { presentations: 1, workshops: 2, coworking: 3, networking: 4 },
+        q12ConferenceLength: 'just_right',
+        q12Comment: null,
+        q13ComparisonToPD: '5',
+        q13Comment: null,
+        q14LikedMost: 'The networking opportunities',
+        q15AdditionalFeedback: 'Keep up the great work',
+        q16Improvements: 'yes_clear',
+        q16Comment: null,
+        q17FeedbackConfidence: ['public_summary', 'action_plan'],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: 'employee',
+        q19Name: 'John Doe',
+        q19Location: 'New York, NY',
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('550e8400-e29b-41d4-a716-446655440047');
+
+      expect(result.id).toBe('550e8400-e29b-41d4-a716-446655440047');
+      expect(result.submittedAt).toBe('2025-12-03T14:34:22.123Z');
+      expect(result.questions).toHaveLength(19);
+      expect(result.questions[0].questionNumber).toBe(1);
+      expect(result.questions[18].questionNumber).toBe(19);
+    });
+
+    it('should correctly transform likert question with numeric value', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: 5,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q1 = result.questions.find(q => q.questionNumber === 1);
+      expect(q1?.answer).toEqual({
+        value: 5,
+        label: 'Excellent',
+      });
+    });
+
+    it('should correctly transform likert question with string value', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: '5',
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q3 = result.questions.find(q => q.questionNumber === 3);
+      expect(q3?.answer).toEqual({
+        value: 5,
+        label: 'Extremely valuable',
+      });
+    });
+
+    it('should correctly transform multi-select question', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: ['leadership', 'associates', 'technical_experts'],
+        q4ConnectionOther: 'Industry peers',
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q4 = result.questions.find(q => q.questionNumber === 4);
+      expect(q4?.answer).toEqual({
+        selectedOptions: ['leadership', 'associates', 'technical_experts', 'Other: Industry peers'],
+      });
+    });
+
+    it('should correctly transform ranking question', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: { workshops: 1, presentations: 2, networking: 3, coworking: 4 },
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q11 = result.questions.find(q => q.questionNumber === 11);
+      expect(q11?.answer).toEqual({
+        rankedItems: ['workshops', 'presentations', 'networking', 'coworking'],
+      });
+    });
+
+    it('should correctly transform open-ended question', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: 'AI and Machine Learning\nCloud Architecture',
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q7 = result.questions.find(q => q.questionNumber === 7);
+      expect(q7?.answer).toEqual({
+        text: 'AI and Machine Learning\nCloud Architecture',
+      });
+    });
+
+    it('should correctly transform single-choice question', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: 'just_right',
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q12 = result.questions.find(q => q.questionNumber === 12);
+      expect(q12?.answer).toEqual({
+        text: 'just_right',
+      });
+    });
+
+    it('should combine name and location for Q19', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: 'Jane Smith',
+        q19Location: 'San Francisco, CA',
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q19 = result.questions.find(q => q.questionNumber === 19);
+      expect(q19?.answer).toEqual({
+        text: 'Jane Smith - San Francisco, CA',
+      });
+    });
+
+    it('should return null for unanswered questions', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: null,
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      // All questions should have null answers
+      result.questions.forEach(q => {
+        expect(q.answer).toBeNull();
+      });
+    });
+
+    it('should handle N/A value for likert questions', async () => {
+      const mockResponse = {
+        id: 'test-id',
+        userId: 'user-123',
+        status: Status.SUBMITTED,
+        createdAt: new Date('2025-12-03T14:34:22.123Z'),
+        updatedAt: new Date('2025-12-03T14:34:22.123Z'),
+        q1OverallRating: null,
+        q1Comment: null,
+        q2ReturnIntent: null,
+        q2Comment: null,
+        q3CoworkingEffectiveness: 'N/A',
+        q3Comment: null,
+        q4ConnectionTypes: [],
+        q4ConnectionOther: null,
+        q4Comment: null,
+        q5ConnectionDepth: null,
+        q5Comment: null,
+        q6LearningValue: null,
+        q6Comment: null,
+        q7FutureTopics: null,
+        q8SaturdayWorth: null,
+        q8Comment: null,
+        q9PreConferenceCommunication: null,
+        q9Comment: null,
+        q10AccommodationsVenue: null,
+        q10Comment: null,
+        q11SessionRankings: null,
+        q12ConferenceLength: null,
+        q12Comment: null,
+        q13ComparisonToPD: null,
+        q13Comment: null,
+        q14LikedMost: null,
+        q15AdditionalFeedback: null,
+        q16Improvements: null,
+        q16Comment: null,
+        q17FeedbackConfidence: [],
+        q17FeedbackOther: null,
+        q18EmploymentStatus: null,
+        q19Name: null,
+        q19Location: null,
+      };
+
+      mockPrismaService.surveyResponse.findUnique.mockResolvedValue(
+        mockResponse,
+      );
+
+      const result = await service.getResponseDetail('test-id');
+
+      const q3 = result.questions.find(q => q.questionNumber === 3);
+      expect(q3?.answer).toEqual({
+        value: 0,
+        label: 'N/A',
+      });
     });
   });
 });
