@@ -21,7 +21,7 @@ export default function ThankYouPage() {
             className="ee-logo"
           />
 
-          <Title order={1} ta="center" c="equalBlue.4">
+          <Title order={1} ta="center" c="equalNavy.5">
             Thank You!
           </Title>
 

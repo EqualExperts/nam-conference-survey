@@ -160,7 +160,7 @@ export default function SurveyPage() {
             w="auto"
             className="ee-logo"
           />
-          <Title order={1} ta="center" c="equalBlue.4">
+          <Title order={1} ta="center" c="equalNavy.5">
             NAM Conference Survey
           </Title>
           <Text size="lg" ta="center" c="dimmed">

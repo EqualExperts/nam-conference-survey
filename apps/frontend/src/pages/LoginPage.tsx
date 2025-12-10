@@ -69,7 +69,7 @@ export default function LoginPage() {
             w="auto"
             className="ee-logo"
           />
-          <Title order={1} ta="center" c="equalBlue.4">
+          <Title order={1} ta="center" c="equalNavy.5">
             Admin Login
           </Title>
           <Text size="sm" ta="center" c="dimmed">

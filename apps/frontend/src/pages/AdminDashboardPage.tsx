@@ -58,7 +58,7 @@ export default function AdminDashboardPage() {
             fit="contain"
             className="ee-logo"
           />
-          <Title order={1} ta="center" c="equalBlue.4">
+          <Title order={1} ta="center" c="equalNavy.5">
             Admin Dashboard
           </Title>
         </Stack>
