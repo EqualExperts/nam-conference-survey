@@ -82,8 +82,14 @@ Use the AskUserQuestion tool to gather information through interactive discovery
 
 After analyzing the story and making inferences, use the AskUserQuestion tool to **confirm your understanding** with targeted questions:
 
-1. **Template type confirmation** (if confident, present as default):
-   - "Based on the story, this looks like a [frontend/backend/fullstack] task. Should I use the [template-name] template?"
+1. **Template type confirmation**:
+   - **For full-stack stories** (both frontend and backend): ALWAYS create separate prompts
+     - Ask only: "This story has both backend and frontend work. Should I:"
+       - Option 1: "Create backend prompt first (you can request frontend after)"
+       - Option 2: "Create both backend and frontend prompts now"
+     - Do NOT offer a combined prompt option - fullstack stories MUST be split
+
+   - **For single-concern stories**: "Based on the story, this looks like a [frontend/backend] task. Should I use the [template-name] template?"
    - Or if uncertain: "Should this use the frontend template, backend template, or both?"
 
 2. **Scope clarification** (only if story is ambiguous):
@@ -97,11 +103,44 @@ After analyzing the story and making inferences, use the AskUserQuestion tool to
 
 **Keep confirmation questions minimal** - only ask what's truly ambiguous. Trust your inferences when the story is clear.
 
-## Step 3: Generate the Structured Prompt
+**RULE: Fullstack stories MUST be split** - Stories with both API and UI work must ALWAYS be divided into separate backend and frontend prompts because:
+- Each prompt stays focused on a single concern (API design vs UI/UX)
+- Backend can be implemented and tested independently
+- Frontend can reference the completed backend API
+- Easier to review and verify each part separately
+- Better alignment with typical development workflow
+
+## Step 3: Generate the Structured Prompt(s)
 
 Once the template and approach are confirmed:
 
-1. **Read the selected template** using the Read tool
+### For Fullstack Stories (Backend + Frontend - REQUIRED):
+
+1. **Create Backend Prompt First**:
+   - Read the backend template (`prompts/00-backend-prompt-template.md`)
+   - Focus on API endpoint design, data structures, and backend logic
+   - Include domain model and DTO definitions
+   - Add API request/response examples
+   - Reference the story for context
+
+2. **Create Frontend Prompt Second** (if user requested both, or after user confirms):
+   - Read the frontend template (`prompts/00-frontend-prompt-template.md`)
+   - Focus on UI components, user interactions, and visual design
+   - Include component hierarchy and props interfaces
+   - Reference the backend API endpoint from the first prompt
+   - Add visual mockups and user interaction flows
+   - Reference the story for context
+
+3. **Ensure Consistency Between Prompts**:
+   - DTO interfaces MUST match exactly between backend and frontend prompts
+   - API endpoint paths MUST be consistent
+   - Data structures MUST align
+   - Both prompts MUST reference the same story
+   - Frontend prompt should reference backend prompt for API contract
+
+### For Single-Concern Stories (Backend OR Frontend):
+
+1. **Read the selected template** using the Read tool (backend or frontend)
 
 2. **Transform story into prompt sections**:
 
@@ -159,9 +198,42 @@ Once the template and approach are confirmed:
 
 4. **Write the prompt to the prompts directory** (see Step 4 below)
 
-## Step 4: Save the Prompt to File
+## Step 4: Save the Prompt(s) to File
 
-After generating the structured prompt:
+### For Fullstack Stories (Backend + Frontend):
+
+1. **Determine the next prompt numbers**:
+   - List all files in `prompts/` directory
+   - Find the highest number used (excluding 00-* templates)
+   - Use sequential numbers for backend (N) and frontend (N+1)
+
+2. **Derive descriptive filenames**:
+   - **Backend**: `{number}-story-{story-number}-{kebab-case-title}-backend.md`
+     - Example: `10-story-046-response-detail-backend.md`
+   - **Frontend**: `{number+1}-story-{story-number}-{kebab-case-title}-{component}.md`
+     - Use specific component type: `-modal.md`, `-page.md`, `-form.md`, `-component.md`
+     - Example: `11-story-046-response-detail-modal.md`
+
+3. **Write the prompts** to the prompts directory:
+   - Each prompt MUST have the story reference at the top:
+     ```markdown
+     # [Feature Title - Backend/Frontend]
+
+     **Story Reference**: STORY-{number} (path/to/story-file.md)
+
+     [Overview paragraph...]
+     ```
+   - Backend prompt focuses on API implementation
+   - Frontend prompt focuses on UI/UX implementation
+   - Both prompts reference the same story
+
+4. **Confirm to user**:
+   - Show file path(s) created
+   - Summarize what each prompt covers
+   - Mention the story ID for reference
+   - If only backend created, ask if they want frontend next
+
+### For Single-Concern Stories (Backend OR Frontend only):
 
 1. **Determine the next prompt number**:
    - List all files in `prompts/` directory
@@ -175,7 +247,7 @@ After generating the structured prompt:
    - Keep the descriptive name concise but clear
 
 3. **Write the prompt** to the prompts directory:
-   - **If from story**: Add story reference at the top of the prompt immediately after the title:
+   - **If from story**: Add story reference at the top:
      ```markdown
      # [Feature Title]
 
@@ -184,12 +256,11 @@ After generating the structured prompt:
      [Overview paragraph continues...]
      ```
    - **If from user input** (legacy mode): No story reference needed
-   - File path: `prompts/{filename}` as determined in step 2
 
 4. **Confirm to user**:
    - Show the file path
    - Summarize what template was used
-   - If from story, mention the story ID for reference
+   - Mention the story ID for reference
 
 ## Step 5: Iterate if Needed
 
@@ -204,11 +275,28 @@ After saving the prompt, ask if the user wants to:
 - **Story-first approach**: When given a story number, read it thoroughly before making inferences
 - **Trust your inferences**: If the story is clear, minimize confirmation questions
 - **Don't over-ask**: Only confirm what's genuinely ambiguous - don't ask for confirmation on obvious things
+
+- **MANDATORY: Always split fullstack stories**: When a story has both API and UI work, you MUST create separate backend and frontend prompts - NO EXCEPTIONS, NO COMBINED OPTION
+- **Fullstack story indicators** - MUST split when story includes:
+  - API endpoint definition + UI component
+  - Database changes + user interface
+  - Service layer logic + page/modal/form component
+  - "As a user I want to see..." (UI) combined with "fetches data from..." (API)
+  - Backend acceptance criteria + frontend acceptance criteria
+
 - **Be specific**: Convert story acceptance criteria into concrete, testable requirements
 - **Preserve intent**: Don't change the story's intent - structure and enhance it for engineering
 - **Think examples**: Transform UX designs and scenarios into concrete code examples
 - **Consider rules**: Auto-suggest relevant rules files based on story content and labels
 - **Story context matters**: Include relevant context from dependencies, open questions, and iteration goals
+
+- **CRITICAL: Maintain consistency across split prompts** - When creating backend + frontend prompts, ensure:
+  - DTO/interface definitions match EXACTLY (copy between prompts)
+  - API endpoint paths are IDENTICAL
+  - Data structures ALIGN perfectly
+  - Both reference the SAME story
+  - Frontend prompt explicitly references the backend prompt's API design
+  - Question types, enums, and constants are consistent
 
 ## Rules Files Reference
 
@@ -221,14 +309,30 @@ Common rules files in this project:
 
 ## Quick Start Workflows
 
-### With story number:
+### With story number (single-concern story):
 ```
 /metaprompt 047
 → Finds story-047 from iterations
 → Analyzes content and makes inferences
-→ Asks 1-2 confirmation questions
+→ Determines this is a frontend-only story
+→ Confirms template choice with user
 → Generates prompt in prompts/09-story-047-dark-mode.md
 → Includes story reference at top of prompt
+```
+
+### With story number (fullstack story - ALWAYS SPLIT):
+```
+/metaprompt 046
+→ Finds story-046 from iterations
+→ Analyzes content: has both API endpoint and modal UI
+→ Detects fullstack story - will create separate backend and frontend prompts
+→ Asks: "Create backend first, or both now?"
+→ User selects: "Create backend prompt first"
+→ Generates backend prompt in prompts/10-story-046-response-detail-backend.md
+→ Asks: "Ready to create the frontend prompt?"
+→ User confirms: "yes please"
+→ Generates frontend prompt in prompts/11-story-046-response-detail-modal.md
+→ Both prompts reference STORY-046 with consistent DTOs and API contracts
 ```
 
 ### Without story number (legacy):
