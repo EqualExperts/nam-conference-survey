@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Table, Text, Anchor, Stack, Skeleton } from '@mantine/core';
 import { RecentResponseItem } from '../types/admin';
+import { ResponseDetailModal } from './ResponseDetailModal';
 
 export interface RecentResponsesSectionProps {
   responses: RecentResponseItem[] | null;
@@ -32,6 +34,19 @@ function formatResponseId(id: string): string {
 }
 
 export function RecentResponsesSection({ responses, loading = false }: RecentResponsesSectionProps) {
+  const [modalOpened, setModalOpened] = useState(false);
+  const [selectedResponseId, setSelectedResponseId] = useState<string | null>(null);
+
+  const handleViewClick = (responseId: string) => {
+    setSelectedResponseId(responseId);
+    setModalOpened(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpened(false);
+    setSelectedResponseId(null);
+  };
+
   if (loading) {
     return (
       <Stack gap="md">
@@ -61,46 +76,53 @@ export function RecentResponsesSection({ responses, loading = false }: RecentRes
   }
 
   return (
-    <Stack gap="md">
-      <Text size="xl" fw={600} c="#2c3234">
-        Recent Responses
-      </Text>
-      <Table striped highlightOnHover>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Response ID</Table.Th>
-            <Table.Th>Submitted</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {responses.map((response) => (
-            <Table.Tr key={response.id}>
-              <Table.Td>
-                <Text ff="monospace" size="sm">
-                  {formatResponseId(response.id)}
-                </Text>
-              </Table.Td>
-              <Table.Td>
-                <Text size="sm">{formatTimestamp(response.submittedAt)}</Text>
-              </Table.Td>
-              <Table.Td>
-                <Anchor
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Modal interaction will be implemented in STORY-046
-                    console.log('View response:', response.id);
-                  }}
-                  aria-label={`View response ${formatResponseId(response.id)}`}
-                >
-                  View →
-                </Anchor>
-              </Table.Td>
+    <>
+      <Stack gap="md">
+        <Text size="xl" fw={600} c="#2c3234">
+          Recent Responses
+        </Text>
+        <Table striped highlightOnHover>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Response ID</Table.Th>
+              <Table.Th>Submitted</Table.Th>
+              <Table.Th>Actions</Table.Th>
             </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
-    </Stack>
+          </Table.Thead>
+          <Table.Tbody>
+            {responses.map((response) => (
+              <Table.Tr key={response.id}>
+                <Table.Td>
+                  <Text ff="monospace" size="sm">
+                    {formatResponseId(response.id)}
+                  </Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text size="sm">{formatTimestamp(response.submittedAt)}</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Anchor
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleViewClick(response.id);
+                    }}
+                    aria-label={`View response ${formatResponseId(response.id)}`}
+                  >
+                    View →
+                  </Anchor>
+                </Table.Td>
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
+      </Stack>
+
+      <ResponseDetailModal
+        responseId={selectedResponseId}
+        opened={modalOpened}
+        onClose={handleModalClose}
+      />
+    </>
   );
 }
