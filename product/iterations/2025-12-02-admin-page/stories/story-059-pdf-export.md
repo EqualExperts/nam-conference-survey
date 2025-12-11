@@ -1,36 +1,35 @@
-# User Story: CSV Export
+# User Story: PDF Export
 
-**Story ID**: STORY-051
+**Story ID**: STORY-059
 **Iteration**: 2025-12-02-admin-page
-**Priority**: Critical
+**Priority**: High
 **Status**: Ready
 **Labels**: 2025-12-02-admin-page, conference-organizer, admin, llm-dev, export
 
 ## User Story
 As a Conference Organizer,
-I want to export survey response data as CSV,
-So that I can perform additional analysis offline in spreadsheet applications.
+I want to export survey results as a formatted PDF report,
+So that I can share professional-looking results with stakeholders.
 
 ## Context
-The admin dashboard provides read-only access to survey data. This story adds a CSV export button to the dashboard header so organizers can download raw data for spreadsheet analysis.
+While CSV export (STORY-051) provides raw data for analysis, stakeholders often need a polished report format for presentations and sharing. This story adds PDF export with visualizations and summaries suitable for non-technical audiences.
 
 ## Source
 **Discovery Cycle**: 2025-12-02-admin-page
 **Synthesis Reference**: `product/iterations/2025-12-02-admin-page/discovery/synthesis/synthesis-2025-12-02.md`
-**User Need**: Data portability for offline analysis
-**Supporting Evidence**: Stakeholder interview specifying CSV for full dataset
+**User Need**: Shareable reports for stakeholders
+**Supporting Evidence**: Stakeholder interview specifying PDF for charts and summaries
 
 ## User Experience Design
 
-### Navigation Update
-- Add CSV export button to the existing dashboard header
+### Export Button Placement
+- Add PDF button to dashboard header alongside CSV button (from STORY-051)
 - Button appears right-aligned in the header row
 - Button remains visible regardless of which tab is active
 
-### Export Button Placement
 ```
 ┌─────────────────────────────────────────────────┐
-│  Admin Dashboard                          [CSV] │
+│  Admin Dashboard                    [CSV] [PDF] │
 ├─────────────────────────────────────────────────┤
 │  [Overview]  [Responses]  [Analytics] [Sentiment│
 ├─────────────────────────────────────────────────┤
@@ -39,39 +38,30 @@ The admin dashboard provides read-only access to survey data. This story adds a 
 ```
 
 **Elements:**
-- CSV button added to the page header, right-aligned
-- "CSV" button: Downloads all response data as CSV file
+- "PDF" button: Downloads formatted report as PDF file
 - Button uses secondary/outline style (not primary) to avoid competing with main content
 - Button visible on all tabs
 
-### CSV Export Format
-- File name: `survey-responses-YYYY-MM-DD.csv`
-- One row per response
-- Columns:
-  - `response_id`: Sequential ID
-  - `submitted_at`: ISO 8601 timestamp
-  - `status`: Complete or In Progress
-  - One column per question (Q1, Q2, ... Q19)
-- Likert responses: Numeric value (1-5)
-- Multi-select answers: Comma-separated within cell
-- Ranking answers: Pipe-separated in rank order (e.g., "Keynote|Workshop|Panel")
-- Open-ended answers: Full text (escaped for CSV)
-- Empty cells for unanswered questions
-- UTF-8 encoding with BOM for Excel compatibility
-
-**Example:**
-```csv
-response_id,submitted_at,status,Q1,Q2,Q3,...
-42,2025-12-02T14:34:00Z,Complete,4,5,"AI/ML,Cloud",...
-43,2025-12-02T15:21:00Z,Complete,5,4,"DevOps",...
-```
+### PDF Export Format
+- File name: `survey-report-YYYY-MM-DD.pdf`
+- Cover page with title and generation date
+- Summary section:
+  - Total responses count
+  - Date range of responses
+- Analytics section:
+  - One page per question type grouping
+  - Pie charts for Likert questions
+  - Bar charts for multi-select and ranking questions
+- Sentiment section (if STORY-050 implemented):
+  - Narrative summaries for each open-ended question
+  - Key themes listed
 
 ### Export States
 
 **Generating:**
 ```
 ┌─────────────────────────────────────────────────┐
-│  Admin Dashboard                [Generating...] │
+│  Admin Dashboard           [CSV] [Generating...]│
 └─────────────────────────────────────────────────┘
 ```
 - Button shows "Generating..." with spinner while processing
@@ -84,7 +74,7 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
 **Error:**
 ```
 ┌─────────────────────────────────────────────────┐
-│  Admin Dashboard                          [CSV] │
+│  Admin Dashboard                    [CSV] [PDF] │
 ├─────────────────────────────────────────────────┤
 │  ⚠ Export failed. Please try again.            │
 └─────────────────────────────────────────────────┘
@@ -93,33 +83,31 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
 - Button returns to normal state
 
 ### Empty Data
-- If no responses exist, export still works but:
-  - CSV: Headers only, no data rows
+- If no responses exist, PDF downloads with "No responses recorded" message in summary
 
 ## Acceptance Criteria
 
 ### Functional Scenarios
 
-**Scenario 1: Export CSV**
+**Scenario 1: Export PDF**
 - **Given** the organizer is on any tab of the admin dashboard
-- **When** they click the "CSV" button
+- **When** they click the "PDF" button
 - **Then** the button shows "Generating..." state
-- **And** a CSV file downloads with all response data
+- **And** a PDF file downloads with the formatted report
 - **And** the file name includes today's date
 
-**Scenario 2: CSV Format Correctness**
-- **Given** the organizer exports CSV
+**Scenario 2: PDF Content Correctness**
+- **Given** the organizer exports PDF
 - **When** they open the downloaded file
-- **Then** the first row contains column headers
-- **And** each subsequent row represents one response
-- **And** all 19 question columns are present
-- **And** multi-select values are comma-separated
-- **And** ranking values are pipe-separated in order
+- **Then** the cover page shows title and generation date
+- **And** the summary shows total response count
+- **And** charts are rendered for fixed-answer questions
+- **And** sentiment summaries appear for open-ended questions (if STORY-050 implemented)
 
 **Scenario 3: Export with No Data**
 - **Given** no survey responses exist
-- **When** the organizer clicks "CSV"
-- **Then** a CSV downloads with headers only
+- **When** the organizer clicks "PDF"
+- **Then** a PDF downloads with "No responses recorded" message
 
 **Scenario 4: Export Error Handling**
 - **Given** an error occurs during export generation
@@ -129,22 +117,20 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
 
 **Scenario 5: Concurrent Export Prevention**
 - **Given** an export is currently generating
-- **When** the organizer clicks the CSV button again
+- **When** the organizer clicks the PDF button again
 - **Then** the click is ignored (button is disabled)
 
 ### Non-Functional Requirements
-- [ ] Performance: CSV export completes within 5 seconds for 500 responses
+- [ ] Performance: PDF export completes within 10 seconds for 500 responses
 - [ ] Security: No sensitive data exposed (responses are anonymous)
 - [ ] Accessibility: Export button has accessible label
 - [ ] Accessibility: Loading state is announced to screen readers
 
 ### Quality Checklist
-- [ ] CSV downloads with correct filename format
-- [ ] CSV opens correctly in Microsoft Excel (Windows and Mac)
-- [ ] CSV opens correctly in Google Sheets
-- [ ] CSV opens correctly in Apple Numbers
-- [ ] CSV handles special characters (quotes, commas, newlines) correctly
-- [ ] CSV contains all response data accurately
+- [ ] PDF downloads with correct filename format
+- [ ] PDF renders correctly in Chrome, Safari, Firefox, Edge
+- [ ] PDF charts are legible and professional
+- [ ] PDF includes all sections (cover, summary, analytics, sentiment if available)
 - [ ] Export button displays correctly in header
 - [ ] Loading state displays during generation
 - [ ] Error handling works correctly
@@ -153,19 +139,23 @@ response_id,submitted_at,status,Q1,Q2,Q3,...
 - [ ] Export works with 500 responses
 
 ## Technical Notes
-- CSV generation: Server-side streaming for large datasets
+- PDF generation: Consider library like PDFKit or Puppeteer for chart rendering
+- Charts in PDF should match Analytics tab visualizations
 
 ## Dependencies
 - STORY-045: Admin Overview Page (provides header location for button)
+- STORY-051: CSV Export (establishes export button pattern in header)
+- STORY-049: Analytics Tab (chart data for PDF)
+- STORY-050: Sentiment Analysis Tab (optional - sentiment summaries for PDF)
 
 ## Estimate
-**Size**: S
-**Confidence**: High
+**Size**: M
+**Confidence**: Medium
 
-**Reasoning**: CSV export is straightforward file generation with well-defined format requirements.
+**Reasoning**: PDF generation with charts requires library integration and layout work. Medium confidence due to PDF rendering complexity and need to match Analytics tab visualizations.
 
 ## Metadata
 **Iteration**: 2025-12-02-admin-page
-**Created**: 2025-12-05
+**Created**: 2025-12-11
 **Last Updated**: 2025-12-11
 **Build Date**:
