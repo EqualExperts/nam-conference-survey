@@ -165,6 +165,17 @@ Conference organizers navigate to `/admin` to see a dashboard with key metrics (
 
 ## Appendix: Build History
 
+### Release 006 - 2025-12-10
+
+**Stories Built**: 0
+
+**Capabilities Built Without Stories**: 2
+
+| Capability | Commit |
+|------------|--------|
+| Dark mode toggle on login and admin pages | 08dac5f |
+| human-deploy.sh script for manual GCP deployments | 45a6969 |
+
 ### Release 005 - 2025-12-09
 
 **Stories Built**: 1
