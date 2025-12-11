@@ -2,9 +2,9 @@
 
 **Iteration**: Admin Dashboard
 **Created**: 2025-12-02
-**Last Updated**: 2025-12-05
-**Total Stories**: 6
-**Total Effort**: S + S + M + M + M + M
+**Last Updated**: 2025-12-11
+**Total Stories**: 7
+**Total Effort**: S + S + M + M + M + S + M
 
 ## Stories
 
@@ -15,14 +15,15 @@
 | STORY-048 | Responses Tab | Must Have | M | Ready |
 | STORY-049 | Analytics Tab | Must Have | M | Ready |
 | STORY-050 | Sentiment Analysis Tab | Should Have | M | Ready |
-| STORY-051 | Data Export | Should Have | M | Ready |
+| STORY-051 | CSV Export | Should Have | S | Ready |
+| STORY-059 | PDF Export | Should Have | M | Ready |
 
 ## Priority Summary
 
 | Priority | Count |
 |----------|-------|
 | Must Have | 4 |
-| Should Have | 2 |
+| Should Have | 3 |
 
 ## Story Details
 
@@ -72,13 +73,19 @@ Adds Sentiment tab to navigation:
 - Expandable view to see all raw responses
 - Minimum 3 responses required for analysis
 
-### STORY-051: Data Export
+### STORY-051: CSV Export
 **File**: `story-051-data-export.md`
 
-Adds export buttons to dashboard header:
-- CSV export: Full dataset download, all responses and questions
-- PDF export: Formatted report with charts and sentiment summaries
-- Buttons visible on all tabs
+Adds CSV export button to dashboard header:
+- Full dataset download, all responses and questions
+- Button visible on all tabs
+
+### STORY-059: PDF Export
+**File**: `story-059-pdf-export.md`
+
+Adds PDF export button to dashboard header:
+- Formatted report with charts and sentiment summaries
+- Button visible on all tabs
 
 ## Dependencies
 
@@ -88,7 +95,8 @@ STORY-045 (Admin Overview)
     └── STORY-048 (Responses Tab)
             └── STORY-049 (Analytics Tab)
                     └── STORY-050 (Sentiment Tab)
-                            └── STORY-051 (Data Export)
+    └── STORY-051 (CSV Export)
+            └── STORY-059 (PDF Export)
 ```
 
 ## Notes

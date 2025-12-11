@@ -17,12 +17,12 @@ Master index of all stories that have been created but not yet built. Stories ar
 | STORY-049 | Analytics Tab | High | 2025-12-02-admin-page |
 | STORY-050 | Sentiment Analysis Tab | Low | 2025-12-02-admin-page |
 | STORY-051 | CSV Export | Critical | 2025-12-02-admin-page |
-| STORY-059 | PDF Export | High | 2025-12-02-admin-page |
 | STORY-054 | Sticky Survey Header | Low | 2025-12-08-final-fixes |
 | STORY-055 | Chaos Mode Theme | Low | 2025-12-08-final-fixes |
 | STORY-056 | Question Numbers Display | Low | 2025-12-08-final-fixes |
 | STORY-057 | Connection Types Missing "Other" Checkbox | High | 2025-12-08-final-fixes |
 | STORY-058 | GCP Secret Manager for Admin Credentials | High | 2025-12-08-final-fixes |
+| STORY-059 | PDF Export | High | 2025-12-02-admin-page |
 
 ---
 
